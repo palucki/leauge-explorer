@@ -39,6 +39,7 @@ void MainWindow::connectToDatabase()
     if(db.open())
     {
         qDebug() << "Opened";
+        updateConnectedIndicator(true);
 
     }
     else
@@ -47,6 +48,7 @@ void MainWindow::connectToDatabase()
         qDebug() << "User name: " << db.userName();
         qDebug() << "Database name: " << db.databaseName();
         qDebug() << db.lastError();
+        updateConnectedIndicator(false);
     }
 }
 
@@ -56,6 +58,7 @@ void MainWindow::disconnectFromDatabase()
     {
         qDebug() << "Closing";
         db.close();
+        updateConnectedIndicator(false);
     }
 }
 
@@ -73,4 +76,18 @@ void MainWindow::showLeaugeTable()
     {
         qDebug() << "Error: " << db.lastError();
     }
+}
+
+void MainWindow::updateConnectedIndicator(bool state)
+{
+    ui->connectionIndicator->setChecked(state);
+    if(state)
+    {
+        ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: green }");
+    }
+    else
+    {
+        ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: red }");
+    }
+
 }

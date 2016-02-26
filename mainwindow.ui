@@ -24,11 +24,28 @@
     </item>
     <item>
      <widget class="QCheckBox" name="connectionIndicator">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator {
+    background-color: red;
+}</string>
+      </property>
       <property name="text">
        <string>Connected</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
       </property>
       <property name="checkable">
        <bool>false</bool>
