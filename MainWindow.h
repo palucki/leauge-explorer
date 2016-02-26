@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QDebug>
-#include <QtSql>
+#include "DatabaseHandler.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,6 +14,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void setDatabaseHandler(DatabaseHandler* dbh);
     ~MainWindow();
 
 private slots:
@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase db;
+    DatabaseHandler *databaseHandler;
 };
 
 
