@@ -40,18 +40,8 @@ void MainWindow::disconnectFromDatabase()
 
 void MainWindow::showLeaugeTable()
 {
-//    QSqlQuery qry(db);
-//    if(qry.exec("SELECT * FROM overall_performance"))
-//    {
-//        while(qry.next())
-//        {
-//            qDebug() << "Team: " << qry.value(0).toString() << "\t\tpts: " << qry.value(1).toString();
-//        }
-//    }
-//    else
-//    {
-//        qDebug() << "Error: " << db.lastError();
-//    }
+    databaseHandler->setResultTable(ui->resultTable);
+    executeQuery();
 }
 
 void MainWindow::updateConnectedIndicator(bool state)
@@ -66,4 +56,9 @@ void MainWindow::updateConnectedIndicator(bool state)
         ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: red }");
     }
 
+}
+
+void MainWindow::executeQuery()
+{
+    databaseHandler->executeQuery(ui->queryEditor->toPlainText());
 }

@@ -22,6 +22,7 @@ private slots:
     void disconnectFromDatabase();
     void showLeaugeTable();
     void updateConnectedIndicator(bool);
+    void executeQuery();
 
 private:
     Ui::MainWindow *ui;
