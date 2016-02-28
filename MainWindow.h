@@ -22,8 +22,8 @@ private slots:
     void disconnectFromDatabase();
     void showLeaugeTable();
     void updateConnectedIndicator(bool);
-    void executeQuery();
-
+    void executeQueryFromEditor();
+    void showSelectedTable();
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;

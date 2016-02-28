@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QtSql>
 #include <QTableWidget>
+#include <QListWidget>
 
 class DatabaseHandler
 {
@@ -15,6 +16,8 @@ public:
     void sendQuery();
     void executeQuery(const QString query);
     void setResultTable(QTableWidget* resTab);
+    void showAvailableTablesFromDatabaseIn(QListWidget* list);
+    void showTableInResults(const QString tableName);
 private:
     QSqlDatabase db;
     QTableWidget* resultTable;

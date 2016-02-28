@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->connectButton, SIGNAL(clicked()),this, SLOT(connectToDatabase()));
     connect(ui->disconnectButton, SIGNAL(clicked()),this, SLOT(disconnectFromDatabase()));
     connect(ui->showLeaugeTableButton, SIGNAL(clicked()),this, SLOT(showLeaugeTable()));
+    connect(ui->executeQueryButton, SIGNAL(clicked()),this, SLOT(executeQueryFromEditor()));
+    connect(ui->showSelectedButton, SIGNAL(clicked()),this, SLOT(showSelectedTable()));
     connect(ui->exitButton, SIGNAL(clicked()),this, SLOT(close()));
 }
 
@@ -30,6 +32,8 @@ void MainWindow::connectToDatabase()
 {
     databaseHandler->connectToDatabase();
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
+    databaseHandler->setResultTable(ui->resultTable);
+    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables);
 }
 
 void MainWindow::disconnectFromDatabase()
@@ -40,8 +44,23 @@ void MainWindow::disconnectFromDatabase()
 
 void MainWindow::showLeaugeTable()
 {
-    databaseHandler->setResultTable(ui->resultTable);
-    executeQuery();
+
+}
+
+void MainWindow::executeQueryFromEditor()
+{
+    databaseHandler->executeQuery(ui->queryEditor->toPlainText());
+}
+
+void MainWindow::showSelectedTable()
+{
+    if(ui->allTables->currentItem())
+    {
+        QString selectedTable = ui->allTables->currentItem()->text();
+        databaseHandler->showTableInResults(selectedTable);
+        qDebug() << "selected table: " << selectedTable;
+    }
+
 }
 
 void MainWindow::updateConnectedIndicator(bool state)
@@ -56,9 +75,4 @@ void MainWindow::updateConnectedIndicator(bool state)
         ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: red }");
     }
 
-}
-
-void MainWindow::executeQuery()
-{
-    databaseHandler->executeQuery(ui->queryEditor->toPlainText());
 }

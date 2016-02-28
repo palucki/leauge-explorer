@@ -19,6 +19,21 @@ void DatabaseHandler::connectToDatabase()
     if(db.open())
     {
         qDebug() << "Opened";
+
+        //SELECT * FROM information_schema.tables
+        //fill "available tables" with current values
+
+//        QSqlQuery qry(db);
+//        if(qry.exec(query))
+//        {
+//            prepareColumns(qry);
+//            fillTableWithQueryData(qry);
+//        }
+//        else
+//        {
+//            qDebug() << "Error: " << db.lastError();
+//        }
+
     }
     else
     {
@@ -54,7 +69,8 @@ void DatabaseHandler::prepareColumns(QSqlQuery qry)
 
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
-    for(int i = 0; qry.next(); i++)
+    int rowCount = 1;
+    for(int i = 0; qry.next(); i++, rowCount++)
     {
         if(resultTable->rowCount() <= i)
             resultTable->insertRow(i);
@@ -69,6 +85,9 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
             resultTable->item(i,j)->setText(qry.value(j).toString());
         }
     }
+
+    resultTable->setRowCount(rowCount);
+    qDebug() <<"Row count set to: " << rowCount;
 }
 
 void DatabaseHandler::executeQuery(const QString query)
@@ -88,4 +107,37 @@ void DatabaseHandler::executeQuery(const QString query)
 void DatabaseHandler::setResultTable(QTableWidget *resTab)
 {
     resultTable = resTab;
+}
+
+void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
+{
+    QSqlQuery qry(db);
+    if(qry.exec("SELECT * FROM information_schema.tables"))
+    {
+        while(qry.next())
+        {
+            list->addItem(new QListWidgetItem(qry.record().value(2).toString()));
+        }
+    }
+    else
+    {
+        qDebug() << "Error: " << db.lastError();
+    }
+}
+
+void DatabaseHandler::showTableInResults(const QString tableName)
+{
+    QSqlQuery qry(db);
+    QString query = "SELECT * FROM ";
+    query.append(tableName);
+
+    if(qry.exec(query))
+    {
+        prepareColumns(qry);
+        fillTableWithQueryData(qry);
+    }
+    else
+    {
+        qDebug() << "Error: " << db.lastError();
+    }
 }
