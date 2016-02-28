@@ -17,13 +17,16 @@ public:
     void executeQuery(const QString query);
     void setResultTable(QTableWidget* resTab);
     void showAvailableTablesFromDatabaseIn(QListWidget* list);
+    void clearAvailableTablesList(QListWidget* list);
     void showTableInResults(const QString tableName);
+    void addTable(const QString tableName);
 private:
     QSqlDatabase db;
     QTableWidget* resultTable;
     int prepareColumns(QTableWidget* resultTable, QSqlQuery qry);
     void prepareColumns(QSqlQuery qry);
     void fillTableWithQueryData(QSqlQuery qry);
+    void logDbError();
 };
 
 #endif // DATABASEHANDLER_H

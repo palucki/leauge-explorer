@@ -40,6 +40,7 @@ void MainWindow::disconnectFromDatabase()
 {
     databaseHandler->disconnectFromDatabase();
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
+    databaseHandler->clearAvailableTablesList(ui->allTables);
 }
 
 void MainWindow::showLeaugeTable()
@@ -60,7 +61,6 @@ void MainWindow::showSelectedTable()
         databaseHandler->showTableInResults(selectedTable);
         qDebug() << "selected table: " << selectedTable;
     }
-
 }
 
 void MainWindow::updateConnectedIndicator(bool state)
@@ -69,10 +69,17 @@ void MainWindow::updateConnectedIndicator(bool state)
     if(state)
     {
         ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: green }");
+        ui->showSelectedButton->setEnabled(true);
     }
     else
     {
         ui->connectionIndicator->setStyleSheet("QCheckBox::indicator { background-color: red }");
+        ui->showSelectedButton->setEnabled(false);
     }
 
+}
+
+void MainWindow::on_allTables_itemDoubleClicked(QListWidgetItem *item)
+{
+    showSelectedTable();
 }

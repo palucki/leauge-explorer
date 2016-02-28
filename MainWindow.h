@@ -24,6 +24,8 @@ private slots:
     void updateConnectedIndicator(bool);
     void executeQueryFromEditor();
     void showSelectedTable();
+    void on_allTables_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;

@@ -19,21 +19,6 @@ void DatabaseHandler::connectToDatabase()
     if(db.open())
     {
         qDebug() << "Opened";
-
-        //SELECT * FROM information_schema.tables
-        //fill "available tables" with current values
-
-//        QSqlQuery qry(db);
-//        if(qry.exec(query))
-//        {
-//            prepareColumns(qry);
-//            fillTableWithQueryData(qry);
-//        }
-//        else
-//        {
-//            qDebug() << "Error: " << db.lastError();
-//        }
-
     }
     else
     {
@@ -69,7 +54,7 @@ void DatabaseHandler::prepareColumns(QSqlQuery qry)
 
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
-    int rowCount = 1;
+    int rowCount = 0;
     for(int i = 0; qry.next(); i++, rowCount++)
     {
         if(resultTable->rowCount() <= i)
@@ -90,6 +75,11 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
     qDebug() <<"Row count set to: " << rowCount;
 }
 
+void DatabaseHandler::logDbError()
+{
+    qDebug() << "Error: " << db.lastError();
+}
+
 void DatabaseHandler::executeQuery(const QString query)
 {
     QSqlQuery qry(db);
@@ -99,9 +89,7 @@ void DatabaseHandler::executeQuery(const QString query)
         fillTableWithQueryData(qry);
     }
     else
-    {
-        qDebug() << "Error: " << db.lastError();
-    }
+        logDbError();
 }
 
 void DatabaseHandler::setResultTable(QTableWidget *resTab)
@@ -120,9 +108,12 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
         }
     }
     else
-    {
-        qDebug() << "Error: " << db.lastError();
-    }
+        logDbError();
+}
+
+void DatabaseHandler::clearAvailableTablesList(QListWidget *list)
+{
+    list->clear();
 }
 
 void DatabaseHandler::showTableInResults(const QString tableName)
@@ -137,7 +128,20 @@ void DatabaseHandler::showTableInResults(const QString tableName)
         fillTableWithQueryData(qry);
     }
     else
+        logDbError();
+}
+
+void DatabaseHandler::addTable(const QString tableName)
+{
+    QSqlQuery qry(db);
+    QString query = "SELECT * FROM ";
+    query.append(tableName);
+
+    if(qry.exec(query))
     {
-        qDebug() << "Error: " << db.lastError();
+        prepareColumns(qry);
+        fillTableWithQueryData(qry);
     }
+    else
+        logDbError();
 }

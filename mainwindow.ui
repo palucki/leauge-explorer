@@ -140,7 +140,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Dostępne tabele</string>
+     <string>Available tables</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -153,7 +153,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Rezultat</string>
+     <string>Table viewer</string>
     </property>
    </widget>
    <widget class="QListWidget" name="allTables">
@@ -167,6 +167,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="showSelectedButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>220</x>
