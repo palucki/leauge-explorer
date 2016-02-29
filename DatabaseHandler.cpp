@@ -118,6 +118,7 @@ void DatabaseHandler::clearAvailableTablesList(QListWidget *list)
 
 void DatabaseHandler::showTableInResults(const QString tableName)
 {
+    currentTable = tableName;
     QSqlQuery qry(db);
     QString query = "SELECT * FROM ";
     query.append(tableName);
@@ -129,19 +130,11 @@ void DatabaseHandler::showTableInResults(const QString tableName)
     }
     else
         logDbError();
+
+    qDebug() << "Current table is " << currentTable;
 }
 
-void DatabaseHandler::addTable(const QString tableName)
+void DatabaseHandler::updateDatabase(int row, int column)
 {
-    QSqlQuery qry(db);
-    QString query = "SELECT * FROM ";
-    query.append(tableName);
-
-    if(qry.exec(query))
-    {
-        prepareColumns(qry);
-        fillTableWithQueryData(qry);
-    }
-    else
-        logDbError();
+    qDebug() << "Cell: " << row << " " << column << " changed";
 }

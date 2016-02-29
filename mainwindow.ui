@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>687</width>
-    <height>436</height>
+    <width>680</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +23,7 @@
       <x>10</x>
       <y>30</y>
       <width>191</width>
-      <height>237</height>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -69,36 +72,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPlainTextEdit" name="queryEditor">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="plainText">
-        <string>SELECT * from overall_performance</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="executeQueryButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Execute query</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="showLeaugeTableButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Show Leauge Table</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="exitButton">
        <property name="autoFillBackground">
         <bool>false</bool>
@@ -111,24 +84,23 @@
     </layout>
    </widget>
    <widget class="QTableWidget" name="resultTable">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>30</y>
-      <width>261</width>
+      <x>10</x>
+      <y>220</y>
+      <width>651</width>
       <height>231</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>Nazwa drużyny</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Punkty</string>
-     </property>
-    </column>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -146,8 +118,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>10</y>
+      <x>580</x>
+      <y>200</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -162,25 +134,119 @@
       <x>220</x>
       <y>31</y>
       <width>171</width>
-      <height>231</height>
+      <height>111</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="showSelectedButton">
+   <widget class="QPushButton" name="showLeaugeTableButton">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>270</y>
-      <width>171</width>
+      <x>470</x>
+      <y>140</y>
+      <width>189</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Show selected table</string>
+     <string>Show Leauge Table</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="executeQueryButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>111</y>
+      <width>189</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Execute query</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="queryEditor">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>34</y>
+      <width>189</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="plainText">
+     <string>SELECT * from overall_performance</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>150</y>
+      <width>268</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="saveButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="deleteButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="editModeButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Edit mode</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="showSelectedButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Show selected table</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="addRecordButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Add record</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -188,7 +254,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>687</width>
+     <width>680</width>
      <height>21</height>
     </rect>
    </property>

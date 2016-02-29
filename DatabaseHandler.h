@@ -19,9 +19,10 @@ public:
     void showAvailableTablesFromDatabaseIn(QListWidget* list);
     void clearAvailableTablesList(QListWidget* list);
     void showTableInResults(const QString tableName);
-    void addTable(const QString tableName);
+    void updateDatabase(int row, int column);
 private:
     QSqlDatabase db;
+    QString currentTable;
     QTableWidget* resultTable;
     int prepareColumns(QTableWidget* resultTable, QSqlQuery qry);
     void prepareColumns(QSqlQuery qry);
