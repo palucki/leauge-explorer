@@ -51,7 +51,7 @@
 }</string>
        </property>
        <property name="text">
-        <string>Connected</string>
+        <string>Connection state</string>
        </property>
        <property name="iconSize">
         <size>
@@ -66,6 +66,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="disconnectButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Disconnect from Database</string>
        </property>
@@ -221,22 +224,6 @@
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>
-     <widget class="QPushButton" name="showLeaugeTableButton">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>120</y>
-        <width>189</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Show Leauge Table</string>
-      </property>
-     </widget>
      <widget class="QPlainTextEdit" name="queryEditor">
       <property name="enabled">
        <bool>false</bool>

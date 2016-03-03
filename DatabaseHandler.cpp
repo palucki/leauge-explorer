@@ -121,10 +121,16 @@ void DatabaseHandler::showTableInResults(const QString tableName)
     currentTable = tableName;
     QSqlQuery qry(db);
     QString query = "SELECT * FROM ";
+
     query.append(tableName);
+    if(tableName == "overall_performance") {
+        qDebug() << "Sort by points";
+        query.append(" ORDER BY points DESC");
+    }
 
     if(qry.exec(query))
     {
+        resultTable->clearContents();
         prepareColumns(qry);
         fillTableWithQueryData(qry);
     }
@@ -137,4 +143,32 @@ void DatabaseHandler::showTableInResults(const QString tableName)
 void DatabaseHandler::updateDatabase(int row, int column)
 {
     qDebug() << "Cell: " << row << " " << column << " changed";
+}
+
+void DatabaseHandler::saveRowToDatabase()
+{
+    QString query = "INSERT INTO ";
+    query.append(currentTable);
+    query.append(" VALUES (");
+
+    bool willBeInserted = true;
+    for(int i = 0; i < resultTable->columnCount(); i++)
+    {
+        if(resultTable->item(resultTable->currentRow(), i))
+        {
+            query.append(resultTable->item(resultTable->currentRow(), i)->text());
+            query.append(",");
+        }
+        else
+        {
+            willBeInserted = false;
+            qDebug() << "Wyskakujace okienko ze pola (poza id) są puste";
+        }
+    }
+    query.append(")");
+    qDebug() << query;
+
+    if(willBeInserted)
+        qDebug() << "Poprawnie wypelnione, bedzie dodane";
+    //qry.exec(query);
 }

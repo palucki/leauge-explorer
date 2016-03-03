@@ -21,7 +21,6 @@ public:
 private slots:
     void connectToDatabase();
     void disconnectFromDatabase();
-    void showLeaugeTable();
     void updateConnectedIndicator(bool);
     void executeQueryFromEditor();
     void showTableFrom(QListWidgetItem *item);
@@ -30,7 +29,7 @@ private slots:
     void editSelectedTable();
     void savebuttonClicked();
     void deletebuttonClicked();
-    void addrecordbuttonClicked();
+    void addRecordButtonClicked();
 
     void on_resultTable_cellChanged(int row, int column);
 
@@ -39,6 +38,9 @@ private:
     DatabaseHandler *databaseHandler;
     void cleanupEnvironment();
     void connectAllSignals();
+    void setEditingButtonsState(bool state);
+    void setConnectionButtonsInitialState();
+    void setConnectionButtonsAfterConnectState();
 };
 
 
