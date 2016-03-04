@@ -5,11 +5,12 @@
 #include <QtSql>
 #include <QTableWidget>
 #include <QListWidget>
+#include <memory>
 
 class DatabaseHandler
 {
 public:
-    DatabaseHandler();
+    DatabaseHandler() ;
     void connectToDatabase();
     void disconnectFromDatabase();
     bool getConnectionStatus() {return db.isOpen(); }

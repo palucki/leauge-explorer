@@ -147,6 +147,7 @@ void MainWindow::savebuttonClicked()
     setEditingButtonsState(false);
 
     databaseHandler->saveRowToDatabase();
+    showTableFrom(ui->allTables->currentItem()); //update table
 }
 
 void MainWindow::deletebuttonClicked()

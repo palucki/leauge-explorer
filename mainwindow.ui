@@ -180,7 +180,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Show selected table</string>
+          <string>Refresh table</string>
          </property>
         </widget>
        </item>
@@ -226,7 +226,7 @@
      </attribute>
      <widget class="QPlainTextEdit" name="queryEditor">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -242,7 +242,7 @@
      </widget>
      <widget class="QPushButton" name="executeQueryButton">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>

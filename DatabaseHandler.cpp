@@ -44,6 +44,7 @@ void DatabaseHandler::prepareColumns(QSqlQuery qry)
     resultTable->setColumnCount(numberOfCols);
 
     QStringList headerList;
+
     for(int i = 0; i < numberOfCols; i++)
     {
         headerList << qry.record().fieldName(i);
@@ -51,6 +52,7 @@ void DatabaseHandler::prepareColumns(QSqlQuery qry)
     }
     resultTable->setHorizontalHeaderLabels(headerList);
 }
+
 
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
@@ -68,8 +70,13 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
                 qDebug() << "Allocation of new items in table";
             }
             resultTable->item(i,j)->setText(qry.value(j).toString());
+
+            if(j == 0)
+                resultTable->item(i,j)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         }
     }
+
+
 
     resultTable->setRowCount(rowCount);
     qDebug() <<"Row count set to: " << rowCount;
@@ -147,28 +154,54 @@ void DatabaseHandler::updateDatabase(int row, int column)
 
 void DatabaseHandler::saveRowToDatabase()
 {
-    QString query = "INSERT INTO ";
+    QSqlQuery qry(db);
+    QString query = "SELECT COUNT(*) FROM ";
     query.append(currentTable);
-    query.append(" VALUES (");
 
-    bool willBeInserted = true;
-    for(int i = 0; i < resultTable->columnCount(); i++)
+    qDebug() << query;
+    if(qry.exec(query))
+       qDebug() << "Success";
+    else
+        logDbError();
+
+    qry.next();
+
+    auto rowsToBeAdde = resultTable->rowCount() - qry.value(0).toInt();
+    qDebug() << "Rows to be added: " << rowsToBeAdde;
+
+    for(auto processedRow = qry.value(0).toInt(); processedRow < resultTable->rowCount(); processedRow++)
     {
-        if(resultTable->item(resultTable->currentRow(), i))
+
+        query = "INSERT INTO ";
+        query.append(currentTable);
+        query.append(" VALUES (");
+
+        for(int i = 1; i < resultTable->columnCount(); i++) //don't insert 1st column, its ID
         {
-            query.append(resultTable->item(resultTable->currentRow(), i)->text());
+            if(resultTable->item(processedRow, i)) {
+                QString value = resultTable->item(processedRow, i)->text();
+                if(value.at(0).isLetter())
+                {
+                    value.prepend("'");
+                    value.append("'");
+                }
+                query.append(value);
+            }
+            else
+                query.append(" ");
             query.append(",");
         }
-        else
-        {
-            willBeInserted = false;
-            qDebug() << "Wyskakujace okienko ze pola (poza id) są puste";
-        }
-    }
-    query.append(")");
-    qDebug() << query;
+        query.remove(query.length()-1, 1); //remove last comma
+        query.append(")");
+        qDebug() << "zapytanie: " << query;
 
-    if(willBeInserted)
-        qDebug() << "Poprawnie wypelnione, bedzie dodane";
-    //qry.exec(query);
+        if(qry.exec(query))
+            qDebug() << "Dodano " << query;
+        else
+            logDbError();
+    }
 }
+
+
+
+//id nie moze sie znalezc!
