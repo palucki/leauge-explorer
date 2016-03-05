@@ -11,6 +11,8 @@ class DatabaseHandler
 {
 public:
     DatabaseHandler() ;
+    void setDatabase();
+    ~DatabaseHandler();
     void connectToDatabase();
     void disconnectFromDatabase();
     bool getConnectionStatus() {return db.isOpen(); }
@@ -21,18 +23,23 @@ public:
     void clearAvailableTablesList(QListWidget* list);
     void showTableInResults(const QString tableName);
     void updateDatabase(int row, int column);
-    void saveRowToDatabase();
+    void saveChangesToDatabase();
+    int getNextId(const QString);
+    void insertNewRow(QStringList fields);
+    void refreshTable();
 private:
     QSqlDatabase db;
     QString currentTable;
     QTableWidget* resultTable;
+    int nextId;
     int prepareColumns(QTableWidget* resultTable, QSqlQuery qry);
-    void prepareColumns(QSqlQuery qry);
+    void prepareColumns(const QSqlQuery qry);
     void fillTableWithQueryData(QSqlQuery qry);
     void logDbError();
     void rowIsCorrect(QString query, bool willBeInserted);
     bool asdas(QString query);
     bool rowIsAcceptable(QString query);
+    std::vector<int> changesVector;
 };
 
 #endif // DATABASEHANDLER_H

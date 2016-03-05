@@ -14,10 +14,13 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
     DatabaseHandler.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    AddRecordHelper.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
-    MainWindow.h
+    MainWindow.h \
+    AddRecordHelper.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    addrecordhelper.ui

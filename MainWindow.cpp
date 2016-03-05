@@ -11,6 +11,7 @@ void MainWindow::connectAllSignals()
     connect(ui->saveButton, SIGNAL(clicked()),this, SLOT(savebuttonClicked()));
     connect(ui->deleteButton, SIGNAL(clicked()),this, SLOT(deletebuttonClicked()));
     connect(ui->addRecordButton, SIGNAL(clicked()),this, SLOT(addRecordButtonClicked()));
+    connect(ui->resultTable, SIGNAL(cellDoubleClicked(int,int)),this, SLOT(onResultTableCellDoubleClicked(int,int)));
     connect(ui->exitButton, SIGNAL(clicked()),this, SLOT(close()));
 }
 
@@ -19,17 +20,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    newRecordWindow = new AddRecordHelper(this);
+
     connectAllSignals();
 }
 
 void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
 {
     databaseHandler = dbh;
+    newRecordWindow->setDatabaseHandler(databaseHandler);
 }
 
 MainWindow::~MainWindow()
 {
     cleanupEnvironment();
+    delete newRecordWindow;
     delete ui;
 }
 
@@ -48,7 +53,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables);
 
     setConnectionButtonsAfterConnectState();
-    setEditingButtonsState(false);
+    //setEditingButtonsState(false);
 }
 
 void MainWindow::disconnectFromDatabase()
@@ -70,6 +75,8 @@ void MainWindow::setConnectionButtonsAfterConnectState()
     ui->disconnectButton->setEnabled(true);
     ui->showSelectedButton->setEnabled(true);
     ui->editModeButton->setEnabled(true);
+
+    ui->addRecordButton->setEnabled(true);
 }
 
 
@@ -146,7 +153,7 @@ void MainWindow::savebuttonClicked()
     ui->editModeButton->setEnabled(true);
     setEditingButtonsState(false);
 
-    databaseHandler->saveRowToDatabase();
+    databaseHandler->saveChangesToDatabase();
     showTableFrom(ui->allTables->currentItem()); //update table
 }
 
@@ -159,11 +166,27 @@ void MainWindow::deletebuttonClicked()
 
 void MainWindow::addRecordButtonClicked()
 {
-    ui->resultTable->insertRow(ui->resultTable->rowCount());
+    if(ui->allTables->currentRow() != -1)
+    {
+        //clear contents
+        newRecordWindow->clearTable();
+
+        //update table headers
+        QStringList headersList;
+        for(int i = 0; i < ui->resultTable->columnCount(); i++)
+        {
+            headersList << ui->resultTable->horizontalHeaderItem(i)->text();
+        }
+        newRecordWindow->updateTableHeaders(ui->resultTable->columnCount(), headersList);
+        newRecordWindow->prepareIdColumn(ui->allTables->currentItem()->text());
+
+
+        //add rows
+        newRecordWindow->show();
+    }
 }
 
-
-void MainWindow::on_resultTable_cellChanged(int row, int column)
+void MainWindow::onResultTableCellDoubleClicked(int row, int column)
 {
-    databaseHandler->updateDatabase(row, column);
+    qDebug() << "We edit: " << row << " " << column;
 }

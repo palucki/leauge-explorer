@@ -2,6 +2,12 @@
 
 DatabaseHandler::DatabaseHandler()
 {
+    if(!db.isValid())
+        setDatabase();
+}
+
+void DatabaseHandler::setDatabase()
+{
     //Setup Database
     QString connectionName = "myDB";
     QString connectionTemplate = "DRIVER={SQL Server Native Client 11.0};SERVER=%1;DATABASE=%2;UID=%3;PWD=;WSID=.;Trusted_connection=yes";
@@ -12,6 +18,11 @@ DatabaseHandler::DatabaseHandler()
 
     db = QSqlDatabase::addDatabase("QODBC3", connectionName);
     db.setDatabaseName(connectionString);
+}
+
+DatabaseHandler::~DatabaseHandler()
+{
+    QSqlDatabase::removeDatabase(db.connectionName());
 }
 
 void DatabaseHandler::connectToDatabase()
@@ -38,7 +49,7 @@ void DatabaseHandler::disconnectFromDatabase()
     }
 }
 
-void DatabaseHandler::prepareColumns(QSqlQuery qry)
+void DatabaseHandler::prepareColumns(const QSqlQuery qry)
 {
     int numberOfCols = qry.record().count();
     resultTable->setColumnCount(numberOfCols);
@@ -97,6 +108,7 @@ void DatabaseHandler::executeQuery(const QString query)
     }
     else
         logDbError();
+    qry.finish();
 }
 
 void DatabaseHandler::setResultTable(QTableWidget *resTab)
@@ -116,6 +128,7 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
     }
     else
         logDbError();
+    qry.finish();
 }
 
 void DatabaseHandler::clearAvailableTablesList(QListWidget *list)
@@ -126,6 +139,8 @@ void DatabaseHandler::clearAvailableTablesList(QListWidget *list)
 void DatabaseHandler::showTableInResults(const QString tableName)
 {
     currentTable = tableName;
+
+
     QSqlQuery qry(db);
     QString query = "SELECT * FROM ";
 
@@ -145,6 +160,7 @@ void DatabaseHandler::showTableInResults(const QString tableName)
         logDbError();
 
     qDebug() << "Current table is " << currentTable;
+    qry.finish();
 }
 
 void DatabaseHandler::updateDatabase(int row, int column)
@@ -152,26 +168,29 @@ void DatabaseHandler::updateDatabase(int row, int column)
     qDebug() << "Cell: " << row << " " << column << " changed";
 }
 
-void DatabaseHandler::saveRowToDatabase()
+void DatabaseHandler::saveChangesToDatabase()
 {
-    QSqlQuery qry(db);
-    QString query = "SELECT COUNT(*) FROM ";
-    query.append(currentTable);
+    //add updating database here:
 
-    qDebug() << query;
-    if(qry.exec(query))
-       qDebug() << "Success";
-    else
-        logDbError();
+//    QSqlQuery qry(db);
+//    QString query = "SELECT COUNT(*) FROM ";
+//    query.append(currentTable);
 
-    qry.next();
+//    qDebug() << query;
+//    if(qry.exec(query))
+//       qDebug() << "Success";
+//    else
+//        logDbError();
 
-    auto rowsToBeAdde = resultTable->rowCount() - qry.value(0).toInt();
-    qDebug() << "Rows to be added: " << rowsToBeAdde;
+//    qry.next();
 
-    for(auto processedRow = qry.value(0).toInt(); processedRow < resultTable->rowCount(); processedRow++)
-    {
+//    auto rowsToBeAdde = resultTable->rowCount() - qry.value(0).toInt();
+//    qDebug() << "Rows to be added: " << rowsToBeAdde;
 
+//    for(auto processedRow = qry.value(0).toInt(); processedRow < resultTable->rowCount(); processedRow++)
+//    {
+        auto processedRow = resultTable->currentRow();
+        QString query;
         query = "INSERT INTO ";
         query.append(currentTable);
         query.append(" VALUES (");
@@ -195,13 +214,71 @@ void DatabaseHandler::saveRowToDatabase()
         query.append(")");
         qDebug() << "zapytanie: " << query;
 
+        QSqlQuery qry(db);
         if(qry.exec(query))
             qDebug() << "Dodano " << query;
         else
             logDbError();
+//    }
+        qry.finish();
+}
+
+int DatabaseHandler::getNextId(const QString fromTableName)
+{
+    int nextId = -1;
+    QString query = "SELECT MAX(id) FROM ";
+    query.append(fromTableName);
+    qDebug() << query;
+
+    QSqlQuery qry(db);
+
+    if(qry.exec(query)){
+        qry.next();
+        nextId = qry.value(0).toInt() + 1;
     }
+    else
+        logDbError();
+
+    return nextId;
 }
 
 
+void DatabaseHandler::insertNewRow(QStringList fields)
+{
+    QString query;
+    query = "INSERT INTO ";
+    query.append(currentTable);
+    query.append(" VALUES (");
 
-//id nie moze sie znalezc!
+    for(int i = 0; i < fields.count(); i++) //don't insert 1st column, its ID
+    {
+
+            QString value = fields.at(i);
+            if(value.at(0).isLetter() || value == "")
+            {
+                value.prepend("'");
+                value.append("'");
+            }
+            query.append(value);
+
+
+        query.append(",");
+    }
+    query.remove(query.length()-1, 1); //remove last comma
+    query.append(")");
+
+    qDebug() << "zapytanie: " << query;
+
+    QSqlQuery qry(db);
+    if(qry.exec(query))
+        qDebug() << "Dodano " << query;
+    else
+        logDbError();
+
+    qry.finish();
+}
+
+void DatabaseHandler::refreshTable()
+{
+    showTableInResults(currentTable);
+}

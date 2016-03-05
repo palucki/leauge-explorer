@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QAbstractItemView>
 #include "DatabaseHandler.h"
+#include "AddRecordHelper.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,19 +32,17 @@ private slots:
     void deletebuttonClicked();
     void addRecordButtonClicked();
 
-    void on_resultTable_cellChanged(int row, int column);
+    void onResultTableCellDoubleClicked(int row, int column);
 
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;
+    AddRecordHelper *newRecordWindow;
     void cleanupEnvironment();
     void connectAllSignals();
     void setEditingButtonsState(bool state);
     void setConnectionButtonsInitialState();
     void setConnectionButtonsAfterConnectState();
 };
-
-
-
 
 #endif // MAINWINDOW_H
