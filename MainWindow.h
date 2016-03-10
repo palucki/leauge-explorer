@@ -31,13 +31,13 @@ private slots:
     void savebuttonClicked();
     void deletebuttonClicked();
     void addRecordButtonClicked();
-
-    void onResultTableCellDoubleClicked(int row, int column);
+    void on_resultTable_itemChanged(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;
     AddRecordHelper *newRecordWindow;
+    bool inEditingMode;
     void cleanupEnvironment();
     void connectAllSignals();
     void setEditingButtonsState(bool state);

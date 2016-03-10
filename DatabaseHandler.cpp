@@ -1,6 +1,6 @@
 #include "DatabaseHandler.h"
 
-DatabaseHandler::DatabaseHandler()
+DatabaseHandler::DatabaseHandler() : queriesList(0)
 {
     if(!db.isValid())
         setDatabase();
@@ -78,7 +78,7 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
             if(0 == resultTable->item(i,j))
             {
                 resultTable->setItem(i,j,new QTableWidgetItem);
-                qDebug() << "Allocation of new items in table";
+//                qDebug() << "Allocation of new items in table";
             }
             resultTable->item(i,j)->setText(qry.value(j).toString());
 
@@ -163,64 +163,56 @@ void DatabaseHandler::showTableInResults(const QString tableName)
     qry.finish();
 }
 
-void DatabaseHandler::updateDatabase(int row, int column)
+void DatabaseHandler::addUpdateQueryToQueriesList(int row)
 {
-    qDebug() << "Cell: " << row << " " << column << " changed";
+    qDebug() << "Row: " << row << " " " changed";
+//    SYNTAX:
+//    UPDATE table_name
+//    SET column1=value1,column2=value2,...
+//    WHERE some_column=some_value;
+
+
+    QString query = "UPDATE ";
+    query.append(currentTable);
+    query.append(" ");
+    query.append("SET ");
+
+    for(int i = 1; i < resultTable->columnCount(); i++)
+    {
+        query.append(resultTable->horizontalHeaderItem(i)->text());
+        query.append("='");
+        query.append(resultTable->item(row,i)->text());
+        query.append("' ,");
+    }
+
+    query.remove(query.length()-1, 1); //remove last comma
+    query.append("WHERE ");
+    query.append(resultTable->horizontalHeaderItem(0)->text());
+    query.append("='");
+    query.append(resultTable->item(row,0)->text());
+    query.append("'");
+    query.append(";");
+
+    qDebug() << "zapytanie: " << query;
+    queriesList.push_back(query);
 }
 
 void DatabaseHandler::saveChangesToDatabase()
 {
-    //add updating database here:
-
-//    QSqlQuery qry(db);
-//    QString query = "SELECT COUNT(*) FROM ";
-//    query.append(currentTable);
-
-//    qDebug() << query;
-//    if(qry.exec(query))
-//       qDebug() << "Success";
-//    else
-//        logDbError();
-
-//    qry.next();
-
-//    auto rowsToBeAdde = resultTable->rowCount() - qry.value(0).toInt();
-//    qDebug() << "Rows to be added: " << rowsToBeAdde;
-
-//    for(auto processedRow = qry.value(0).toInt(); processedRow < resultTable->rowCount(); processedRow++)
-//    {
-        auto processedRow = resultTable->currentRow();
-        QString query;
-        query = "INSERT INTO ";
-        query.append(currentTable);
-        query.append(" VALUES (");
-
-        for(int i = 1; i < resultTable->columnCount(); i++) //don't insert 1st column, its ID
-        {
-            if(resultTable->item(processedRow, i)) {
-                QString value = resultTable->item(processedRow, i)->text();
-                if(value.at(0).isLetter())
-                {
-                    value.prepend("'");
-                    value.append("'");
-                }
-                query.append(value);
-            }
-            else
-                query.append(" ");
-            query.append(",");
-        }
-        query.remove(query.length()-1, 1); //remove last comma
-        query.append(")");
-        qDebug() << "zapytanie: " << query;
+    for(auto it = queriesList.begin(); it != queriesList.end(); it++)
+    {
+        qDebug() << *it;
+        QString query = *it;
 
         QSqlQuery qry(db);
         if(qry.exec(query))
             qDebug() << "Dodano " << query;
         else
             logDbError();
-//    }
         qry.finish();
+    }
+
+    queriesList.clear();
 }
 
 int DatabaseHandler::getNextId(const QString fromTableName)
@@ -281,4 +273,24 @@ void DatabaseHandler::insertNewRow(QStringList fields)
 void DatabaseHandler::refreshTable()
 {
     showTableInResults(currentTable);
+}
+
+void DatabaseHandler::removeCurrentRow()
+{
+    int currentRow = resultTable->currentRow();
+    QString currentId = resultTable->item(currentRow, 0)->text();
+
+
+    QString query = "DELETE FROM ";
+    query.append(currentTable);
+    query.append(" WHERE id=");
+    query.append(currentId);
+
+    QSqlQuery qry(db);
+    if(qry.exec(query))
+        qDebug() << "Usunieto " << query;
+    else
+        logDbError();
+
+    qry.finish();
 }

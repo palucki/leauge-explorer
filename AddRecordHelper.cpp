@@ -30,12 +30,12 @@ void AddRecordHelper::updateTableHeaders(const int columns, const QStringList he
 
 void AddRecordHelper::prepareIdColumn(QString tableName)
 {
-    int nextId = databaseHandler->getNextId(tableName);
+    //int nextId = databaseHandler->getNextId(tableName); QString::number(nextId)
 
     if(ui->newRecordTable->item(0,0) == NULL)
         ui->newRecordTable->setItem(0,0, new QTableWidgetItem);
 
-    ui->newRecordTable->item(0,0)->setText(QString::number(nextId));
+    ui->newRecordTable->item(0,0)->setText("(automatic id)");
     ui->newRecordTable->item(0,0)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 }
 

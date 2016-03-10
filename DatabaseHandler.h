@@ -10,7 +10,7 @@
 class DatabaseHandler
 {
 public:
-    DatabaseHandler() ;
+    DatabaseHandler()  ;
     void setDatabase();
     ~DatabaseHandler();
     void connectToDatabase();
@@ -22,11 +22,13 @@ public:
     void showAvailableTablesFromDatabaseIn(QListWidget* list);
     void clearAvailableTablesList(QListWidget* list);
     void showTableInResults(const QString tableName);
-    void updateDatabase(int row, int column);
+    void addUpdateQueryToQueriesList(int row);
     void saveChangesToDatabase();
     int getNextId(const QString);
     void insertNewRow(QStringList fields);
     void refreshTable();
+    void removeCurrentRow();
+
 private:
     QSqlDatabase db;
     QString currentTable;
@@ -39,7 +41,7 @@ private:
     void rowIsCorrect(QString query, bool willBeInserted);
     bool asdas(QString query);
     bool rowIsAcceptable(QString query);
-    std::vector<int> changesVector;
+    QStringList queriesList;
 };
 
 #endif // DATABASEHANDLER_H

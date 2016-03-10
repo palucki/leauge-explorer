@@ -11,13 +11,12 @@ void MainWindow::connectAllSignals()
     connect(ui->saveButton, SIGNAL(clicked()),this, SLOT(savebuttonClicked()));
     connect(ui->deleteButton, SIGNAL(clicked()),this, SLOT(deletebuttonClicked()));
     connect(ui->addRecordButton, SIGNAL(clicked()),this, SLOT(addRecordButtonClicked()));
-    connect(ui->resultTable, SIGNAL(cellDoubleClicked(int,int)),this, SLOT(onResultTableCellDoubleClicked(int,int)));
     connect(ui->exitButton, SIGNAL(clicked()),this, SLOT(close()));
 }
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), inEditingMode(false)
 {
     ui->setupUi(this);
     newRecordWindow = new AddRecordHelper(this);
@@ -40,6 +39,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setEditingButtonsState(bool state)
 {
+    qDebug() << "Edition mode: " << state;
+    inEditingMode = state;
     ui->saveButton->setEnabled(state);
     ui->deleteButton->setEnabled(state);
     ui->addRecordButton->setEnabled(state);
@@ -146,20 +147,17 @@ void MainWindow::editSelectedTable()
     setEditingButtonsState(true);
 }
 
-void MainWindow::savebuttonClicked()
-{
-    ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    ui->editModeButton->setEnabled(true);
-    setEditingButtonsState(false);
-
-    databaseHandler->saveChangesToDatabase();
-    showTableFrom(ui->allTables->currentItem()); //update table
-}
 
 void MainWindow::deletebuttonClicked()
 {
         qDebug() << "Remove";
+
+
+        databaseHandler->removeCurrentRow();
+
+
+
         ui->resultTable->removeRow(ui->resultTable->currentRow());
         ui->resultTable->setCurrentCell(ui->resultTable->currentRow(), ui->resultTable->currentColumn());
 }
@@ -186,7 +184,21 @@ void MainWindow::addRecordButtonClicked()
     }
 }
 
-void MainWindow::onResultTableCellDoubleClicked(int row, int column)
+void MainWindow::savebuttonClicked()
 {
-    qDebug() << "We edit: " << row << " " << column;
+    ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->editModeButton->setEnabled(true);
+    setEditingButtonsState(false);
+
+    databaseHandler->saveChangesToDatabase();
+    showTableFrom(ui->allTables->currentItem()); //update table
+}
+
+void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
+{
+    if(inEditingMode)
+    {
+        databaseHandler->addUpdateQueryToQueriesList(item->row());
+    }
 }
