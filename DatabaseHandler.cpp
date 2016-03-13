@@ -140,6 +140,7 @@ void DatabaseHandler::showTableInResults(const QString tableName)
 {
     currentTable = tableName;
 
+    qDebug() << currentTable;
 
     QSqlQuery qry(db);
     QString query = "SELECT * FROM ";
@@ -279,7 +280,6 @@ void DatabaseHandler::removeCurrentRow()
 {
     int currentRow = resultTable->currentRow();
     QString currentId = resultTable->item(currentRow, 0)->text();
-
 
     QString query = "DELETE FROM ";
     query.append(currentTable);

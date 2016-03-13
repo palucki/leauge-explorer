@@ -6,7 +6,6 @@ void MainWindow::connectAllSignals()
     connect(ui->connectButton, SIGNAL(clicked()),this, SLOT(connectToDatabase()));
     connect(ui->disconnectButton, SIGNAL(clicked()),this, SLOT(disconnectFromDatabase()));
     connect(ui->executeQueryButton, SIGNAL(clicked()),this, SLOT(executeQueryFromEditor()));
-    connect(ui->showSelectedButton, SIGNAL(clicked()),this, SLOT(showSelectedFromButton()));
     connect(ui->editModeButton, SIGNAL(clicked()),this, SLOT(editSelectedTable()));
     connect(ui->saveButton, SIGNAL(clicked()),this, SLOT(savebuttonClicked()));
     connect(ui->deleteButton, SIGNAL(clicked()),this, SLOT(deletebuttonClicked()));
@@ -20,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     newRecordWindow = new AddRecordHelper(this);
-
+    loginHelper = new LoginHelper;
+    userIdentity = "";
     connectAllSignals();
 }
 
@@ -33,6 +33,7 @@ void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
 MainWindow::~MainWindow()
 {
     cleanupEnvironment();
+    delete loginHelper;
     delete newRecordWindow;
     delete ui;
 }
@@ -42,7 +43,6 @@ void MainWindow::setEditingButtonsState(bool state)
     qDebug() << "Edition mode: " << state;
     inEditingMode = state;
     ui->saveButton->setEnabled(state);
-    ui->deleteButton->setEnabled(state);
     ui->addRecordButton->setEnabled(state);
 }
 
@@ -54,6 +54,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables);
 
     setConnectionButtonsAfterConnectState();
+
     //setEditingButtonsState(false);
 }
 
@@ -63,7 +64,6 @@ void MainWindow::disconnectFromDatabase()
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
 
     setConnectionButtonsInitialState();
-    setEditingButtonsState(false);
 
     ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -72,12 +72,14 @@ void MainWindow::disconnectFromDatabase()
 
 void MainWindow::setConnectionButtonsAfterConnectState()
 {
+    inEditingMode = false;
+
     ui->connectButton->setEnabled(false);
     ui->disconnectButton->setEnabled(true);
-    ui->showSelectedButton->setEnabled(true);
     ui->editModeButton->setEnabled(true);
-
+    ui->deleteButton->setEnabled(true);
     ui->addRecordButton->setEnabled(true);
+    ui->saveButton->setEnabled(false);
 }
 
 
@@ -85,8 +87,10 @@ void MainWindow::setConnectionButtonsInitialState()
 {
     ui->connectButton->setEnabled(true);
     ui->disconnectButton->setEnabled(false);
-    ui->showSelectedButton->setEnabled(false);
     ui->editModeButton->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+    ui->addRecordButton->setEnabled(false);
+    ui->saveButton->setEnabled(false);
 }
 
 void MainWindow::cleanupEnvironment()
@@ -106,13 +110,16 @@ void MainWindow::executeQueryFromEditor()
 
 void MainWindow::showTableFrom(QListWidgetItem *item)
 {
+    setConnectionButtonsAfterConnectState();
+
+
     if(!item) {
        item = ui->allTables->currentItem();
        qDebug() << "Allocated to item";
     }
     QString selectedTable = item->text();
-    databaseHandler->showTableInResults(selectedTable);
     qDebug() << "selected table: " << selectedTable;
+    databaseHandler->showTableInResults(selectedTable);
 
 }
 
@@ -156,8 +163,6 @@ void MainWindow::deletebuttonClicked()
 
         databaseHandler->removeCurrentRow();
 
-
-
         ui->resultTable->removeRow(ui->resultTable->currentRow());
         ui->resultTable->setCurrentCell(ui->resultTable->currentRow(), ui->resultTable->currentColumn());
 }
@@ -189,7 +194,6 @@ void MainWindow::savebuttonClicked()
     ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     ui->editModeButton->setEnabled(true);
-    setEditingButtonsState(false);
 
     databaseHandler->saveChangesToDatabase();
     showTableFrom(ui->allTables->currentItem()); //update table
@@ -201,4 +205,26 @@ void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
     {
         databaseHandler->addUpdateQueryToQueriesList(item->row());
     }
+}
+
+void MainWindow::on_signInButton_clicked()
+{
+    //add some hash function in the future
+
+    std::map<std::string, std::string> usersCredentials;
+    usersCredentials["user"] = "user";
+    usersCredentials["admin"] = "admin";
+    usersCredentials["default"] = "1234";
+
+    std::string userName = ui->usernameLineEdit->text().toStdString();
+    std::string password = ui->passwordLineEdit->text().toStdString();
+
+    if(usersCredentials[userName] == password)
+    {
+        userIdentity = QString::fromStdString(userName);
+        qDebug() << "Correct password";
+        qDebug() << "Welcome " << userIdentity;
+    }
+    else
+        qDebug() << "Username or password incorrect";
 }

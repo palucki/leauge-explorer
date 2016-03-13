@@ -17,75 +17,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>191</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="connectButton">
-       <property name="text">
-        <string>Connect to Database</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="connectionIndicator">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QCheckBox::indicator {
-    background-color: red;
-}</string>
-       </property>
-       <property name="text">
-        <string>Connection state</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="disconnectButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Disconnect from Database</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="exitButton">
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Exit</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QTableWidget" name="resultTable">
     <property name="enabled">
      <bool>true</bool>
@@ -121,14 +52,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>280</x>
       <y>0</y>
-      <width>501</width>
+      <width>391</width>
       <height>201</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -137,54 +68,14 @@
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>50</y>
-        <width>268</width>
+        <x>210</x>
+        <y>70</y>
+        <width>161</width>
         <height>80</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="1">
-        <widget class="QPushButton" name="saveButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Save</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="deleteButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Delete</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="editModeButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Edit mode</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
-        <widget class="QPushButton" name="showSelectedButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Refresh table</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
         <widget class="QPushButton" name="addRecordButton">
          <property name="enabled">
           <bool>false</bool>
@@ -194,12 +85,42 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="deleteButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Delete record</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="saveButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="editModeButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Edit mode</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>70</x>
         <y>20</y>
         <width>91</width>
         <height>20</height>
@@ -212,7 +133,7 @@
      <widget class="QListWidget" name="allTables">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>30</x>
         <y>41</y>
         <width>171</width>
         <height>111</height>
@@ -256,6 +177,189 @@
        <string>Execute query</string>
       </property>
      </widget>
+     <widget class="QGroupBox" name="loginGroupBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>207</width>
+        <height>112</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Login</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Password</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::AutoText</enum>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>User name</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="usernameLineEdit">
+           <property name="text">
+            <string>user</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="passwordLineEdit">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="signInButton">
+         <property name="text">
+          <string>Sign in</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>queryEditor</zorder>
+     <zorder>executeQueryButton</zorder>
+     <zorder>verticalLayoutWidget</zorder>
+     <zorder>verticalLayoutWidget_2</zorder>
+     <zorder>loginGroupBox</zorder>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>211</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GroupBox</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>197</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="connectButton">
+        <property name="text">
+         <string>Connect to Database</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="connectionIndicator">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox::indicator {
+    background-color: red;
+}</string>
+          </property>
+          <property name="text">
+           <string>Connection state</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="disconnectButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Disconnect from Database</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitButton">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Exit</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>

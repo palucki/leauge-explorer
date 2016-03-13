@@ -5,6 +5,9 @@
 #include <QAbstractItemView>
 #include "DatabaseHandler.h"
 #include "AddRecordHelper.h"
+#include "loginhelper.h"
+#include <string>
+#include <map>
 
 namespace Ui {
 class MainWindow;
@@ -32,11 +35,14 @@ private slots:
     void deletebuttonClicked();
     void addRecordButtonClicked();
     void on_resultTable_itemChanged(QTableWidgetItem *item);
+    void on_signInButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;
     AddRecordHelper *newRecordWindow;
+    LoginHelper *loginHelper;
+    QString userIdentity;
     bool inEditingMode;
     void cleanupEnvironment();
     void connectAllSignals();
