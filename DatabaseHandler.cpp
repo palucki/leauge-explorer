@@ -103,6 +103,7 @@ void DatabaseHandler::executeQuery(const QString query)
     QSqlQuery qry(db);
     if(qry.exec(query))
     {
+        resultTable->clearContents();
         prepareColumns(qry);
         fillTableWithQueryData(qry);
     }
@@ -293,4 +294,27 @@ void DatabaseHandler::removeCurrentRow()
         logDbError();
 
     qry.finish();
+}
+
+std::string DatabaseHandler::getHashFromDbForUser(std::string user)
+{
+    QString query = "SELECT passwordHash FROM credentials WHERE username = '";
+    query.append(QString::fromStdString(user));
+    query.append("'");
+
+//    qDebug() << query;
+
+    QSqlQuery qry(db);
+    if(qry.exec(query))
+        qDebug() << "Success";
+    else
+        logDbError();
+
+    qry.next();
+    QString hash = qry.record().value(0).toString();
+
+    qry.finish();
+
+
+    return hash.toStdString();
 }

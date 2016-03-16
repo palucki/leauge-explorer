@@ -28,6 +28,7 @@ public:
     void insertNewRow(QStringList fields);
     void refreshTable();
     void removeCurrentRow();
+    std::string getHashFromDbForUser(std::string user);
 
 private:
     QSqlDatabase db;

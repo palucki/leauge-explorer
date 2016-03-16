@@ -1,14 +1,25 @@
 #include "loginhelper.h"
+#include <sstream>
 
-LoginHelper::LoginHelper()
+LoginHelper::LoginHelper(DatabaseHandler *dbh)
 {
-
+    databaseHandler = dbh;
 }
 
-bool LoginHelper::validateUser()
+bool LoginHelper::userOK(std::string user, std::string pass)
 {
-//    if(loginGroupBox.)
+    std::hash<std::string> str_hash;
 
-    return true;
+    std::string passwordHashFromDb = databaseHandler->getHashFromDbForUser(user);
+
+    std::stringstream ss;
+    ss << str_hash(pass);
+
+
+    qDebug() << "Hash for user: " << QString::fromStdString(passwordHashFromDb);
+    qDebug() << "Whereas hash generated with password supplied: " << str_hash(pass);
+
+    return ss.str() == passwordHashFromDb;
 }
+
 

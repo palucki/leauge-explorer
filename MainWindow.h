@@ -8,6 +8,7 @@
 #include "loginhelper.h"
 #include <string>
 #include <map>
+#include <functional>
 
 namespace Ui {
 class MainWindow;

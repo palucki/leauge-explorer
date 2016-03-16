@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     newRecordWindow = new AddRecordHelper(this);
-    loginHelper = new LoginHelper;
     userIdentity = "";
     connectAllSignals();
 }
@@ -33,7 +32,6 @@ void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
 MainWindow::~MainWindow()
 {
     cleanupEnvironment();
-    delete loginHelper;
     delete newRecordWindow;
     delete ui;
 }
@@ -211,6 +209,8 @@ void MainWindow::on_signInButton_clicked()
 {
     //add some hash function in the future
 
+    LoginHelper loginHelper(databaseHandler);
+
     std::map<std::string, std::string> usersCredentials;
     usersCredentials["user"] = "user";
     usersCredentials["admin"] = "admin";
@@ -219,12 +219,28 @@ void MainWindow::on_signInButton_clicked()
     std::string userName = ui->usernameLineEdit->text().toStdString();
     std::string password = ui->passwordLineEdit->text().toStdString();
 
-    if(usersCredentials[userName] == password)
+    bool passwordCorrect = loginHelper.userOK(userName, password);
+
+    if(userIdentity == "")
     {
-        userIdentity = QString::fromStdString(userName);
-        qDebug() << "Correct password";
-        qDebug() << "Welcome " << userIdentity;
+        if(passwordCorrect)
+        {
+            userIdentity = QString::fromStdString(userName);
+            qDebug() << "Correct password";
+            qDebug() << "Welcome " << userIdentity;
+            ui->usernameLineEdit->setEnabled(false);
+            ui->passwordLineEdit->setEnabled(false);
+            ui->signInButton->setText("Sign out");
+        }
+        else
+            qDebug() << "Username or password incorrect";
     }
     else
-        qDebug() << "Username or password incorrect";
+    {
+        userIdentity = "";
+        ui->usernameLineEdit->setEnabled(true);
+        ui->passwordLineEdit->setEnabled(true);
+        ui->signInButton->setText("Sign in");
+    }
+
 }
