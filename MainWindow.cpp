@@ -243,4 +243,13 @@ void MainWindow::on_signInButton_clicked()
         ui->signInButton->setText("Sign in");
     }
 
+    qDebug() << userIdentity << "== admin? " << (userIdentity == "admin");
+    if(userIdentity == "admin")
+    {
+        ui->advancedOptions->setEnabled(true);
+    }
+    else
+    {
+        ui->advancedOptions->setEnabled(false);
+    }
 }
