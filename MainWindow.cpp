@@ -201,7 +201,7 @@ void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
 {
     if(inEditingMode)
     {
-        databaseHandler->addUpdateQueryToQueriesList(item->row());
+        databaseHandler->addUpdateQueryToQueriesList(item->row(), item->column());
     }
 }
 

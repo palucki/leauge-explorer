@@ -1,6 +1,6 @@
 #include "DatabaseHandler.h"
 
-DatabaseHandler::DatabaseHandler() : queriesList(0)
+DatabaseHandler::DatabaseHandler()
 {
     if(!db.isValid())
         setDatabase();
@@ -165,7 +165,7 @@ void DatabaseHandler::showTableInResults(const QString tableName)
     qry.finish();
 }
 
-void DatabaseHandler::addUpdateQueryToQueriesList(int row)
+void DatabaseHandler::addUpdateQueryToQueriesList(int row, int column)
 {
     qDebug() << "Row: " << row << " " " changed";
 //    SYNTAX:
@@ -179,16 +179,12 @@ void DatabaseHandler::addUpdateQueryToQueriesList(int row)
     query.append(" ");
     query.append("SET ");
 
-    for(int i = 1; i < resultTable->columnCount(); i++)
-    {
-        query.append(resultTable->horizontalHeaderItem(i)->text());
-        query.append("='");
-        query.append(resultTable->item(row,i)->text());
-        query.append("' ,");
-    }
+    query.append(resultTable->horizontalHeaderItem(column)->text());
+    query.append("='");
+    query.append(resultTable->item(row,column)->text());
+    query.append("'");
 
-    query.remove(query.length()-1, 1); //remove last comma
-    query.append("WHERE ");
+    query.append(" WHERE ");
     query.append(resultTable->horizontalHeaderItem(0)->text());
     query.append("='");
     query.append(resultTable->item(row,0)->text());
@@ -298,7 +294,7 @@ void DatabaseHandler::removeCurrentRow()
 
 std::string DatabaseHandler::getHashFromDbForUser(std::string user)
 {
-    QString query = "SELECT passwordHash FROM credentials WHERE username = '";
+    QString query = "SELECT hash FROM users WHERE username = '";
     query.append(QString::fromStdString(user));
     query.append("'");
 

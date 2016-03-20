@@ -22,7 +22,7 @@ public:
     void showAvailableTablesFromDatabaseIn(QListWidget* list);
     void clearAvailableTablesList(QListWidget* list);
     void showTableInResults(const QString tableName);
-    void addUpdateQueryToQueriesList(int row);
+    void addUpdateQueryToQueriesList(int row, int column);
     void saveChangesToDatabase();
     int getNextId(const QString);
     void insertNewRow(QStringList fields);
