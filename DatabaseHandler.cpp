@@ -124,7 +124,7 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
     {
         while(qry.next())
         {
-            list->addItem(new QListWidgetItem(qry.record().value(2).toString()));
+            list->addItem(qry.record().value(2).toString());
         }
     }
     else

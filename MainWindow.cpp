@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
+#include "searchtype.h"
+#include "simplesearch.h"
 
 void MainWindow::connectAllSignals()
 {
@@ -18,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow), inEditingMode(false)
 {
     ui->setupUi(this);
+    ui->advancedOptions->setEnabled(false);
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
@@ -252,4 +255,32 @@ void MainWindow::on_signInButton_clicked()
     {
         ui->advancedOptions->setEnabled(false);
     }
+}
+
+void MainWindow::on_searchButton_clicked()
+{
+    SearchType* searchType;
+    QString searchTypeText = ui->searchTypeField->currentText();
+
+    if(searchTypeText == "simple")
+    {
+        qDebug() << "Proste";
+        searchType = new SimpleSearch(databaseHandler);
+    }
+
+    else if(searchTypeText == "mathematical")
+    {
+        qDebug() << "Matematyczne";
+
+    }
+    else if(searchTypeText == "logical")
+    {
+        qDebug() << "Logiczne";
+    }
+    else
+        qDebug() << "Unknown search type!";
+
+
+//    searchType->processQuery()
+
 }

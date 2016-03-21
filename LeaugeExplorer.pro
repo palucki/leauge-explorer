@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     DatabaseHandler.cpp \
     MainWindow.cpp \
     AddRecordHelper.cpp \
-    loginhelper.cpp
+    loginhelper.cpp \
+    simplesearch.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
     MainWindow.h \
     AddRecordHelper.h \
-    loginhelper.h
-
+    loginhelper.h \
+    searchtype.h \
+    simplesearch.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui
 

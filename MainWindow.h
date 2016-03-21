@@ -38,6 +38,8 @@ private slots:
     void on_resultTable_itemChanged(QTableWidgetItem *item);
     void on_signInButton_clicked();
 
+    void on_searchButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;

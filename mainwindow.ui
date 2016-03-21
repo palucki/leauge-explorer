@@ -59,7 +59,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -151,6 +151,16 @@
       </property>
       <property name="text">
        <string>Wykres</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="allTablesasdasd">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>20</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -290,7 +300,7 @@
      <attribute name="title">
       <string>Wyszukiwanie</string>
      </attribute>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -310,7 +320,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_2">
+          <widget class="QComboBox" name="searchTypeField">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -363,7 +373,7 @@
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="searchFieldsLayout">
          <item>
           <widget class="QLineEdit" name="searchLineEdit">
            <property name="text">
@@ -400,7 +410,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3"/>
+          <widget class="QComboBox" name="availableTablesInSearch"/>
          </item>
          <item>
           <widget class="QPushButton" name="searchButton">
