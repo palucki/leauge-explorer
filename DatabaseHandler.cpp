@@ -117,7 +117,7 @@ void DatabaseHandler::setResultTable(QTableWidget *resTab)
     resultTable = resTab;
 }
 
-void DatabaseHandler::showAvailableTablesFromDatabaseIn(QComboBox* box, QComboBox* serachbox)
+void DatabaseHandler::showAvailableTablesFromDatabaseIn(QComboBox* box)
 {
     QSqlQuery qry(db);
     if(qry.exec("SELECT * FROM information_schema.tables"))
@@ -125,7 +125,6 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QComboBox* box, QComboBo
         while(qry.next())
         {
             box->addItem(qry.record().value(2).toString());
-            serachbox->addItem(qry.record().value(2).toString());
         }
     }
     else
@@ -133,10 +132,9 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QComboBox* box, QComboBo
     qry.finish();
 }
 
-void DatabaseHandler::clearAvailableTablesList(QComboBox* box, QComboBox* searchbox)
+void DatabaseHandler::clearAvailableTablesList(QComboBox* box)
 {
     box->clear();
-    searchbox->clear();
 }
 
 void DatabaseHandler::showTableInResults(const QString tableName)
@@ -315,4 +313,40 @@ std::string DatabaseHandler::getHashFromDbForUser(std::string user)
 
 
     return hash.toStdString();
+}
+
+std::vector<std::string> DatabaseHandler::getAvailableTables()
+{
+    std::vector<std::string> availableTables;
+    QSqlQuery qry(db);
+    if(qry.exec("SELECT * FROM information_schema.tables"))
+    {
+        while(qry.next())
+        {
+            availableTables.push_back(qry.record().value(2).toString().toStdString());
+        }
+    }
+    else
+        logDbError();
+    qry.finish();
+
+    return availableTables;
+}
+
+std::vector<QSqlRecord> DatabaseHandler::processSimpleSearch(QString query)
+{
+    std::vector<QSqlRecord> foundRecords;
+    QSqlQuery qry(db);
+    if(qry.exec(query))
+    {
+        while(qry.next())
+        {
+            foundRecords.push_back(qry.record());
+        }
+    }
+    else
+        logDbError();
+    qry.finish();
+
+    return foundRecords;
 }

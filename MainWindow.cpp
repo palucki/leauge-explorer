@@ -53,8 +53,10 @@ void MainWindow::connectToDatabase()
     databaseHandler->connectToDatabase();
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
     databaseHandler->setResultTable(ui->resultTable);
-    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd, ui->availableTablesInSearch);
+    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd);
 
+    ui->availableTablesInSearch->addItem(wholeDatabaseString);
+    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
 
     //setEditingButtonsState(false);
@@ -110,7 +112,8 @@ void MainWindow::setConnectionButtonsInitialState()
 
 void MainWindow::cleanupEnvironment()
 {
-    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd, ui->availableTablesInSearch);
+    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd);
+    databaseHandler->clearAvailableTablesList(ui->availableTablesInSearch);
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
 
@@ -279,11 +282,14 @@ void MainWindow::on_searchButton_clicked()
 {
     SearchType* searchType;
     QString searchTypeText = ui->searchTypeField->currentText();
+    QStringList arguments;
 
     if(searchTypeText == "simple")
     {
         qDebug() << "Proste";
         searchType = new SimpleSearch(databaseHandler);
+        arguments.push_back(ui->searchLineEdit->text());
+        arguments.push_back(ui->availableTablesInSearch->currentText());
     }
 
     else if(searchTypeText == "mathematical")
@@ -299,7 +305,7 @@ void MainWindow::on_searchButton_clicked()
         qDebug() << "Unknown search type!";
 
 
-//    searchType->processQuery()
+    searchType->processQuery(arguments);
 
 }
 

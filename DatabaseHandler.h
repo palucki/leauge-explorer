@@ -19,8 +19,8 @@ public:
     void sendQuery();
     void executeQuery(const QString query);
     void setResultTable(QTableWidget* resTab);
-    void showAvailableTablesFromDatabaseIn(QComboBox* box, QComboBox* serachbox);
-    void clearAvailableTablesList(QComboBox* box, QComboBox* searchbox);
+    void showAvailableTablesFromDatabaseIn(QComboBox* box);
+    void clearAvailableTablesList(QComboBox* box);
     void showTableInResults(const QString tableName);
     void addUpdateQueryToQueriesList(int row, int column);
     void saveChangesToDatabase();
@@ -29,6 +29,8 @@ public:
     void refreshTable();
     void removeCurrentRow();
     std::string getHashFromDbForUser(std::string user);
+    std::vector<std::string> getAvailableTables();
+    std::vector<QSqlRecord> processSimpleSearch(QString query);
 
 private:
     QSqlDatabase db;
