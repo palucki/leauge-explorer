@@ -35,6 +35,7 @@ void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
 MainWindow::~MainWindow()
 {
     cleanupEnvironment();
+    databaseHandler->disconnectFromDatabase();
     delete newRecordWindow;
     delete ui;
 }
@@ -76,12 +77,26 @@ void MainWindow::setConnectionButtonsAfterConnectState()
 
     ui->connectButton->setEnabled(false);
     ui->disconnectButton->setEnabled(true);
-    ui->editModeButton->setEnabled(true);
-    ui->deleteButton->setEnabled(true);
-    ui->addRecordButton->setEnabled(true);
+    ui->editModeButton->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+    ui->addRecordButton->setEnabled(false);
     ui->saveButton->setEnabled(false);
 }
 
+void MainWindow::disableEditingButtonsForUnknownUser()
+{
+    ui->editModeButton->setEnabled(false);
+    ui->saveButton->setEnabled(false);
+    ui->addRecordButton->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+}
+
+void MainWindow::enableEditingButtonsForKnownUser()
+{
+    ui->editModeButton->setEnabled(true);
+    ui->addRecordButton->setEnabled(true);
+    ui->deleteButton->setEnabled(true);
+}
 
 void MainWindow::setConnectionButtonsInitialState()
 {
@@ -113,7 +128,9 @@ void MainWindow::executeQueryFromEditor()
 
 void MainWindow::showTableFrom(QListWidgetItem *item)
 {
-    setConnectionButtonsAfterConnectState();
+//    setConnectionButtonsAfterConnectState();
+    inEditingMode = false;
+    ui->saveButton->setEnabled(false);
 
     QString selectedTable = item->text();
     qDebug() << "selected table: " << selectedTable;
@@ -197,6 +214,7 @@ void MainWindow::savebuttonClicked()
 //    showTableFrom(ui->allTables->currentItem()); //update table
     QListWidgetItem tempItem(ui->allTablesasdasd->currentText());
     showTableFrom(&tempItem); //update table
+    ui->editModeButton->setEnabled(true);
 }
 
 void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
@@ -209,14 +227,7 @@ void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
 
 void MainWindow::on_signInButton_clicked()
 {
-    //add some hash function in the future
-
     LoginHelper loginHelper(databaseHandler);
-
-    std::map<std::string, std::string> usersCredentials;
-    usersCredentials["user"] = "user";
-    usersCredentials["admin"] = "admin";
-    usersCredentials["default"] = "1234";
 
     std::string userName = ui->usernameLineEdit->text().toStdString();
     std::string password = ui->passwordLineEdit->text().toStdString();
@@ -245,7 +256,15 @@ void MainWindow::on_signInButton_clicked()
         ui->signInButton->setText("Sign in");
     }
 
-    qDebug() << userIdentity << "== admin? " << (userIdentity == "admin");
+    if(userIdentity == "")
+    {
+        disableEditingButtonsForUnknownUser();
+    }
+    else
+    {
+        enableEditingButtonsForKnownUser();
+    }
+
     if(userIdentity == "admin")
     {
         ui->advancedOptions->setEnabled(true);
@@ -290,6 +309,8 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
     {
         QListWidgetItem tempItem(arg1);
         showTableFrom(&tempItem);
+        if(userIdentity != "")
+            ui->editModeButton->setEnabled(true);
     }
 
 }

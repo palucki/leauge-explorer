@@ -52,6 +52,8 @@ private:
     void setEditingButtonsState(bool state);
     void setConnectionButtonsInitialState();
     void setConnectionButtonsAfterConnectState();
+    void disableEditingButtonsForUnknownUser();
+    void enableEditingButtonsForKnownUser();
 };
 
 #endif // MAINWINDOW_H
