@@ -52,7 +52,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->connectToDatabase();
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
     databaseHandler->setResultTable(ui->resultTable);
-    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables, ui->allTablesasdasd);
+    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd, ui->availableTablesInSearch);
 
     setConnectionButtonsAfterConnectState();
 
@@ -95,7 +95,7 @@ void MainWindow::setConnectionButtonsInitialState()
 
 void MainWindow::cleanupEnvironment()
 {
-    databaseHandler->clearAvailableTablesList(ui->allTables, ui->allTablesasdasd);
+    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd, ui->availableTablesInSearch);
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
 
@@ -115,15 +115,9 @@ void MainWindow::showTableFrom(QListWidgetItem *item)
 {
     setConnectionButtonsAfterConnectState();
 
-
-    if(!item) {
-       item = ui->allTables->currentItem();
-       qDebug() << "Allocated to item";
-    }
     QString selectedTable = item->text();
     qDebug() << "selected table: " << selectedTable;
     databaseHandler->showTableInResults(selectedTable);
-
 }
 
 void MainWindow::updateConnectedIndicator(bool state)
@@ -138,15 +132,15 @@ void MainWindow::updateConnectedIndicator(bool state)
     }
 }
 
-void MainWindow::on_allTables_itemDoubleClicked(QListWidgetItem *item)
-{
-    showTableFrom(item);
-}
+//void MainWindow::on_allTables_itemDoubleClicked(QListWidgetItem *item)
+//{
+//    showTableFrom(item);
+//}
 
-void MainWindow::showSelectedFromButton()
-{
-    showTableFrom(ui->allTables->currentItem());
-}
+//void MainWindow::showSelectedFromButton()
+//{
+//    showTableFrom(ui->allTables->currentItem());
+//}
 
 
 void MainWindow::editSelectedTable()

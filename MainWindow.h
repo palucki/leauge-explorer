@@ -29,17 +29,15 @@ private slots:
     void updateConnectedIndicator(bool);
     void executeQueryFromEditor();
     void showTableFrom(QListWidgetItem *item);
-    void showSelectedFromButton();
-    void on_allTables_itemDoubleClicked(QListWidgetItem *item);
+//    void showSelectedFromButton();
+//    void on_allTables_itemDoubleClicked(QListWidgetItem *item);
     void editSelectedTable();
     void savebuttonClicked();
     void deletebuttonClicked();
     void addRecordButtonClicked();
     void on_resultTable_itemChanged(QTableWidgetItem *item);
     void on_signInButton_clicked();
-
     void on_searchButton_clicked();
-
     void on_allTablesasdasd_currentTextChanged(const QString &arg1);
 
 private:
