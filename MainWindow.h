@@ -40,6 +40,8 @@ private slots:
 
     void on_searchButton_clicked();
 
+    void on_allTablesasdasd_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;

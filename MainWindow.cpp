@@ -52,7 +52,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->connectToDatabase();
     updateConnectedIndicator(databaseHandler->getConnectionStatus());
     databaseHandler->setResultTable(ui->resultTable);
-    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables);
+    databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTables, ui->allTablesasdasd);
 
     setConnectionButtonsAfterConnectState();
 
@@ -67,8 +67,7 @@ void MainWindow::disconnectFromDatabase()
     setConnectionButtonsInitialState();
 
     ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    cleanupEnvironment();
+    cleanupEnvironment();\
 }
 
 void MainWindow::setConnectionButtonsAfterConnectState()
@@ -96,12 +95,15 @@ void MainWindow::setConnectionButtonsInitialState()
 
 void MainWindow::cleanupEnvironment()
 {
-    databaseHandler->clearAvailableTablesList(ui->allTables);
+    databaseHandler->clearAvailableTablesList(ui->allTables, ui->allTablesasdasd);
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
+
     ui->resultTable->setColumnCount(0);
     ui->resultTable->setRowCount(0);
     ui->resultTable->clearContents();
+
+
 }
 
 void MainWindow::executeQueryFromEditor()
@@ -159,18 +161,20 @@ void MainWindow::editSelectedTable()
 
 void MainWindow::deletebuttonClicked()
 {
-        qDebug() << "Remove";
+    qDebug() << "Remove";
 
-
+    if(ui->resultTable->currentRow() != -1)
+    {
         databaseHandler->removeCurrentRow();
-
         ui->resultTable->removeRow(ui->resultTable->currentRow());
         ui->resultTable->setCurrentCell(ui->resultTable->currentRow(), ui->resultTable->currentColumn());
+
+    }
 }
 
 void MainWindow::addRecordButtonClicked()
 {
-    if(ui->allTables->currentRow() != -1)
+    if(ui->allTablesasdasd->currentText() != "")
     {
         //clear contents
         newRecordWindow->clearTable();
@@ -182,8 +186,7 @@ void MainWindow::addRecordButtonClicked()
             headersList << ui->resultTable->horizontalHeaderItem(i)->text();
         }
         newRecordWindow->updateTableHeaders(ui->resultTable->columnCount(), headersList);
-        newRecordWindow->prepareIdColumn(ui->allTables->currentItem()->text());
-
+        newRecordWindow->prepareIdColumn(ui->allTablesasdasd->currentText());
 
         //add rows
         newRecordWindow->show();
@@ -197,7 +200,9 @@ void MainWindow::savebuttonClicked()
     ui->editModeButton->setEnabled(true);
 
     databaseHandler->saveChangesToDatabase();
-    showTableFrom(ui->allTables->currentItem()); //update table
+//    showTableFrom(ui->allTables->currentItem()); //update table
+    QListWidgetItem tempItem(ui->allTablesasdasd->currentText());
+    showTableFrom(&tempItem); //update table
 }
 
 void MainWindow::on_resultTable_itemChanged(QTableWidgetItem *item)
@@ -282,5 +287,15 @@ void MainWindow::on_searchButton_clicked()
 
 
 //    searchType->processQuery()
+
+}
+
+void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
+{
+    if(arg1 != "")
+    {
+        QListWidgetItem tempItem(arg1);
+        showTableFrom(&tempItem);
+    }
 
 }

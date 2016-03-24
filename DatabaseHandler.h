@@ -19,8 +19,8 @@ public:
     void sendQuery();
     void executeQuery(const QString query);
     void setResultTable(QTableWidget* resTab);
-    void showAvailableTablesFromDatabaseIn(QListWidget* list);
-    void clearAvailableTablesList(QListWidget* list);
+    void showAvailableTablesFromDatabaseIn(QListWidget* list, QComboBox* box);
+    void clearAvailableTablesList(QListWidget* list, QComboBox* box);
     void showTableInResults(const QString tableName);
     void addUpdateQueryToQueriesList(int row, int column);
     void saveChangesToDatabase();

@@ -117,7 +117,7 @@ void DatabaseHandler::setResultTable(QTableWidget *resTab)
     resultTable = resTab;
 }
 
-void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
+void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list, QComboBox* box)
 {
     QSqlQuery qry(db);
     if(qry.exec("SELECT * FROM information_schema.tables"))
@@ -125,6 +125,7 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
         while(qry.next())
         {
             list->addItem(qry.record().value(2).toString());
+            box->addItem(qry.record().value(2).toString());
         }
     }
     else
@@ -132,9 +133,10 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QListWidget *list)
     qry.finish();
 }
 
-void DatabaseHandler::clearAvailableTablesList(QListWidget *list)
+void DatabaseHandler::clearAvailableTablesList(QListWidget *list, QComboBox* box)
 {
     list->clear();
+    box->clear();
 }
 
 void DatabaseHandler::showTableInResults(const QString tableName)
