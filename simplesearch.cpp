@@ -10,22 +10,13 @@ SimpleSearch::~SimpleSearch()
 
 std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
 {
-    //simple search expects only 3 arguments - text and table id and column name
+    //simple search expects only 3 arguments - text and table name and column name
     QString text = arguments[0];
-    QString whereToSearch = arguments[1];
+    QString tableName = arguments[1];
     QString columnName = arguments[2];
     qDebug() << "text to find: " << text;
-    qDebug() << "in: " << whereToSearch;
+    qDebug() << "in: " << tableName;
 
-    QString tableName;
-    if("whole database" == whereToSearch)
-    {
-        qDebug() << "Bedziemy szukac w calej";
-    }
-    else
-    {
-        tableName = whereToSearch;
-    }
     QString query = QString("SELECT * FROM %1 WHERE ").arg(tableName);
 
     if("any column" == columnName)
@@ -51,10 +42,18 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
     }
 
     qDebug() << query;
-    std::vector<QSqlRecord> found = databaseHandler->processSimpleSearch(query);
+    std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
 //    std::vector<std::string> availableTables = databaseHandler->getAvailableTables();
-    std::vector<FoundRecord> a;
+    std::vector<FoundRecord> foundRecords;
+
+    for(auto it = foundIDs.begin(); it != foundIDs.end(); it++)
+    {
+//        qDebug() << "Found: " << *it;
+//        qDebug() << "In table: " << tableName;
+        foundRecords.push_back(FoundRecord(tableName, *it));
+    }
+
 //    for(int i = 0 ; i < found.size(); i++)
 //    {
 //        //qry.record().value(2).toString().toStdString()
@@ -63,7 +62,5 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
 //        qDebug() << "In table: " << whereToSearch;
 //    }
 
-
-
-    return a;
+    return foundRecords;
 }

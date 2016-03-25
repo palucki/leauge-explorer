@@ -30,7 +30,7 @@ public:
     void removeCurrentRow();
     std::string getHashFromDbForUser(std::string user);
     std::vector<std::string> getAvailableTables();
-    std::vector<QSqlRecord> processSimpleSearch(QString query);
+    std::vector<int> processSimpleSearch(QString query);
     QStringList getColumnNamesForTable(QString tableName);
 
 private:

@@ -5,17 +5,8 @@
 #include <QStringList>
 #include <vector>
 #include "DatabaseHandler.h"
+#include "foundrecord.h"
 
-class FoundRecord
-{
-public:
-    FoundRecord(QString tablName, int rw) : tableName(tablName), row(rw) {}
-    QString getTableName() { return tableName;}
-    int getRow() { return row; }
-private:
-    QString tableName;
-    int row;
-};
 
 class SearchType
 {

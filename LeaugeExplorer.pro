@@ -25,7 +25,8 @@ HEADERS  += \
     AddRecordHelper.h \
     loginhelper.h \
     searchtype.h \
-    simplesearch.h
+    simplesearch.h \
+    foundrecord.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui
 

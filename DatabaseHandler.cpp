@@ -349,17 +349,20 @@ std::vector<std::string> DatabaseHandler::getAvailableTables()
     return availableTables;
 }
 
-std::vector<QSqlRecord> DatabaseHandler::processSimpleSearch(QString query)
+std::vector<int> DatabaseHandler::processSimpleSearch(QString query)
 {
-    std::vector<QSqlRecord> foundRecords;
+    //get IDs of found records
+//    std::vector<QSqlRecord> foundSqlRecords;
+    std::vector<int> foundIDs;
+
     QSqlQuery qry(db);
     if(qry.exec(query))
     {
         while(qry.next())
         {
-            foundRecords.push_back(qry.record());
+            foundIDs.push_back(qry.record().value(0).toInt());
         }
-    qDebug() << "Found " << foundRecords.size() << " elements";
+    qDebug() << "Found " << foundIDs.size() << " elements";
     }
     else {
         qDebug() << "Incorrect query format";
@@ -368,7 +371,8 @@ std::vector<QSqlRecord> DatabaseHandler::processSimpleSearch(QString query)
 
     qry.finish();
 
-    return foundRecords;
+
+    return foundIDs;
 }
 
 

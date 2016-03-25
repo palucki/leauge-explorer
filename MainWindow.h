@@ -56,7 +56,6 @@ private:
     void setConnectionButtonsAfterConnectState();
     void disableEditingButtonsForUnknownUser();
     void enableEditingButtonsForKnownUser();
-    const QString wholeDatabaseString = "whole database";
 };
 
 #endif // MAINWINDOW_H

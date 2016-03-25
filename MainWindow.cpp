@@ -55,7 +55,6 @@ void MainWindow::connectToDatabase()
     databaseHandler->setResultTable(ui->resultTable);
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd);
 
-    ui->availableTablesInSearch->addItem(wholeDatabaseString);
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
 
@@ -112,8 +111,11 @@ void MainWindow::setConnectionButtonsInitialState()
 
 void MainWindow::cleanupEnvironment()
 {
-    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd);
-    databaseHandler->clearAvailableTablesList(ui->availableTablesInSearch);
+//    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd);
+//    databaseHandler->clearAvailableTablesList(ui->availableTablesInSearch);
+    ui->allTablesasdasd->clear();
+    ui->availableTablesInSearch->clear();
+    ui->columnForSearch->clear();
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
 
@@ -305,9 +307,14 @@ void MainWindow::on_searchButton_clicked()
     else
         qDebug() << "Unknown search type!";
 
+    std::vector<FoundRecord> foundRecords = searchType->processQuery(arguments);
 
-    searchType->processQuery(arguments);
-
+    qDebug() <<  "Simple search found: ";
+    for(auto it = foundRecords.begin(); it != foundRecords.end(); it++)
+    {
+        qDebug() << "Found record: "<< it - foundRecords.begin() + 1;
+        qDebug() << (*it).getTableName() << " " << (*it).getRow();
+    }
 }
 
 void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
@@ -323,14 +330,16 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
 
 void MainWindow::on_availableTablesInSearch_currentTextChanged(const QString &arg1)
 {
-    ui->columnForSearch->clear();
-    ui->columnForSearch->addItem("any column");
-    if(arg1 != wholeDatabaseString)
+    if(arg1 != "")
     {
+        ui->columnForSearch->clear();
+        ui->columnForSearch->addItem("any column");
+
         QStringList columnNames = databaseHandler->getColumnNamesForTable(arg1);
         for(int i = 0; i < columnNames.size(); i++)
         {
             ui->columnForSearch->addItem(columnNames[i]);
         }
     }
+
 }
