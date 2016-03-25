@@ -42,6 +42,8 @@ private slots:
 
     void on_availableTablesInSearch_currentTextChanged(const QString &arg1);
 
+    void on_searchTypeField_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     DatabaseHandler *databaseHandler;

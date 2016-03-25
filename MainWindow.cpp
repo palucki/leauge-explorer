@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
+    on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
 }
 
 void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
@@ -342,4 +343,40 @@ void MainWindow::on_availableTablesInSearch_currentTextChanged(const QString &ar
         }
     }
 
+}
+
+void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
+{
+    if(arg1 == "simple")
+    {
+        ui->searchOptionBox->clear();
+        ui->searchOptionBox->setEnabled(false);
+        ui->searchLineEdit_2->clear();
+        ui->searchLineEdit_2->setEnabled(false);
+    }
+    else if(arg1 == "logical")
+    {
+        ui->searchOptionBox->clear();
+        ui->searchOptionBox->setEnabled(true);
+        ui->searchOptionBox->addItem("OR");
+        ui->searchOptionBox->addItem("AND");
+
+        ui->searchLineEdit_2->clear();
+        ui->searchLineEdit_2->setEnabled(true);
+        ui->searchLineEdit_2->setText("condition2");
+    }
+    else if(arg1 == "mathematical")
+    {
+        ui->searchOptionBox->clear();
+        ui->searchOptionBox->setEnabled(true);
+        ui->searchOptionBox->addItem("=");
+        ui->searchOptionBox->addItem("!=");
+        ui->searchOptionBox->addItem(">");
+        ui->searchOptionBox->addItem("<");
+        ui->searchOptionBox->addItem(">=");
+        ui->searchOptionBox->addItem("<=");
+        ui->searchLineEdit_2->clear();
+        ui->searchLineEdit_2->setEnabled(true);
+        ui->searchLineEdit_2->setText("constant");
+    }
 }
