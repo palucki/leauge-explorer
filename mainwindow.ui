@@ -450,7 +450,7 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>in</string>
+            <string>in table</string>
            </property>
           </widget>
          </item>
@@ -459,6 +459,23 @@
            <property name="minimumSize">
             <size>
              <width>200</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>in column</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="columnForSearch">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
              <height>0</height>
             </size>
            </property>

@@ -49,21 +49,37 @@ void DatabaseHandler::disconnectFromDatabase()
     }
 }
 
+
+
 void DatabaseHandler::prepareColumns(const QSqlQuery qry)
 {
     int numberOfCols = qry.record().count();
     resultTable->setColumnCount(numberOfCols);
 
-    QStringList headerList;
-
-    for(int i = 0; i < numberOfCols; i++)
-    {
-        headerList << qry.record().fieldName(i);
-        qDebug() << qry.record().fieldName(i);
-    }
+    QStringList headerList = getColumnNamesForTable(currentTable);
     resultTable->setHorizontalHeaderLabels(headerList);
 }
 
+
+QStringList DatabaseHandler::getColumnNamesForTable(QString tableName)
+{
+    QStringList headerList;
+    QSqlQuery qry(db);
+    if(qry.exec(QString("SELECT TOP 0 * FROM %1").arg(tableName)))
+    {
+        int numberOfCols = qry.record().count();
+        for(int i = 0; i < numberOfCols; i++)
+        {
+            headerList << qry.record().fieldName(i);
+            qDebug() << qry.record().fieldName(i);
+        }
+    }
+    else
+        logDbError();
+    qry.finish();
+
+    return headerList;
+}
 
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
@@ -343,10 +359,16 @@ std::vector<QSqlRecord> DatabaseHandler::processSimpleSearch(QString query)
         {
             foundRecords.push_back(qry.record());
         }
+    qDebug() << "Found " << foundRecords.size() << " elements";
     }
-    else
+    else {
+        qDebug() << "Incorrect query format";
         logDbError();
+    }
+
     qry.finish();
 
     return foundRecords;
 }
+
+

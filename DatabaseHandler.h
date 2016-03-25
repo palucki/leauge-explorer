@@ -31,13 +31,13 @@ public:
     std::string getHashFromDbForUser(std::string user);
     std::vector<std::string> getAvailableTables();
     std::vector<QSqlRecord> processSimpleSearch(QString query);
+    QStringList getColumnNamesForTable(QString tableName);
 
 private:
     QSqlDatabase db;
     QString currentTable;
     QTableWidget* resultTable;
     int nextId;
-    int prepareColumns(QTableWidget* resultTable, QSqlQuery qry);
     void prepareColumns(const QSqlQuery qry);
     void fillTableWithQueryData(QSqlQuery qry);
     void logDbError();

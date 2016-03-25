@@ -290,6 +290,7 @@ void MainWindow::on_searchButton_clicked()
         searchType = new SimpleSearch(databaseHandler);
         arguments.push_back(ui->searchLineEdit->text());
         arguments.push_back(ui->availableTablesInSearch->currentText());
+        arguments.push_back(ui->columnForSearch->currentText());
     }
 
     else if(searchTypeText == "mathematical")
@@ -318,5 +319,18 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
         if(userIdentity != "")
             ui->editModeButton->setEnabled(true);
     }
+}
 
+void MainWindow::on_availableTablesInSearch_currentTextChanged(const QString &arg1)
+{
+    ui->columnForSearch->clear();
+    ui->columnForSearch->addItem("any column");
+    if(arg1 != wholeDatabaseString)
+    {
+        QStringList columnNames = databaseHandler->getColumnNamesForTable(arg1);
+        for(int i = 0; i < columnNames.size(); i++)
+        {
+            ui->columnForSearch->addItem(columnNames[i]);
+        }
+    }
 }
