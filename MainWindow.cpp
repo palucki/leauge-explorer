@@ -1,6 +1,5 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
-#include "searchtype.h"
 #include "simplesearch.h"
 
 void MainWindow::connectAllSignals()
@@ -56,7 +55,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->setResultTable(ui->resultTable);
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd);
 
-    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
+//    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
 
     //setEditingButtonsState(false);
@@ -100,6 +99,14 @@ void MainWindow::enableEditingButtonsForKnownUser()
     ui->deleteButton->setEnabled(true);
 }
 
+void MainWindow::showOnlyFoundRecordsInResultTable(std::vector<FoundRecord> foundRecords)
+{
+    //prepare all tables here
+
+    ui->resultTable->setRowCount(foundRecords.size());
+    databaseHandler->showFoundRecordsInResultTable(foundRecords);
+}
+
 void MainWindow::setConnectionButtonsInitialState()
 {
     ui->connectButton->setEnabled(true);
@@ -115,7 +122,7 @@ void MainWindow::cleanupEnvironment()
 //    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd);
 //    databaseHandler->clearAvailableTablesList(ui->availableTablesInSearch);
     ui->allTablesasdasd->clear();
-    ui->availableTablesInSearch->clear();
+//    ui->availableTablesInSearch->clear();
     ui->columnForSearch->clear();
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
@@ -123,8 +130,6 @@ void MainWindow::cleanupEnvironment()
     ui->resultTable->setColumnCount(0);
     ui->resultTable->setRowCount(0);
     ui->resultTable->clearContents();
-
-
 }
 
 void MainWindow::executeQueryFromEditor()
@@ -292,7 +297,7 @@ void MainWindow::on_searchButton_clicked()
         qDebug() << "Proste";
         searchType = new SimpleSearch(databaseHandler);
         arguments.push_back(ui->searchLineEdit->text());
-        arguments.push_back(ui->availableTablesInSearch->currentText());
+        arguments.push_back(ui->allTablesasdasd->currentText());
         arguments.push_back(ui->columnForSearch->currentText());
     }
 
@@ -310,12 +315,7 @@ void MainWindow::on_searchButton_clicked()
 
     std::vector<FoundRecord> foundRecords = searchType->processQuery(arguments);
 
-    qDebug() <<  "Simple search found: ";
-    for(auto it = foundRecords.begin(); it != foundRecords.end(); it++)
-    {
-        qDebug() << "Found record: "<< it - foundRecords.begin() + 1;
-        qDebug() << (*it).getTableName() << " " << (*it).getRow();
-    }
+    showOnlyFoundRecordsInResultTable(foundRecords);
 }
 
 void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
@@ -326,13 +326,7 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
         showTableFrom(&tempItem);
         if(userIdentity != "")
             ui->editModeButton->setEnabled(true);
-    }
-}
 
-void MainWindow::on_availableTablesInSearch_currentTextChanged(const QString &arg1)
-{
-    if(arg1 != "")
-    {
         ui->columnForSearch->clear();
         ui->columnForSearch->addItem("any column");
 
@@ -342,7 +336,6 @@ void MainWindow::on_availableTablesInSearch_currentTextChanged(const QString &ar
             ui->columnForSearch->addItem(columnNames[i]);
         }
     }
-
 }
 
 void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
@@ -353,6 +346,7 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
         ui->searchOptionBox->setEnabled(false);
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(false);
+        ui->searchLineEdit_2->setPlaceholderText("");
     }
     else if(arg1 == "logical")
     {
@@ -363,7 +357,7 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
 
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(true);
-        ui->searchLineEdit_2->setText("condition2");
+        ui->searchLineEdit_2->setPlaceholderText("condition2");
     }
     else if(arg1 == "mathematical")
     {
@@ -377,6 +371,6 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
         ui->searchOptionBox->addItem("<=");
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(true);
-        ui->searchLineEdit_2->setText("constant");
+        ui->searchLineEdit_2->setPlaceholderText("constant");
     }
 }

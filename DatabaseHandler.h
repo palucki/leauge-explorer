@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QListWidget>
 #include <memory>
+#include "foundrecord.h"
 
 class DatabaseHandler
 {
@@ -32,6 +33,7 @@ public:
     std::vector<std::string> getAvailableTables();
     std::vector<int> processSimpleSearch(QString query);
     QStringList getColumnNamesForTable(QString tableName);
+    void showFoundRecordsInResultTable(std::vector <FoundRecord> fr);
 
 private:
     QSqlDatabase db;

@@ -9,6 +9,7 @@
 #include <string>
 #include <map>
 #include <functional>
+#include "searchtype.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,8 +30,6 @@ private slots:
     void updateConnectedIndicator(bool);
     void executeQueryFromEditor();
     void showTableFrom(QListWidgetItem *item);
-//    void showSelectedFromButton();
-//    void on_allTables_itemDoubleClicked(QListWidgetItem *item);
     void editSelectedTable();
     void savebuttonClicked();
     void deletebuttonClicked();
@@ -39,9 +38,6 @@ private slots:
     void on_signInButton_clicked();
     void on_searchButton_clicked();
     void on_allTablesasdasd_currentTextChanged(const QString &arg1);
-
-    void on_availableTablesInSearch_currentTextChanged(const QString &arg1);
-
     void on_searchTypeField_currentTextChanged(const QString &arg1);
 
 private:
@@ -58,6 +54,7 @@ private:
     void setConnectionButtonsAfterConnectState();
     void disableEditingButtonsForUnknownUser();
     void enableEditingButtonsForKnownUser();
+    void showOnlyFoundRecordsInResultTable(std::vector<FoundRecord>);
 };
 
 #endif // MAINWINDOW_H

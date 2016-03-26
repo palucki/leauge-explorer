@@ -81,6 +81,33 @@ QStringList DatabaseHandler::getColumnNamesForTable(QString tableName)
     return headerList;
 }
 
+void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
+{
+    QSqlQuery qry(db);
+
+    QString query = QString("SELECT * FROM %1 WHERE ").arg(fr[0].getTableName());
+
+    for(int i = 0; i < fr.size(); i++)
+    {
+        query.append("id='");
+        query.append(QString::number(fr[i].getRow()));
+        query.append("' OR ");
+    }
+
+    query.remove(query.length()-3, 3); // remove last "OR "
+    qDebug() << query;
+    if(qry.exec(query))
+    {
+        resultTable->clearContents();
+        prepareColumns(qry);
+        fillTableWithQueryData(qry);
+    }
+    else
+        logDbError();
+
+    qry.finish();
+}
+
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
     int rowCount = 0;
