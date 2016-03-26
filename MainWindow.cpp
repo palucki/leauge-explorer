@@ -101,9 +101,6 @@ void MainWindow::enableEditingButtonsForKnownUser()
 
 void MainWindow::showOnlyFoundRecordsInResultTable(std::vector<FoundRecord> foundRecords)
 {
-    //prepare all tables here
-
-    ui->resultTable->setRowCount(foundRecords.size());
     databaseHandler->showFoundRecordsInResultTable(foundRecords);
 }
 

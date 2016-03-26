@@ -47,6 +47,8 @@ private:
     bool asdas(QString query);
     bool rowIsAcceptable(QString query);
     QStringList queriesList;
+    void showQueryResults(QSqlQuery qry);
+    void executeGivenQueryAndShowResults(QSqlQuery qry, QString query);
 };
 
 #endif // DATABASEHANDLER_H

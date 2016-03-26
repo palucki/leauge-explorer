@@ -1,3 +1,17 @@
 <RCC>
-    <qresource prefix="/MyFiles"/>
+    <qresource prefix="/MyFiles">
+        <file>110955-data/png/data-search.png</file>
+        <file>110955-data/png/lifeline-turning-into-directional-arrow.png</file>
+        <file>110955-data/png/database-settings-button-for-interface.png</file>
+        <file>110955-data/png/bible-with-cross-symbol-variant.png</file>
+        <file>110955-data/png/data-storage.png</file>
+        <file>110955-data/png/data-storage-disc.png</file>
+        <file>110955-data/png/data-storage-drive-with-cross-mark.png</file>
+        <file>110955-data/png/folder-silhouette-with-arrow-pointing-up.png</file>
+        <file>110955-data/png/folder-with-close-or-delete-button.png</file>
+        <file>110955-data/png/magnifying-glass-focusing-on-flowchart.png</file>
+        <file>110955-data/png/direction.png</file>
+        <file>110955-data/png/database-edition.png</file>
+        <file>110955-data/png/interface.png</file>
+    </qresource>
 </RCC>

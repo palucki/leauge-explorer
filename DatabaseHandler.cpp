@@ -81,31 +81,41 @@ QStringList DatabaseHandler::getColumnNamesForTable(QString tableName)
     return headerList;
 }
 
-void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
+void DatabaseHandler::showQueryResults(QSqlQuery qry)
 {
-    QSqlQuery qry(db);
+    resultTable->clearContents();
+    prepareColumns(qry);
+    fillTableWithQueryData(qry);
+}
 
-    QString query = QString("SELECT * FROM %1 WHERE ").arg(fr[0].getTableName());
-
-    for(int i = 0; i < fr.size(); i++)
-    {
-        query.append("id='");
-        query.append(QString::number(fr[i].getRow()));
-        query.append("' OR ");
-    }
-
-    query.remove(query.length()-3, 3); // remove last "OR "
-    qDebug() << query;
+void DatabaseHandler::executeGivenQueryAndShowResults(QSqlQuery qry, QString query)
+{
     if(qry.exec(query))
     {
-        resultTable->clearContents();
-        prepareColumns(qry);
-        fillTableWithQueryData(qry);
+        showQueryResults(qry);
     }
     else
         logDbError();
 
     qry.finish();
+}
+
+void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
+{
+    QSqlQuery qSqlQry(db);
+
+    QString queryText = QString("SELECT * FROM %1 WHERE ").arg(fr[0].getTableName());
+
+    for(int i = 0; i < fr.size(); i++)
+    {
+        queryText.append("id='");
+        queryText.append(QString::number(fr[i].getRow()));
+        queryText.append("' OR ");
+    }
+
+    queryText.remove(queryText.length()-3, 3); // remove last "OR "
+    qDebug() << queryText;
+    executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
@@ -129,9 +139,6 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
                 resultTable->item(i,j)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         }
     }
-
-
-
     resultTable->setRowCount(rowCount);
     qDebug() <<"Row count set to: " << rowCount;
 }
@@ -141,18 +148,10 @@ void DatabaseHandler::logDbError()
     qDebug() << "Error: " << db.lastError();
 }
 
-void DatabaseHandler::executeQuery(const QString query)
+void DatabaseHandler::executeQuery(const QString queryText)
 {
-    QSqlQuery qry(db);
-    if(qry.exec(query))
-    {
-        resultTable->clearContents();
-        prepareColumns(qry);
-        fillTableWithQueryData(qry);
-    }
-    else
-        logDbError();
-    qry.finish();
+    QSqlQuery qSqlQry(db);
+    executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
 void DatabaseHandler::setResultTable(QTableWidget *resTab)
@@ -186,26 +185,16 @@ void DatabaseHandler::showTableInResults(const QString tableName)
 
     qDebug() << currentTable;
 
-    QSqlQuery qry(db);
-    QString query = "SELECT * FROM ";
+    QSqlQuery qSqlQry(db);
+    QString queryText = "SELECT * FROM ";
 
-    query.append(tableName);
+    queryText.append(tableName);
     if(tableName == "overall_performance") {
         qDebug() << "Sort by points";
-        query.append(" ORDER BY points DESC");
+        queryText.append(" ORDER BY points DESC");
     }
 
-    if(qry.exec(query))
-    {
-        resultTable->clearContents();
-        prepareColumns(qry);
-        fillTableWithQueryData(qry);
-    }
-    else
-        logDbError();
-
-    qDebug() << "Current table is " << currentTable;
-    qry.finish();
+    executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
 void DatabaseHandler::addUpdateQueryToQueriesList(int row, int column)
