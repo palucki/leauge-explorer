@@ -11,6 +11,7 @@
 #include <functional>
 #include "searchtype.h"
 #include "logger.h"
+#include "plotter.h"
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,7 @@ private:
     DatabaseHandler *databaseHandler;
     AddRecordHelper *newRecordWindow;
     LoginHelper *loginHelper;
+    Plotter plotter;
     QString userIdentity;
     bool inEditingMode;
     void cleanupEnvironment();

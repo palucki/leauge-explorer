@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     loginhelper.cpp \
     simplesearch.cpp \
     logger.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    plotter.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -30,9 +31,11 @@ HEADERS  += \
     simplesearch.h \
     foundrecord.h \
     logger.h \
-    qcustomplot.h
+    qcustomplot.h \
+    plotter.h
 FORMS    += mainwindow.ui \
-    addrecordhelper.ui
+    addrecordhelper.ui \
+    plotter.ui
 
 RESOURCES += \
     myresources.qrc

@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "simplesearch.h"
+#include "plotter.h"
 
 void MainWindow::connectAllSignals()
 {
@@ -341,7 +342,7 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
 
 void MainWindow::enableChartButtonIfRequired()
 {
-    if(ui->allTablesasdasd->currentText() == "last_week_attendance")
+    if(ui->allTablesasdasd->currentText() == "overall_attendance")
         ui->chartButton->setEnabled(true);
     else
         ui->chartButton->setEnabled(false);
@@ -388,21 +389,6 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
 
 void MainWindow::on_chartButton_clicked()
 {
-    // generate some data:
-    QVector<double> x(101), y(101); // initialize with entries 0..100
-    for (int i=0; i<101; ++i)
-    {
-      x[i] = i/50.0 - 1; // x goes from -1 to 1
-      y[i] = x[i]*x[i]; // let's plot a quadratic function
-    }
-    // create graph and assign data to it:
-    ui->chart->addGraph();
-    ui->chart->graph(0)->setData(x, y);
-    // give the axes some labels:
-    ui->chart->xAxis->setLabel("x");
-    ui->chart->yAxis->setLabel("y");
-    // set axes ranges, so we see all data:
-    ui->chart->xAxis->setRange(-1, 1);
-    ui->chart->yAxis->setRange(0, 1);
-    ui->chart->replot();
+    plotter.show();
+    plotter.showOverallAttendance();
 }
