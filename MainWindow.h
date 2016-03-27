@@ -10,6 +10,7 @@
 #include <map>
 #include <functional>
 #include "searchtype.h"
+#include "logger.h"
 
 namespace Ui {
 class MainWindow;

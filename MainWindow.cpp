@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     userIdentity = "";
     connectAllSignals();
     on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
+    Logger::getInstance().log("Started application", __FILE__, __LINE__);
 }
 
 void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
@@ -57,7 +58,7 @@ void MainWindow::connectToDatabase()
 
 //    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
-
+    Logger::getInstance().log("Connected to database", __FILE__, __LINE__);
     //setEditingButtonsState(false);
 }
 
@@ -70,6 +71,7 @@ void MainWindow::disconnectFromDatabase()
 
     ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     cleanupEnvironment();\
+    Logger::getInstance().log("Disconnected from database", __FILE__, __LINE__);
 }
 
 void MainWindow::setConnectionButtonsAfterConnectState()

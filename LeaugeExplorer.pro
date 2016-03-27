@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     MainWindow.cpp \
     AddRecordHelper.cpp \
     loginhelper.cpp \
-    simplesearch.cpp
+    simplesearch.cpp \
+    logger.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -26,7 +27,8 @@ HEADERS  += \
     loginhelper.h \
     searchtype.h \
     simplesearch.h \
-    foundrecord.h
+    foundrecord.h \
+    logger.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui
 

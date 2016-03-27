@@ -1,4 +1,5 @@
 #include "simplesearch.h"
+#include "logger.h"
 
 SimpleSearch::SimpleSearch(DatabaseHandler* dbh) : SearchType(dbh)
 {
@@ -42,6 +43,7 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
     }
 
     qDebug() << query;
+    Logger::getInstance().log(query, __FILE__, __LINE__);
     std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
 //    std::vector<std::string> availableTables = databaseHandler->getAvailableTables();
