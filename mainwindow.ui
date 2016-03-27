@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>678</width>
-    <height>514</height>
+    <width>740</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -65,7 +65,7 @@
      <attribute name="title">
       <string>Modify</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="chartButton">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -78,7 +78,7 @@
        <string>Wykres</string>
       </property>
       <property name="icon">
-       <iconset resource="myresources.qrc">
+       <iconset>
         <normaloff>:/MyFiles/110955-data/png/lifeline-turning-into-directional-arrow.png</normaloff>:/MyFiles/110955-data/png/lifeline-turning-into-directional-arrow.png</iconset>
       </property>
       <property name="iconSize">
@@ -153,7 +153,7 @@
             <string>Add record</string>
            </property>
            <property name="icon">
-            <iconset resource="myresources.qrc">
+            <iconset>
              <normaloff>:/MyFiles/110955-data/png/bible-with-cross-symbol-variant.png</normaloff>:/MyFiles/110955-data/png/bible-with-cross-symbol-variant.png</iconset>
            </property>
           </widget>
@@ -167,7 +167,7 @@
             <string>Delete record</string>
            </property>
            <property name="icon">
-            <iconset resource="myresources.qrc">
+            <iconset>
              <normaloff>:/MyFiles/110955-data/png/data-storage-drive-with-cross-mark.png</normaloff>:/MyFiles/110955-data/png/data-storage-drive-with-cross-mark.png</iconset>
            </property>
           </widget>
@@ -181,7 +181,7 @@
             <string>Save</string>
            </property>
            <property name="icon">
-            <iconset resource="myresources.qrc">
+            <iconset>
              <normaloff>:/MyFiles/110955-data/png/data-storage.png</normaloff>:/MyFiles/110955-data/png/data-storage.png</iconset>
            </property>
           </widget>
@@ -195,7 +195,7 @@
             <string>Edit mode</string>
            </property>
            <property name="icon">
-            <iconset resource="myresources.qrc">
+            <iconset>
              <normaloff>:/MyFiles/110955-data/png/data-storage-disc.png</normaloff>:/MyFiles/110955-data/png/data-storage-disc.png</iconset>
            </property>
           </widget>
@@ -285,7 +285,7 @@
           <string>Sign in</string>
          </property>
          <property name="icon">
-          <iconset resource="myresources.qrc">
+          <iconset>
            <normaloff>:/MyFiles/110955-data/png/interface.png</normaloff>:/MyFiles/110955-data/png/interface.png</iconset>
          </property>
         </widget>
@@ -349,7 +349,7 @@
            <string>Execute custom query</string>
           </property>
           <property name="icon">
-           <iconset resource="myresources.qrc">
+           <iconset>
             <normaloff>:/MyFiles/110955-data/png/database-edition.png</normaloff>:/MyFiles/110955-data/png/database-edition.png</iconset>
           </property>
          </widget>
@@ -547,7 +547,7 @@
             <string>Search</string>
            </property>
            <property name="icon">
-            <iconset resource="myresources.qrc">
+            <iconset>
              <normaloff>:/MyFiles/110955-data/png/data-search.png</normaloff>:/MyFiles/110955-data/png/data-search.png</iconset>
            </property>
           </widget>
@@ -599,7 +599,7 @@
          <string>Connect to Database</string>
         </property>
         <property name="icon">
-         <iconset resource="myresources.qrc">
+         <iconset>
           <normaloff>:/MyFiles/110955-data/png/folder-silhouette-with-arrow-pointing-up.png</normaloff>:/MyFiles/110955-data/png/folder-silhouette-with-arrow-pointing-up.png</iconset>
         </property>
         <property name="flat">
@@ -676,7 +676,7 @@
          <string>Disconnect from Database</string>
         </property>
         <property name="icon">
-         <iconset resource="myresources.qrc">
+         <iconset>
           <normaloff>:/MyFiles/110955-data/png/folder-with-close-or-delete-button.png</normaloff>:/MyFiles/110955-data/png/folder-with-close-or-delete-button.png</iconset>
         </property>
        </widget>
@@ -690,7 +690,7 @@
          <string>Exit</string>
         </property>
         <property name="icon">
-         <iconset resource="myresources.qrc">
+         <iconset>
           <normaloff>:/MyFiles/110955-data/png/direction.png</normaloff>:/MyFiles/110955-data/png/direction.png</iconset>
         </property>
        </widget>
@@ -698,13 +698,23 @@
      </layout>
     </widget>
    </widget>
+   <widget class="QCustomPlot" name="chart" native="true">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>180</y>
+      <width>341</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>678</width>
+     <width>740</width>
      <height>21</height>
     </rect>
    </property>
@@ -720,8 +730,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="myresources.qrc"/>
- </resources>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
  <connections/>
 </ui>

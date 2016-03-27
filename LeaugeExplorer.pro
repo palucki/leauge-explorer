@@ -6,7 +6,7 @@
 
 QT       += core gui sql
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = LeaugeExplorer
 TEMPLATE = app
@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     AddRecordHelper.cpp \
     loginhelper.cpp \
     simplesearch.cpp \
-    logger.cpp
+    logger.cpp \
+    qcustomplot.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -28,7 +29,8 @@ HEADERS  += \
     searchtype.h \
     simplesearch.h \
     foundrecord.h \
-    logger.h
+    logger.h \
+    qcustomplot.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui
 

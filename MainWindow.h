@@ -40,6 +40,8 @@ private slots:
     void on_searchButton_clicked();
     void on_allTablesasdasd_currentTextChanged(const QString &arg1);
     void on_searchTypeField_currentTextChanged(const QString &arg1);
+    void enableChartButtonIfRequired();
+    void on_chartButton_clicked();
 
 private:
     Ui::MainWindow *ui;
