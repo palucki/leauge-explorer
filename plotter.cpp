@@ -1,6 +1,7 @@
 #include "plotter.h"
 #include "ui_plotter.h"
 
+
 Plotter::Plotter(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Plotter)
@@ -13,23 +14,48 @@ Plotter::~Plotter()
     delete ui;
 }
 
-void Plotter::showOverallAttendance()
+void Plotter::setDatabaseHandler(DatabaseHandler *dbh)
 {
-    // generate some data:
-    QVector<double> x(101), y(101); // initialize with entries 0..100
-    for (int i=0; i<101; ++i)
+    databaseHandler = dbh;
+}
+
+void Plotter::setPlotStyle()
+{
+    QCPScatterStyle myScatter;
+    myScatter.setShape(QCPScatterStyle::ssCircle);
+    myScatter.setPen(QPen(Qt::blue));
+    myScatter.setBrush(Qt::white);
+    myScatter.setSize(5);
+    ui->chart->graph(0)->setScatterStyle(myScatter);
+
+
+    ui->chart->xAxis->setLabel("Numer kolejki");
+    ui->chart->yAxis->setLabel("Oglądalność");
+    ui->chart->xAxis->setRange(0, 20);
+    ui->chart->yAxis->setRange(0, 30000);
+}
+
+void Plotter::setPlotData()
+{
+    std::vector< std::pair<double, double > > data = databaseHandler->getOverallAttendance();
+
+    QVector<double> x, y; // initialize with entries 0..100
+    x.resize(static_cast<int>(data.size()));
+    y.resize(static_cast<int>(data.size()));
+
+    for (int i=0; i<data.size(); ++i)
     {
-      x[i] = i/50.0 - 1; // x goes from -1 to 1
-      y[i] = x[i]*x[i]; // let's plot a quadratic function
+      x[i] = data[i].first;
+      y[i] = data[i].second;
     }
-    // create graph and assign data to it:
+
     ui->chart->addGraph();
     ui->chart->graph(0)->setData(x, y);
-    // give the axes some labels:
-    ui->chart->xAxis->setLabel("x");
-    ui->chart->yAxis->setLabel("y");
-    // set axes ranges, so we see all data:
-    ui->chart->xAxis->setRange(-1, 1);
-    ui->chart->yAxis->setRange(0, 1);
+}
+
+void Plotter::showOverallAttendance()
+{
+    setPlotData();
+    setPlotStyle();
     ui->chart->replot();
 }

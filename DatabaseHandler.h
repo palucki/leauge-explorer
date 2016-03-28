@@ -19,9 +19,9 @@ public:
     bool getConnectionStatus() {return db.isOpen(); }
     void sendQuery();
     void executeQuery(const QString query);
-    void setResultTable(QTableWidget* resTab);
-    void showAvailableTablesFromDatabaseIn(QComboBox* box);
-    void clearAvailableTablesList(QComboBox* box);
+    void setResultTable(QTableWidget* resTab);                  //niestety blad, nie powinien nic rysowac database handler
+    void showAvailableTablesFromDatabaseIn(QComboBox* box);     //niestety blad, nie powinien nic rysowac database handler
+    void clearAvailableTablesList(QComboBox* box);              //niestety blad, nie powinien nic rysowac database handler
     void showTableInResults(const QString tableName);
     void addUpdateQueryToQueriesList(int row, int column);
     void saveChangesToDatabase();
@@ -34,6 +34,7 @@ public:
     std::vector<int> processSimpleSearch(QString query);
     QStringList getColumnNamesForTable(QString tableName);
     void showFoundRecordsInResultTable(std::vector <FoundRecord> fr);
+    std::vector< std::pair<double, double> > getOverallAttendance();
 
 private:
     QSqlDatabase db;

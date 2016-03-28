@@ -127,6 +127,31 @@ void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
     executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
+std::vector<std::pair<double, double> > DatabaseHandler::getOverallAttendance()
+{
+    std::vector<std::pair<double, double> > overallAttendance;
+    QSqlQuery qSqlQry(db);
+
+    QString queryText = QString("SELECT * FROM overall_attendance ");
+    qDebug() << queryText;
+
+    if(qSqlQry.exec(queryText))
+    {
+        while(qSqlQry.next())
+        {
+            double weekLabel = qSqlQry.record().value(1).toDouble();
+            double attendance = qSqlQry.record().value(2).toDouble();
+            overallAttendance.push_back(std::make_pair(weekLabel, attendance));
+        }
+    }
+    else
+        logDbError();
+
+    Logger::getInstance().log(queryText, __FILE__, __LINE__);
+    return overallAttendance;
+}
+
+
 void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
 {
     int rowCount = 0;

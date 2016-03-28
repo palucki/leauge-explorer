@@ -32,6 +32,7 @@ void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
 {
     databaseHandler = dbh;
     newRecordWindow->setDatabaseHandler(databaseHandler);
+    plotter.setDatabaseHandler(databaseHandler);
 }
 
 MainWindow::~MainWindow()
