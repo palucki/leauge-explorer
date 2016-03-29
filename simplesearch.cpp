@@ -46,23 +46,12 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
     Logger::getInstance().log(query, __FILE__, __LINE__);
     std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
-//    std::vector<std::string> availableTables = databaseHandler->getAvailableTables();
     std::vector<FoundRecord> foundRecords;
 
     for(auto it = foundIDs.begin(); it != foundIDs.end(); it++)
     {
-//        qDebug() << "Found: " << *it;
-//        qDebug() << "In table: " << tableName;
         foundRecords.push_back(FoundRecord(tableName, *it));
     }
-
-//    for(int i = 0 ; i < found.size(); i++)
-//    {
-//        //qry.record().value(2).toString().toStdString()
-//        a.push_back(FoundRecord(whereToSearch, found[i].value(0).toInt())); //value0 to id, value1 to cos tam
-//        qDebug() << "Found: " << found[i].value(0).toInt();
-//        qDebug() << "In table: " << whereToSearch;
-//    }
-
+    qDebug() << "zero elements test";
     return foundRecords;
 }

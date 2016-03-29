@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "simplesearch.h"
+#include "mathsearch.h"
 #include "plotter.h"
 
 void MainWindow::connectAllSignals()
@@ -305,6 +306,11 @@ void MainWindow::on_searchButton_clicked()
     else if(searchTypeText == "mathematical")
     {
         qDebug() << "Matematyczne";
+        searchType = new MathSearch(databaseHandler);
+        arguments.push_back(ui->allTablesasdasd->currentText());
+        arguments.push_back(ui->searchLineEdit->text());
+        arguments.push_back(ui->searchOptionBox->currentText());
+        arguments.push_back(ui->searchLineEdit_2->text());
 
     }
     else if(searchTypeText == "logical")
@@ -316,7 +322,14 @@ void MainWindow::on_searchButton_clicked()
 
     std::vector<FoundRecord> foundRecords = searchType->processQuery(arguments);
 
-    showOnlyFoundRecordsInResultTable(foundRecords);
+
+    if(foundRecords.size() > 0)
+        showOnlyFoundRecordsInResultTable(foundRecords);
+    else
+    {
+        ui->resultTable->clearContents();
+        ui->resultTable->setRowCount(0);
+    }
 }
 
 void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
@@ -357,6 +370,9 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
     {
         ui->searchOptionBox->clear();
         ui->searchOptionBox->setEnabled(false);
+        ui->searchLineEdit->clear();
+        ui->searchLineEdit->setEnabled(true);
+        ui->searchLineEdit->setPlaceholderText("(eg. Kraków)");
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(false);
         ui->searchLineEdit_2->setPlaceholderText("");
@@ -366,11 +382,13 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
         ui->searchOptionBox->clear();
         ui->searchOptionBox->setEnabled(true);
         ui->searchOptionBox->addItem("OR");
-        ui->searchOptionBox->addItem("AND");
-
+//        ui->searchOptionBox->addItem("AND");
+        ui->searchLineEdit->clear();
+        ui->searchLineEdit->setEnabled(true);
+        ui->searchLineEdit->setPlaceholderText("text1");
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(true);
-        ui->searchLineEdit_2->setPlaceholderText("condition2");
+        ui->searchLineEdit_2->setPlaceholderText("text2");
     }
     else if(arg1 == "mathematical")
     {
@@ -382,9 +400,14 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
         ui->searchOptionBox->addItem("<");
         ui->searchOptionBox->addItem(">=");
         ui->searchOptionBox->addItem("<=");
+        ui->searchLineEdit->clear();
+        ui->searchLineEdit->setEnabled(true);
+        ui->searchLineEdit->setPlaceholderText("column name");
         ui->searchLineEdit_2->clear();
         ui->searchLineEdit_2->setEnabled(true);
         ui->searchLineEdit_2->setPlaceholderText("constant");
+        ui->columnForSearch->clear();
+        ui->columnForSearch->setEnabled(false);
     }
 }
 
@@ -392,4 +415,11 @@ void MainWindow::on_chartButton_clicked()
 {
     plotter.show();
     plotter.showOverallAttendance();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QListWidgetItem tempItem;
+    tempItem.setText(ui->allTablesasdasd->currentText());
+    showTableFrom(&tempItem);
 }

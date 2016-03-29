@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     simplesearch.cpp \
     logger.cpp \
     qcustomplot.cpp \
-    plotter.cpp
+    plotter.cpp \
+    mathsearch.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -32,7 +33,8 @@ HEADERS  += \
     foundrecord.h \
     logger.h \
     qcustomplot.h \
-    plotter.h
+    plotter.h \
+    mathsearch.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui \
     plotter.ui
