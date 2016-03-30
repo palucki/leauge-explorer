@@ -13,7 +13,7 @@ MathSearch::~MathSearch()
 
 std::vector<FoundRecord> MathSearch::processQuery(QStringList arguments)
 {
-    //simple search expects 4 arguments - tablename, column name, operand, value
+    //math search expects 4 arguments - tablename, column name, operand, value
     QString tableName = arguments[0];
     QString columnName = arguments[1];
     QString operand = arguments[2];

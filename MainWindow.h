@@ -62,6 +62,7 @@ private:
     void disableEditingButtonsForUnknownUser();
     void enableEditingButtonsForKnownUser();
     void showOnlyFoundRecordsInResultTable(std::vector<FoundRecord>);
+    void prepareColumnsForSearch(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H

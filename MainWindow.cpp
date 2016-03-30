@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "simplesearch.h"
 #include "mathsearch.h"
+#include "logicalsearch.h"
 #include "plotter.h"
 
 void MainWindow::connectAllSignals()
@@ -25,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
-    on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
+//    on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
     Logger::getInstance().log("Started application", __FILE__, __LINE__);
 }
 
@@ -316,6 +317,14 @@ void MainWindow::on_searchButton_clicked()
     else if(searchTypeText == "logical")
     {
         qDebug() << "Logiczne";
+        searchType = new LogicalSearch(databaseHandler);
+        arguments.push_back(ui->allTablesasdasd->currentText());
+        arguments.push_back(ui->columnForSearch->currentText());
+        arguments.push_back(ui->searchLineEdit->text());
+        arguments.push_back(ui->searchOptionBox->currentText());
+        arguments.push_back(ui->searchLineEdit_2->text());
+
+        qDebug() << arguments;
     }
     else
         qDebug() << "Unknown search type!";
@@ -332,6 +341,17 @@ void MainWindow::on_searchButton_clicked()
     }
 }
 
+void MainWindow::prepareColumnsForSearch(const QString &arg1)
+{
+    ui->columnForSearch->clear();
+    ui->columnForSearch->addItem("any column");
+    QStringList columnNames = databaseHandler->getColumnNamesForTable(arg1);
+    for(int i = 0; i < columnNames.size(); i++)
+    {
+        ui->columnForSearch->addItem(columnNames[i]);
+    }
+}
+
 void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
 {
     if(arg1 != "")
@@ -341,15 +361,7 @@ void MainWindow::on_allTablesasdasd_currentTextChanged(const QString &arg1)
         if(userIdentity != "")
             ui->editModeButton->setEnabled(true);
 
-        ui->columnForSearch->clear();
-        ui->columnForSearch->addItem("any column");
-
-        QStringList columnNames = databaseHandler->getColumnNamesForTable(arg1);
-        for(int i = 0; i < columnNames.size(); i++)
-        {
-            ui->columnForSearch->addItem(columnNames[i]);
-        }
-
+        prepareColumnsForSearch(arg1);
         enableChartButtonIfRequired();
     }
 }
@@ -368,6 +380,8 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
 {
     if(arg1 == "simple")
     {
+        prepareColumnsForSearch(ui->allTablesasdasd->currentText());
+        ui->columnForSearch->setEnabled(true);
         ui->searchOptionBox->clear();
         ui->searchOptionBox->setEnabled(false);
         ui->searchLineEdit->clear();
@@ -379,6 +393,8 @@ void MainWindow::on_searchTypeField_currentTextChanged(const QString &arg1)
     }
     else if(arg1 == "logical")
     {
+        prepareColumnsForSearch(ui->allTablesasdasd->currentText());
+        ui->columnForSearch->setEnabled(true);
         ui->searchOptionBox->clear();
         ui->searchOptionBox->setEnabled(true);
         ui->searchOptionBox->addItem("OR");

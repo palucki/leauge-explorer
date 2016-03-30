@@ -1,2 +1,6 @@
 build-LeaugeExplorer*
 images/
+logs/
+debug/
+release/
+Makefile*
