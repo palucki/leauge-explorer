@@ -47,7 +47,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setEditingButtonsState(bool state)
 {
-    qDebug() << "Edition mode: " << state;
+    //qDebug() << "Edition mode: " << state;
     inEditingMode = state;
     ui->saveButton->setEnabled(state);
     ui->addRecordButton->setEnabled(state);
@@ -147,7 +147,7 @@ void MainWindow::showTableFrom(QListWidgetItem *item)
     ui->saveButton->setEnabled(false);
 
     QString selectedTable = item->text();
-    qDebug() << "selected table: " << selectedTable;
+    //qDebug() << "selected table: " << selectedTable;
     databaseHandler->showTableInResults(selectedTable);
 }
 
@@ -186,7 +186,7 @@ void MainWindow::editSelectedTable()
 
 void MainWindow::deletebuttonClicked()
 {
-    qDebug() << "Remove";
+    //qDebug() << "Remove";
 
     if(ui->resultTable->currentRow() != -1)
     {
@@ -253,14 +253,14 @@ void MainWindow::on_signInButton_clicked()
         if(passwordCorrect)
         {
             userIdentity = QString::fromStdString(userName);
-            qDebug() << "Correct password";
-            qDebug() << "Welcome " << userIdentity;
+            //qDebug() << "Correct password";
+            //qDebug() << "Welcome " << userIdentity;
             ui->usernameLineEdit->setEnabled(false);
             ui->passwordLineEdit->setEnabled(false);
             ui->signInButton->setText("Sign out");
         }
-        else
-            qDebug() << "Username or password incorrect";
+//        else
+            //qDebug() << "Username or password incorrect";
     }
     else
     {
@@ -297,7 +297,7 @@ void MainWindow::on_searchButton_clicked()
 
     if(searchTypeText == "simple")
     {
-        qDebug() << "Proste";
+        //qDebug() << "Proste";
         searchType = new SimpleSearch(databaseHandler);
         arguments.push_back(ui->searchLineEdit->text());
         arguments.push_back(ui->allTablesasdasd->currentText());
@@ -306,7 +306,7 @@ void MainWindow::on_searchButton_clicked()
 
     else if(searchTypeText == "mathematical")
     {
-        qDebug() << "Matematyczne";
+        //qDebug() << "Matematyczne";
         searchType = new MathSearch(databaseHandler);
         arguments.push_back(ui->allTablesasdasd->currentText());
         arguments.push_back(ui->searchLineEdit->text());
@@ -316,7 +316,7 @@ void MainWindow::on_searchButton_clicked()
     }
     else if(searchTypeText == "logical")
     {
-        qDebug() << "Logiczne";
+        //qDebug() << "Logiczne";
         searchType = new LogicalSearch(databaseHandler);
         arguments.push_back(ui->allTablesasdasd->currentText());
         arguments.push_back(ui->columnForSearch->currentText());
@@ -324,10 +324,10 @@ void MainWindow::on_searchButton_clicked()
         arguments.push_back(ui->searchOptionBox->currentText());
         arguments.push_back(ui->searchLineEdit_2->text());
 
-        qDebug() << arguments;
+        //qDebug() << arguments;
     }
-    else
-        qDebug() << "Unknown search type!";
+//    else
+        //qDebug() << "Unknown search type!";
 
     std::vector<FoundRecord> foundRecords = searchType->processQuery(arguments);
 

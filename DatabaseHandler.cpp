@@ -24,21 +24,21 @@ void DatabaseHandler::setDatabase()
 
 DatabaseHandler::~DatabaseHandler()
 {
-    QSqlDatabase::removeDatabase(db.connectionName());
+//    QSqlDatabase::removeDatabase(db.connectionName());
 }
 
 void DatabaseHandler::connectToDatabase()
 {
     if(db.open())
     {
-        qDebug() << "Opened";
+        //qDebug() << "Opened";
     }
     else
     {
-        qDebug() << "Could not open database with following credentials:";
-        qDebug() << "User name: " << db.userName();
-        qDebug() << "Database name: " << db.databaseName();
-        qDebug() << db.lastError();
+        //qDebug() << "Could not open database with following credentials:";
+        //qDebug() << "User name: " << db.userName();
+        //qDebug() << "Database name: " << db.databaseName();
+        //qDebug() << db.lastError();
     }
 }
 
@@ -46,7 +46,7 @@ void DatabaseHandler::disconnectFromDatabase()
 {
     if(db.isOpen())
     {
-        qDebug() << "Closing";
+        //qDebug() << "Closing";
         db.close();
     }
 }
@@ -77,7 +77,7 @@ QStringList DatabaseHandler::getColumnNamesForTable(QString tableName)
         for(int i = 0; i < numberOfCols; i++)
         {
             headerList << qry.record().fieldName(i);
-            qDebug() << qry.record().fieldName(i);
+            //qDebug() << qry.record().fieldName(i);
         }
     }
     else
@@ -121,7 +121,7 @@ void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
     }
 
     queryText.remove(queryText.length()-3, 3); // remove last "OR "
-    qDebug() << queryText;
+    //qDebug() << queryText;
 
     Logger::getInstance().log(queryText, __FILE__, __LINE__);
     executeGivenQueryAndShowResults(qSqlQry, queryText);
@@ -133,7 +133,7 @@ std::vector<std::pair<double, double> > DatabaseHandler::getOverallAttendance()
     QSqlQuery qSqlQry(db);
 
     QString queryText = QString("SELECT * FROM overall_attendance ");
-    qDebug() << queryText;
+    //qDebug() << queryText;
 
     if(qSqlQry.exec(queryText))
     {
@@ -165,7 +165,7 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
             if(0 == resultTable->item(i,j))
             {
                 resultTable->setItem(i,j,new QTableWidgetItem);
-//                qDebug() << "Allocation of new items in table";
+//                //qDebug() << "Allocation of new items in table";
             }
             resultTable->item(i,j)->setText(qry.value(j).toString());
 
@@ -174,12 +174,12 @@ void DatabaseHandler::fillTableWithQueryData(QSqlQuery qry)
         }
     }
     resultTable->setRowCount(rowCount);
-    qDebug() <<"Row count set to: " << rowCount;
+    //qDebug() <<"Row count set to: " << rowCount;
 }
 
 void DatabaseHandler::logDbError()
 {
-    qDebug() << "Error: " << db.lastError();
+    //qDebug() << "Error: " << db.lastError();
 }
 
 void DatabaseHandler::executeQuery(const QString queryText)
@@ -219,14 +219,14 @@ void DatabaseHandler::showTableInResults(const QString tableName)
 {
     currentTable = tableName;
 
-    qDebug() << currentTable;
+    //qDebug() << currentTable;
 
     QSqlQuery qSqlQry(db);
     QString queryText = "SELECT * FROM ";
 
     queryText.append(tableName);
     if(tableName == "overall_performance") {
-        qDebug() << "Sort by points";
+        //qDebug() << "Sort by points";
         queryText.append(" ORDER BY points DESC");
     }
 
@@ -236,7 +236,7 @@ void DatabaseHandler::showTableInResults(const QString tableName)
 
 void DatabaseHandler::addUpdateQueryToQueriesList(int row, int column)
 {
-    qDebug() << "Row: " << row << " " " changed";
+    //qDebug() << "Row: " << row << " " " changed";
 //    SYNTAX:
 //    UPDATE table_name
 //    SET column1=value1,column2=value2,...
@@ -260,7 +260,7 @@ void DatabaseHandler::addUpdateQueryToQueriesList(int row, int column)
     query.append("'");
     query.append(";");
 
-    qDebug() << "zapytanie: " << query;
+    //qDebug() << "zapytanie: " << query;
     queriesList.push_back(query);
 }
 
@@ -268,14 +268,14 @@ void DatabaseHandler::saveChangesToDatabase()
 {
     for(auto it = queriesList.begin(); it != queriesList.end(); it++)
     {
-        qDebug() << *it;
+        //qDebug() << *it;
         QString query = *it;
 
         Logger::getInstance().log(query, __FILE__, __LINE__);
 
         QSqlQuery qry(db);
-        if(qry.exec(query))
-            qDebug() << "Dodano " << query;
+        if(qry.exec(query)) ;
+            //qDebug() << "Dodano " << query;
         else
             logDbError();
         qry.finish();
@@ -289,7 +289,7 @@ int DatabaseHandler::getNextId(const QString fromTableName)
     int nextId = -1;
     QString query = "SELECT MAX(id) FROM ";
     query.append(fromTableName);
-    qDebug() << query;
+    //qDebug() << query;
     Logger::getInstance().log(query, __FILE__, __LINE__);
 
 
@@ -330,11 +330,11 @@ void DatabaseHandler::insertNewRow(QStringList fields)
     query.remove(query.length()-1, 1); //remove last comma
     query.append(")");
 
-    qDebug() << "zapytanie: " << query;
+    //qDebug() << "zapytanie: " << query;
     Logger::getInstance().log(query, __FILE__, __LINE__);
     QSqlQuery qry(db);
-    if(qry.exec(query))
-        qDebug() << "Dodano " << query;
+    if(qry.exec(query)) ;
+        //qDebug() << "Dodano " << query;
     else
         logDbError();
 
@@ -359,8 +359,8 @@ void DatabaseHandler::removeCurrentRow()
     Logger::getInstance().log(query, __FILE__, __LINE__);
 
     QSqlQuery qry(db);
-    if(qry.exec(query))
-        qDebug() << "Usunieto " << query;
+    if(qry.exec(query)) ;
+        //qDebug() << "Usunieto " << query;
     else
         logDbError();
 
@@ -373,13 +373,13 @@ std::string DatabaseHandler::getHashFromDbForUser(std::string user)
     query.append(QString::fromStdString(user));
     query.append("'");
 
-//    qDebug() << query;
+//    //qDebug() << query;
 
     Logger::getInstance().log(query, __FILE__, __LINE__);
 
     QSqlQuery qry(db);
-    if(qry.exec(query))
-        qDebug() << "Success";
+    if(qry.exec(query)) ;
+        //qDebug() << "Success";
     else
         logDbError();
 
@@ -425,10 +425,10 @@ std::vector<int> DatabaseHandler::processSimpleSearch(QString query)
         {
             foundIDs.push_back(qry.record().value(0).toInt());
         }
-    qDebug() << "Found " << foundIDs.size() << " elements";
+    //qDebug() << "Found " << foundIDs.size() << " elements";
     }
     else {
-        qDebug() << "Incorrect query format";
+        //qDebug() << "Incorrect query format";
         logDbError();
     }
 
