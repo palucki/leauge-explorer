@@ -78,22 +78,17 @@ public:
     QSpacerItem *horizontalSpacer_9;
     QPushButton *pushButton;
     QWidget *tab_2;
-    QGroupBox *loginGroupBox;
-    QVBoxLayout *verticalLayout_2;
-    QGridLayout *gridLayout_2;
-    QLabel *label_4;
-    QLabel *label_2;
-    QLineEdit *usernameLineEdit;
-    QLineEdit *passwordLineEdit;
-    QPushButton *signInButton;
     QGroupBox *advancedOptions;
     QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout_4;
     QPlainTextEdit *queryEditor;
     QSpacerItem *verticalSpacer;
     QPushButton *executeQueryButton;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_7;
     QGroupBox *groupBox_2;
-    QWidget *layoutWidget3;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout_6;
     QVBoxLayout *verticalLayout;
     QPushButton *connectButton;
     QHBoxLayout *horizontalLayout_3;
@@ -102,6 +97,17 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QPushButton *disconnectButton;
     QPushButton *exitButton;
+    QGroupBox *loginGroupBox;
+    QWidget *widget2;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_2;
+    QLineEdit *usernameLineEdit;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_4;
+    QLineEdit *passwordLineEdit;
+    QHBoxLayout *horizontalLayout_9;
+    QPushButton *signInButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -122,7 +128,7 @@ public:
         resultTable->setSortingEnabled(true);
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(10, 200, 461, 261));
+        tabWidget->setGeometry(QRect(380, 200, 461, 261));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         chartButton = new QPushButton(tab);
@@ -326,51 +332,6 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        loginGroupBox = new QGroupBox(tab_2);
-        loginGroupBox->setObjectName(QStringLiteral("loginGroupBox"));
-        loginGroupBox->setGeometry(QRect(10, 10, 207, 151));
-        verticalLayout_2 = new QVBoxLayout(loginGroupBox);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        label_4 = new QLabel(loginGroupBox);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setTextFormat(Qt::AutoText);
-        label_4->setAlignment(Qt::AlignCenter);
-
-        gridLayout_2->addWidget(label_4, 2, 0, 1, 1);
-
-        label_2 = new QLabel(loginGroupBox);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setAlignment(Qt::AlignCenter);
-
-        gridLayout_2->addWidget(label_2, 1, 0, 1, 1);
-
-        usernameLineEdit = new QLineEdit(loginGroupBox);
-        usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
-
-        gridLayout_2->addWidget(usernameLineEdit, 1, 1, 1, 1);
-
-        passwordLineEdit = new QLineEdit(loginGroupBox);
-        passwordLineEdit->setObjectName(QStringLiteral("passwordLineEdit"));
-        passwordLineEdit->setEchoMode(QLineEdit::Password);
-
-        gridLayout_2->addWidget(passwordLineEdit, 2, 1, 1, 1);
-
-
-        verticalLayout_2->addLayout(gridLayout_2);
-
-        signInButton = new QPushButton(loginGroupBox);
-        signInButton->setObjectName(QStringLiteral("signInButton"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/MyFiles/110955-data/png/interface.png"), QSize(), QIcon::Normal, QIcon::Off);
-        signInButton->setIcon(icon6);
-
-        verticalLayout_2->addWidget(signInButton);
-
         advancedOptions = new QGroupBox(tab_2);
         advancedOptions->setObjectName(QStringLiteral("advancedOptions"));
         advancedOptions->setEnabled(true);
@@ -396,29 +357,43 @@ public:
         executeQueryButton = new QPushButton(layoutWidget2);
         executeQueryButton->setObjectName(QStringLiteral("executeQueryButton"));
         executeQueryButton->setEnabled(true);
-        QIcon icon7;
-        icon7.addFile(QStringLiteral(":/MyFiles/110955-data/png/database-edition.png"), QSize(), QIcon::Normal, QIcon::Off);
-        executeQueryButton->setIcon(icon7);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/MyFiles/110955-data/png/database-edition.png"), QSize(), QIcon::Normal, QIcon::Off);
+        executeQueryButton->setIcon(icon6);
 
         verticalLayout_4->addWidget(executeQueryButton);
 
         tabWidget->addTab(tab_2, QString());
-        groupBox_2 = new QGroupBox(centralWidget);
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(20, 10, 281, 391));
+        verticalLayout_7 = new QVBoxLayout(widget);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        verticalLayout_7->setContentsMargins(0, 0, 0, 0);
+        groupBox_2 = new QGroupBox(widget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(0, 0, 211, 191));
-        layoutWidget3 = new QWidget(groupBox_2);
-        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(10, 20, 197, 161));
-        verticalLayout = new QVBoxLayout(layoutWidget3);
+        widget1 = new QWidget(groupBox_2);
+        widget1->setObjectName(QStringLiteral("widget1"));
+        widget1->setGeometry(QRect(10, 20, 221, 201));
+        verticalLayout_6 = new QVBoxLayout(widget1);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        connectButton = new QPushButton(layoutWidget3);
+        connectButton = new QPushButton(widget1);
         connectButton->setObjectName(QStringLiteral("connectButton"));
-        QIcon icon8;
-        icon8.addFile(QStringLiteral(":/MyFiles/110955-data/png/folder-silhouette-with-arrow-pointing-up.png"), QSize(), QIcon::Normal, QIcon::Off);
-        connectButton->setIcon(icon8);
+        connectButton->setMinimumSize(QSize(0, 50));
+        QFont font1;
+        font1.setPointSize(11);
+        connectButton->setFont(font1);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/MyFiles/110955-data/png/folder-silhouette-with-arrow-pointing-up.png"), QSize(), QIcon::Normal, QIcon::Off);
+        connectButton->setIcon(icon7);
         connectButton->setFlat(false);
 
         verticalLayout->addWidget(connectButton);
@@ -430,7 +405,7 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_4);
 
-        connectionIndicator = new QCheckBox(layoutWidget3);
+        connectionIndicator = new QCheckBox(widget1);
         connectionIndicator->setObjectName(QStringLiteral("connectionIndicator"));
         connectionIndicator->setEnabled(true);
         connectionIndicator->setLayoutDirection(Qt::LeftToRight);
@@ -450,23 +425,107 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
-        disconnectButton = new QPushButton(layoutWidget3);
+        disconnectButton = new QPushButton(widget1);
         disconnectButton->setObjectName(QStringLiteral("disconnectButton"));
         disconnectButton->setEnabled(false);
-        QIcon icon9;
-        icon9.addFile(QStringLiteral(":/MyFiles/110955-data/png/folder-with-close-or-delete-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        disconnectButton->setIcon(icon9);
+        disconnectButton->setMinimumSize(QSize(0, 50));
+        disconnectButton->setFont(font1);
+        QIcon icon8;
+        icon8.addFile(QStringLiteral(":/MyFiles/110955-data/png/folder-with-close-or-delete-button.png"), QSize(), QIcon::Normal, QIcon::Off);
+        disconnectButton->setIcon(icon8);
 
         verticalLayout->addWidget(disconnectButton);
 
-        exitButton = new QPushButton(layoutWidget3);
+        exitButton = new QPushButton(widget1);
         exitButton->setObjectName(QStringLiteral("exitButton"));
+        exitButton->setMinimumSize(QSize(0, 50));
+        exitButton->setFont(font1);
         exitButton->setAutoFillBackground(false);
-        QIcon icon10;
-        icon10.addFile(QStringLiteral(":/MyFiles/110955-data/png/direction.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exitButton->setIcon(icon10);
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/MyFiles/110955-data/png/direction.png"), QSize(), QIcon::Normal, QIcon::Off);
+        exitButton->setIcon(icon9);
 
         verticalLayout->addWidget(exitButton);
+
+
+        verticalLayout_6->addLayout(verticalLayout);
+
+
+        verticalLayout_7->addWidget(groupBox_2);
+
+        loginGroupBox = new QGroupBox(widget);
+        loginGroupBox->setObjectName(QStringLiteral("loginGroupBox"));
+        loginGroupBox->setMinimumSize(QSize(0, 50));
+        loginGroupBox->setMaximumSize(QSize(16777215, 160));
+        widget2 = new QWidget(loginGroupBox);
+        widget2->setObjectName(QStringLiteral("widget2"));
+        widget2->setGeometry(QRect(10, 20, 221, 130));
+        verticalLayout_2 = new QVBoxLayout(widget2);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        label_2 = new QLabel(widget2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setFont(font1);
+        label_2->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_7->addWidget(label_2);
+
+        usernameLineEdit = new QLineEdit(widget2);
+        usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
+        usernameLineEdit->setMinimumSize(QSize(0, 30));
+        usernameLineEdit->setFont(font1);
+
+        horizontalLayout_7->addWidget(usernameLineEdit);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        label_4 = new QLabel(widget2);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setFont(font1);
+        label_4->setTextFormat(Qt::AutoText);
+        label_4->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_8->addWidget(label_4);
+
+        passwordLineEdit = new QLineEdit(widget2);
+        passwordLineEdit->setObjectName(QStringLiteral("passwordLineEdit"));
+        passwordLineEdit->setMinimumSize(QSize(0, 30));
+        passwordLineEdit->setFont(font1);
+        passwordLineEdit->setEchoMode(QLineEdit::Password);
+
+        horizontalLayout_8->addWidget(passwordLineEdit);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_8);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        signInButton = new QPushButton(widget2);
+        signInButton->setObjectName(QStringLiteral("signInButton"));
+        signInButton->setMinimumSize(QSize(0, 50));
+        signInButton->setFont(font1);
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/MyFiles/110955-data/png/interface.png"), QSize(), QIcon::Normal, QIcon::Off);
+        signInButton->setIcon(icon10);
+
+        horizontalLayout_9->addWidget(signInButton);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_9);
+
+        signInButton->raise();
+
+        verticalLayout_7->addWidget(loginGroupBox);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -517,12 +576,6 @@ public:
         searchButton->setText(QApplication::translate("MainWindow", "Search", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Clear", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Modify", 0));
-        loginGroupBox->setTitle(QApplication::translate("MainWindow", "Login", 0));
-        label_4->setText(QApplication::translate("MainWindow", "Password", 0));
-        label_2->setText(QApplication::translate("MainWindow", "User name", 0));
-        usernameLineEdit->setText(QApplication::translate("MainWindow", "user", 0));
-        passwordLineEdit->setText(QString());
-        signInButton->setText(QApplication::translate("MainWindow", "Sign in", 0));
         advancedOptions->setTitle(QApplication::translate("MainWindow", "Advanced options", 0));
         queryEditor->setPlainText(QApplication::translate("MainWindow", "SELECT * from overall_performance", 0));
         executeQueryButton->setText(QApplication::translate("MainWindow", "Execute custom query", 0));
@@ -532,6 +585,12 @@ public:
         connectionIndicator->setText(QApplication::translate("MainWindow", "Connection state", 0));
         disconnectButton->setText(QApplication::translate("MainWindow", "Disconnect from Database", 0));
         exitButton->setText(QApplication::translate("MainWindow", "Exit", 0));
+        loginGroupBox->setTitle(QApplication::translate("MainWindow", "Login", 0));
+        label_2->setText(QApplication::translate("MainWindow", "User name", 0));
+        usernameLineEdit->setText(QApplication::translate("MainWindow", "user", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Password", 0));
+        passwordLineEdit->setText(QString());
+        signInButton->setText(QApplication::translate("MainWindow", "Sign in", 0));
     } // retranslateUi
 
 };
