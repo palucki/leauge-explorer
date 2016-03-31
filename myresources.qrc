@@ -8,5 +8,8 @@
         <file>images/png/folder-silhouette-with-arrow-pointing-up.png</file>
         <file>images/png/folder-with-close-or-delete-button.png</file>
         <file>images/png/interface.png</file>
+        <file>images/png/arrow-made-up-of-connectors-and-lines.png</file>
+        <file>images/png/data-storage-disc.png</file>
+        <file>images/png/data-search.png</file>
     </qresource>
 </RCC>

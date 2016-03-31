@@ -17,12 +17,25 @@ void MainWindow::connectAllSignals()
     connect(ui->exitButton, SIGNAL(clicked()),this, SLOT(close()));
 }
 
+void MainWindow::disableAdminButtons()
+{
+    ui->queryEditor->setEnabled(false);
+    ui->executeQueryButton->setEnabled(false);
+}
+
+void MainWindow::enableAdminButtons()
+{
+    ui->queryEditor->setEnabled(true);
+    ui->executeQueryButton->setEnabled(true);
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), inEditingMode(false)
 {
     ui->setupUi(this);
-    ui->advancedOptions->setEnabled(false);
+
+    disableAdminButtons();
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
@@ -88,6 +101,10 @@ void MainWindow::setConnectionButtonsAfterConnectState()
     ui->deleteButton->setEnabled(false);
     ui->addRecordButton->setEnabled(false);
     ui->saveButton->setEnabled(false);
+
+    ui->searchButton->setEnabled(true);
+//    ui->clearResults->setEnabled(true);
+
 }
 
 void MainWindow::disableEditingButtonsForUnknownUser()
@@ -281,11 +298,11 @@ void MainWindow::on_signInButton_clicked()
 
     if(userIdentity == "admin")
     {
-        ui->advancedOptions->setEnabled(true);
+        enableAdminButtons();
     }
     else
     {
-        ui->advancedOptions->setEnabled(false);
+        disableAdminButtons();
     }
 }
 
@@ -433,7 +450,7 @@ void MainWindow::on_chartButton_clicked()
     plotter.showOverallAttendance();
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_clearResults_clicked()
 {
     QListWidgetItem tempItem;
     tempItem.setText(ui->allTablesasdasd->currentText());

@@ -44,7 +44,7 @@ private slots:
     void enableChartButtonIfRequired();
     void on_chartButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_clearResults_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -63,6 +63,9 @@ private:
     void enableEditingButtonsForKnownUser();
     void showOnlyFoundRecordsInResultTable(std::vector<FoundRecord>);
     void prepareColumnsForSearch(const QString &arg1);
+
+    void disableAdminButtons();
+    void enableAdminButtons();
 };
 
 #endif // MAINWINDOW_H

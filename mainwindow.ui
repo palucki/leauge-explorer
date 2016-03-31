@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>935</width>
-    <height>506</height>
+    <width>890</width>
+    <height>605</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>20</y>
-      <width>431</width>
-      <height>431</height>
+      <x>240</x>
+      <y>300</y>
+      <width>631</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="editTriggers">
@@ -36,52 +36,230 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>200</y>
-      <width>461</width>
-      <height>261</height>
+      <x>240</x>
+      <y>10</y>
+      <width>631</width>
+      <height>271</height>
      </rect>
     </property>
-    <property name="currentIndex">
-     <number>1</number>
+    <property name="title">
+     <string>Database operations</string>
     </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Modify</string>
-     </attribute>
-     <widget class="QPushButton" name="chartButton">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>20</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Wykres</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>:/MyFiles/110955-data/png/lifeline-turning-into-directional-arrow.png</normaloff>:/MyFiles/110955-data/png/lifeline-turning-into-directional-arrow.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>25</width>
-        <height>25</height>
-       </size>
-      </property>
-     </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>611</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Search</string>
+     </property>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>10</y>
-        <width>337</width>
-        <height>58</height>
+        <x>10</x>
+        <y>20</y>
+        <width>591</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="searchFieldsLayout">
+         <item>
+          <widget class="QLineEdit" name="searchLineEdit">
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>(eg. Kraków)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="searchOptionBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="searchLineEdit_2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Query type:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="searchTypeField">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <item>
+            <property name="text">
+             <string>simple</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>mathematical</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>logical</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>in column</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="columnForSearch">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="searchButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Search</string>
+           </property>
+           <property name="icon">
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/data-search.png</normaloff>:/MyFiles/images/png/data-search.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>611</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Modify</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>592</width>
+        <height>101</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -104,6 +282,17 @@
            </item>
            <item>
             <widget class="QLabel" name="label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Available tables</string>
              </property>
@@ -125,7 +314,74 @@
           </layout>
          </item>
          <item>
-          <widget class="QComboBox" name="allTablesasdasd"/>
+          <widget class="QComboBox" name="allTablesasdasd">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="chartButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Wykres</string>
+           </property>
+           <property name="icon">
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/arrow-made-up-of-connectors-and-lines.png</normaloff>:/MyFiles/images/png/arrow-made-up-of-connectors-and-lines.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -136,12 +392,29 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Add record</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>:/MyFiles/110955-data/png/bible-with-cross-symbol-variant.png</normaloff>:/MyFiles/110955-data/png/bible-with-cross-symbol-variant.png</iconset>
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/bible-with-cross-symbol-variant.png</normaloff>:/MyFiles/images/png/bible-with-cross-symbol-variant.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -150,12 +423,29 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Delete record</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>:/MyFiles/110955-data/png/data-storage-drive-with-cross-mark.png</normaloff>:/MyFiles/110955-data/png/data-storage-drive-with-cross-mark.png</iconset>
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/data-storage-drive-with-cross-mark.png</normaloff>:/MyFiles/images/png/data-storage-drive-with-cross-mark.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -164,12 +454,29 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Save</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>:/MyFiles/110955-data/png/data-storage.png</normaloff>:/MyFiles/110955-data/png/data-storage.png</iconset>
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/data-storage.png</normaloff>:/MyFiles/images/png/data-storage.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -178,226 +485,106 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Edit mode</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>:/MyFiles/110955-data/png/data-storage-disc.png</normaloff>:/MyFiles/110955-data/png/data-storage-disc.png</iconset>
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/data-storage-disc.png</normaloff>:/MyFiles/images/png/data-storage-disc.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>90</y>
-        <width>421</width>
-        <height>118</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Query type:</string>
+          <widget class="QPlainTextEdit" name="queryEditor">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="searchTypeField">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>100</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
-           <item>
-            <property name="text">
-             <string>simple</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>mathematical</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>logical</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
+           <property name="maximumSize">
             <size>
-             <width>40</width>
-             <height>20</height>
+             <width>16777215</width>
+             <height>40</height>
             </size>
            </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="searchFieldsLayout">
-         <item>
-          <widget class="QLineEdit" name="searchLineEdit">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="placeholderText">
-            <string>(eg. Kraków)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="searchOptionBox">
-           <item>
-            <property name="text">
-             <string>Druga</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Dupa</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="searchLineEdit_2">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="placeholderText">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>in column</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="columnForSearch">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <spacer name="horizontalSpacer_8">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="searchButton">
            <property name="font">
             <font>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>false</underline>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="plainText">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>(Insert your custom query)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="executeQueryButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>Search</string>
+            <string>Execute custom query</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>:/MyFiles/110955-data/png/data-search.png</normaloff>:/MyFiles/110955-data/png/data-search.png</iconset>
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/database-edition.png</normaloff>:/MyFiles/images/png/database-edition.png</iconset>
            </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_9">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
+           <property name="iconSize">
             <size>
-             <width>40</width>
-             <height>20</height>
+             <width>25</width>
+             <height>25</height>
             </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>Clear</string>
            </property>
           </widget>
          </item>
@@ -406,84 +593,14 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Login</string>
-     </attribute>
-     <widget class="QGroupBox" name="advancedOptions">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>10</y>
-        <width>201</width>
-        <height>151</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Advanced options</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>181</width>
-         <height>121</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QPlainTextEdit" name="queryEditor">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="plainText">
-           <string>SELECT * from overall_performance</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="executeQueryButton">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Execute custom query</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>:/MyFiles/110955-data/png/database-edition.png</normaloff>:/MyFiles/110955-data/png/database-edition.png</iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>281</width>
-      <height>391</height>
+      <width>211</width>
+      <height>341</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -492,172 +609,228 @@
        <property name="title">
         <string>Connection</string>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>221</width>
-          <height>201</height>
+          <x>11</x>
+          <y>21</y>
+          <width>197</width>
+          <height>151</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+        <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <widget class="QPushButton" name="connectButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Connect to Database</string>
+           </property>
+           <property name="icon">
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png</normaloff>:/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="connectButton">
-             <property name="minimumSize">
+            <spacer name="horizontalSpacer_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>0</width>
-               <height>50</height>
+               <width>40</width>
+               <height>20</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Connect to Database</string>
-             </property>
-             <property name="icon">
-              <iconset resource="myresources.qrc">
-               <normaloff>:/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png</normaloff>:/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>false</bool>
-             </property>
-            </widget>
+            </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="connectionIndicator">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="layoutDirection">
-                <enum>Qt::LeftToRight</enum>
-               </property>
-               <property name="autoFillBackground">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QCheckBox::indicator {
-    background-color: red;
-}</string>
-               </property>
-               <property name="text">
-                <string>Connection state</string>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="checkable">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QPushButton" name="disconnectButton">
+            <widget class="QCheckBox" name="connectionIndicator">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Disconnect from Database</string>
-             </property>
-             <property name="icon">
-              <iconset resource="myresources.qrc">
-               <normaloff>:/MyFiles/images/png/folder-with-close-or-delete-button.png</normaloff>:/MyFiles/images/png/folder-with-close-or-delete-button.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="exitButton">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-              </font>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
              </property>
              <property name="autoFillBackground">
               <bool>false</bool>
              </property>
-             <property name="text">
-              <string>Exit</string>
+             <property name="styleSheet">
+              <string notr="true">QCheckBox::indicator {
+    background-color: red;
+}</string>
              </property>
-             <property name="icon">
-              <iconset resource="myresources.qrc">
-               <normaloff>:/MyFiles/images/png/direction.png</normaloff>:/MyFiles/images/png/direction.png</iconset>
+             <property name="text">
+              <string>Connection state</string>
              </property>
              <property name="iconSize">
               <size>
-               <width>25</width>
-               <height>25</height>
+               <width>20</width>
+               <height>20</height>
               </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="disconnectButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Disconnect from Database</string>
+           </property>
+           <property name="icon">
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/folder-with-close-or-delete-button.png</normaloff>:/MyFiles/images/png/folder-with-close-or-delete-button.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="exitButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Exit</string>
+           </property>
+           <property name="icon">
+            <iconset resource="myresources.qrc">
+             <normaloff>:/MyFiles/images/png/direction.png</normaloff>:/MyFiles/images/png/direction.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -674,19 +847,19 @@
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>160</height>
+         <height>150</height>
         </size>
        </property>
        <property name="title">
         <string>Login</string>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>221</width>
-          <height>130</height>
+          <width>191</width>
+          <height>111</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -694,9 +867,15 @@
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
             <widget class="QLabel" name="label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="font">
               <font>
-               <pointsize>11</pointsize>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <property name="text">
@@ -709,15 +888,27 @@
            </item>
            <item>
             <widget class="QLineEdit" name="usernameLineEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
                <height>30</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <pointsize>11</pointsize>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <property name="text">
@@ -731,9 +922,15 @@
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QLabel" name="label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="font">
               <font>
-               <pointsize>11</pointsize>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <property name="text">
@@ -748,32 +945,28 @@
             </widget>
            </item>
            <item>
-            <spacer name="horizontalSpacer_10">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>5</width>
-               <height>15</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QLineEdit" name="passwordLineEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
                <height>30</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <pointsize>11</pointsize>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <property name="text">
@@ -790,15 +983,29 @@
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
             <widget class="QPushButton" name="signInButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>50</height>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>60</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>11</pointsize>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -820,31 +1027,21 @@
          </item>
         </layout>
        </widget>
-       <zorder>verticalSpacer_3</zorder>
-       <zorder>horizontalSpacer_10</zorder>
-       <zorder></zorder>
-       <zorder>signInButton</zorder>
-       <zorder></zorder>
-       <zorder></zorder>
-       <zorder></zorder>
       </widget>
      </item>
     </layout>
    </widget>
+   <zorder>layoutWidget</zorder>
    <zorder>resultTable</zorder>
-   <zorder>tabWidget</zorder>
-   <zorder>groupBox_2</zorder>
-   <zorder>loginGroupBox</zorder>
-   <zorder></zorder>
-   <zorder></zorder>
-   <zorder></zorder>
+   <zorder>groupBox</zorder>
+   <zorder>searchButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>935</width>
+     <width>890</width>
      <height>21</height>
     </rect>
    </property>
