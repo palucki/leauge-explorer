@@ -76,6 +76,7 @@ void MainWindow::connectToDatabase()
 //    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
     Logger::getInstance().log("Connected to database", __FILE__, __LINE__);
+    on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
     //setEditingButtonsState(false);
 }
 
@@ -91,6 +92,24 @@ void MainWindow::disconnectFromDatabase()
     Logger::getInstance().log("Disconnected from database", __FILE__, __LINE__);
 }
 
+void MainWindow::setConnectionButtonsInitialState()
+{
+    ui->connectButton->setEnabled(true);
+    ui->disconnectButton->setEnabled(false);
+    ui->editModeButton->setEnabled(false);
+    ui->deleteButton->setEnabled(false);
+    ui->addRecordButton->setEnabled(false);
+    ui->saveButton->setEnabled(false);
+
+    userIdentity = "";
+    ui->passwordLineEdit->clear();
+    ui->passwordLineEdit->setEnabled(false);
+    ui->usernameLineEdit->clear();
+    ui->usernameLineEdit->setEnabled(false);
+    ui->signInButton->setEnabled(true);
+    on_signInButton_clicked();
+}
+
 void MainWindow::setConnectionButtonsAfterConnectState()
 {
     inEditingMode = false;
@@ -104,6 +123,13 @@ void MainWindow::setConnectionButtonsAfterConnectState()
 
     ui->searchButton->setEnabled(true);
 //    ui->clearResults->setEnabled(true);
+    ui->searchTypeField->setEnabled(true);
+
+    ui->usernameLineEdit->clear();
+    ui->usernameLineEdit->setEnabled(true);
+    ui->passwordLineEdit->clear();
+    ui->passwordLineEdit->setEnabled(true);
+    ui->signInButton->setEnabled(true);
 
 }
 
@@ -127,15 +153,7 @@ void MainWindow::showOnlyFoundRecordsInResultTable(std::vector<FoundRecord> foun
     databaseHandler->showFoundRecordsInResultTable(foundRecords);
 }
 
-void MainWindow::setConnectionButtonsInitialState()
-{
-    ui->connectButton->setEnabled(true);
-    ui->disconnectButton->setEnabled(false);
-    ui->editModeButton->setEnabled(false);
-    ui->deleteButton->setEnabled(false);
-    ui->addRecordButton->setEnabled(false);
-    ui->saveButton->setEnabled(false);
-}
+
 
 void MainWindow::cleanupEnvironment()
 {
@@ -277,14 +295,17 @@ void MainWindow::on_signInButton_clicked()
             ui->passwordLineEdit->setEnabled(false);
             ui->signInButton->setText("Sign out");
         }
-//        else
+        else
+            ui->signInButton->setText("Sign in");
             //qDebug() << "Username or password incorrect";
     }
     else
     {
         userIdentity = "";
         ui->usernameLineEdit->setEnabled(true);
+        ui->usernameLineEdit->clear();
         ui->passwordLineEdit->setEnabled(true);
+        ui->passwordLineEdit->clear();
         ui->signInButton->setText("Sign in");
     }
 
