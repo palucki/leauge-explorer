@@ -44,7 +44,7 @@ private slots:
     void enableChartButtonIfRequired();
     void on_chartButton_clicked();
 
-    void on_clearResults_clicked();
+//    void on_clearResults_clicked();
 
 private:
     Ui::MainWindow *ui;

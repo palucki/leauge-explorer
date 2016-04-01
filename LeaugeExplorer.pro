@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     qcustomplot.cpp \
     plotter.cpp \
     mathsearch.cpp \
-    logicalsearch.cpp
+    logicalsearch.cpp \
+    digitalclock.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -36,7 +37,8 @@ HEADERS  += \
     qcustomplot.h \
     plotter.h \
     mathsearch.h \
-    logicalsearch.h
+    logicalsearch.h \
+    digitalclock.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui \
     plotter.ui

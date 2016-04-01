@@ -150,6 +150,7 @@ void MainWindow::cleanupEnvironment()
     ui->resultTable->setColumnCount(0);
     ui->resultTable->setRowCount(0);
     ui->resultTable->clearContents();
+    ui->chartButton->setEnabled(false);
 }
 
 void MainWindow::executeQueryFromEditor()
@@ -450,9 +451,9 @@ void MainWindow::on_chartButton_clicked()
     plotter.showOverallAttendance();
 }
 
-void MainWindow::on_clearResults_clicked()
-{
-    QListWidgetItem tempItem;
-    tempItem.setText(ui->allTablesasdasd->currentText());
-    showTableFrom(&tempItem);
-}
+//void MainWindow::on_clearResults_clicked()
+//{
+//    QListWidgetItem tempItem;
+//    tempItem.setText(ui->allTablesasdasd->currentText());
+//    showTableFrom(&tempItem);
+//}

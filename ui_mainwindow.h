@@ -22,15 +22,14 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "digitalclock.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -94,8 +93,7 @@ public:
     QLineEdit *passwordLineEdit;
     QHBoxLayout *horizontalLayout_9;
     QPushButton *signInButton;
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
+    DigitalClock *currentTime;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -579,18 +577,14 @@ public:
 
         verticalLayout_7->addWidget(loginGroupBox);
 
+        currentTime = new DigitalClock(centralWidget);
+        currentTime->setObjectName(QStringLiteral("currentTime"));
+        currentTime->setGeometry(QRect(10, 490, 211, 61));
         MainWindow->setCentralWidget(centralWidget);
         layoutWidget->raise();
         resultTable->raise();
         groupBox->raise();
-        searchButton->raise();
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 890, 21));
-        MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        currentTime->raise();
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -602,7 +596,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Leauge Explorer", 0));
         groupBox->setTitle(QApplication::translate("MainWindow", "Database operations", 0));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Search", 0));
         searchLineEdit->setText(QString());

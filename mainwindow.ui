@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Leauge Explorer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableWidget" name="resultTable">
@@ -1031,32 +1031,31 @@
      </item>
     </layout>
    </widget>
+   <widget class="DigitalClock" name="currentTime">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>490</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>resultTable</zorder>
    <zorder>groupBox</zorder>
-   <zorder>searchButton</zorder>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>890</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <zorder>currentTime</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>DigitalClock</class>
+   <extends>QLCDNumber</extends>
+   <header>digitalclock.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="myresources.qrc"/>
  </resources>
