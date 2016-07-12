@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     plotter.cpp \
     mathsearch.cpp \
     logicalsearch.cpp \
-    digitalclock.cpp
+    digitalclock.cpp \
+    searchtype.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -45,3 +46,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     myresources.qrc
+
+DISTFILES += \
+    to_do

@@ -3,15 +3,12 @@
 #include <QDebug>
 #include "DatabaseHandler.h"
 
-
 MathSearch::MathSearch(DatabaseHandler *dbh) : SearchType(dbh)
 {
-
 }
 
 MathSearch::~MathSearch()
 {
-
 }
 
 std::vector<FoundRecord> MathSearch::processQuery(QStringList arguments)
@@ -22,23 +19,12 @@ std::vector<FoundRecord> MathSearch::processQuery(QStringList arguments)
     QString operand = arguments[2];
     QString value = arguments[3];
 
+    QString query = QString("SELECT * FROM %1 WHERE %2 %3 '%4'")
+            .arg(tableName).arg(columnName).arg(operand).arg(value);
 
-    QString query = QString("SELECT * FROM %1 WHERE %2 %3").arg(tableName).arg(columnName).arg(operand);
-    query.append("'");
-    query.append(value);
-    query.append("'");
-
-
-    qDebug() << query;
+    //qDebug() << query;
     Logger::getInstance().log(query, __FILE__, __LINE__);
     std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
-    std::vector<FoundRecord> foundRecords;
-
-    for(auto it = foundIDs.begin(); it != foundIDs.end(); it++)
-    {
-        foundRecords.push_back(FoundRecord(tableName, *it));
-    }
-
-    return foundRecords;
+    return prepareFoundRecordsVector(foundIDs,tableName);
 }
