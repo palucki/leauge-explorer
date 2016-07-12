@@ -1,5 +1,6 @@
 #include "DatabaseHandler.h"
 #include "logger.h"
+#include "foundrecord.h"
 DatabaseHandler::DatabaseHandler()
 {
     if(!db.isValid())

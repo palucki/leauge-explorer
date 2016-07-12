@@ -1,4 +1,5 @@
 #include "AddRecordHelper.h"
+#include "DatabaseHandler.h"
 #include "ui_addrecordhelper.h"
 
 AddRecordHelper::AddRecordHelper(QWidget *parent) :

@@ -5,6 +5,15 @@
 #include "logicalsearch.h"
 #include "plotter.h"
 
+#include "DatabaseHandler.h"
+#include "AddRecordHelper.h"
+#include "loginhelper.h"
+
+#include "searchtype.h"
+#include "logger.h"
+#include "plotter.h"
+
+
 void MainWindow::connectAllSignals()
 {
     connect(ui->connectButton, SIGNAL(clicked()),this, SLOT(connectToDatabase()));

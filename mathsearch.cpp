@@ -1,5 +1,8 @@
 #include "mathsearch.h"
 #include "logger.h"
+#include <QDebug>
+#include "DatabaseHandler.h"
+
 
 MathSearch::MathSearch(DatabaseHandler *dbh) : SearchType(dbh)
 {

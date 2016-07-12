@@ -3,15 +3,16 @@
 
 #include <QMainWindow>
 #include <QAbstractItemView>
-#include "DatabaseHandler.h"
-#include "AddRecordHelper.h"
-#include "loginhelper.h"
+#include <QListWidgetItem>
+#include <QTableWidgetItem>
 #include <string>
 #include <map>
 #include <functional>
-#include "searchtype.h"
-#include "logger.h"
 #include "plotter.h"
+
+class  DatabaseHandler;
+class AddRecordHelper;
+class LoginHelper;
 
 namespace Ui {
 class MainWindow;
@@ -43,8 +44,6 @@ private slots:
     void on_searchTypeField_currentTextChanged(const QString &arg1);
     void enableChartButtonIfRequired();
     void on_chartButton_clicked();
-
-//    void on_clearResults_clicked();
 
 private:
     Ui::MainWindow *ui;

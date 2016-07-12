@@ -4,9 +4,9 @@
 #include <QString>
 #include <QStringList>
 #include <vector>
-#include "DatabaseHandler.h"
 #include "foundrecord.h"
 
+class DatabaseHandler;
 
 class SearchType
 {

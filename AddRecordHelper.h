@@ -2,7 +2,8 @@
 #define ADDRECORDHELPER_H
 
 #include <QDialog>
-#include "DatabaseHandler.h"
+
+class DatabaseHandler;
 
 namespace Ui {
 class AddRecordHelper;

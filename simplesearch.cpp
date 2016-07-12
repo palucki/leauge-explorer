@@ -1,5 +1,8 @@
 #include "simplesearch.h"
 #include "logger.h"
+#include <QDebug>
+#include "DatabaseHandler.h"
+#include "foundrecord.h"
 
 SimpleSearch::SimpleSearch(DatabaseHandler* dbh) : SearchType(dbh)
 {

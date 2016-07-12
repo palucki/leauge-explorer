@@ -1,6 +1,7 @@
 #include "logicalsearch.h"
-#include "searchtype.h"
 #include "logger.h"
+#include "DatabaseHandler.h"
+#include "foundrecord.h"
 
 LogicalSearch::LogicalSearch(DatabaseHandler* dbh) : SearchType(dbh)
 {

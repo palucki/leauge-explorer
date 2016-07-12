@@ -6,7 +6,8 @@
 #include <QTableWidget>
 #include <QListWidget>
 #include <memory>
-#include "foundrecord.h"
+
+class FoundRecord;
 
 class DatabaseHandler
 {
