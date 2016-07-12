@@ -21,33 +21,51 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
     qDebug() << "text to find: " << text;
     qDebug() << "in: " << tableName;
 
-    QString query = QString("SELECT * FROM %1 WHERE ").arg(tableName);
-
-    if("any column" == columnName)
-    {
-        QStringList headersList = databaseHandler->getColumnNamesForTable(tableName);
-
-        for(int i = 0; i < headersList.count(); i++)
-        {
-            query.append(headersList[i]);
-            query.append(" LIKE '%");
-            query.append(text);
-            query.append("%' OR ");
-
-        }
-        query.remove(query.length()-3, 3); //remove last "OR "
-    }
-    else
-    {
-        query.append(columnName);
-        query.append(" LIKE '%");
-        query.append(text);
-        query.append("%'");
-    }
+    QString query = prepareQuery(columnName, tableName, text);
 
     qDebug() << query;
     Logger::getInstance().log(query, __FILE__, __LINE__);
-    std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
-    return prepareFoundRecordsVector(foundIDs,tableName);
+    return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
+}
+
+QString SimpleSearch::prepareQuery(QString columnName, QString tableName, QString text)
+{
+    if("any column" == columnName)
+    {
+        return prepareQueryForAllColumns(tableName, text);
+    }
+    else
+    {
+        return prepareQueryForSingleColumn(columnName, tableName, text);
+    }
+}
+
+QString SimpleSearch::prepareQueryForSingleColumn(QString columnName, QString tableName, QString text)
+{
+    QString query = QString("SELECT * FROM %1 WHERE ").arg(tableName);
+
+    query.append(columnName);
+    query.append(" LIKE '%");
+    query.append(text);
+    query.append("%'");
+
+    return query;
+}
+
+QString SimpleSearch::prepareQueryForAllColumns(QString tableName, QString text)
+{
+    QString query = QString("SELECT * FROM %1 WHERE ").arg(tableName);
+    QStringList headersList = databaseHandler->getColumnNamesForTable(tableName);
+
+    for(int i = 0; i < headersList.count(); i++)
+    {
+        query.append(headersList[i]);
+        query.append(" LIKE '%");
+        query.append(text);
+        query.append("%' OR ");
+
+    }
+    query.remove(query.length()-3, 3);
+    return query;
 }

@@ -54,7 +54,6 @@ std::vector<FoundRecord> LogicalSearch::processQuery(QStringList arguments)
 
     qDebug() << query;
     Logger::getInstance().log(query, __FILE__, __LINE__);
-    std::vector<int> foundIDs = databaseHandler->processSimpleSearch(query);
 
-    return prepareFoundRecordsVector(foundIDs,tableName);
+    return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
 }
