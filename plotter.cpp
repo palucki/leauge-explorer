@@ -28,7 +28,6 @@ void Plotter::setPlotStyle()
     myScatter.setSize(5);
     ui->chart->graph(0)->setScatterStyle(myScatter);
 
-
     ui->chart->xAxis->setLabel("Numer kolejki");
     ui->chart->yAxis->setLabel("Oglądalność");
     ui->chart->xAxis->setRange(0, 20);
@@ -45,8 +44,8 @@ void Plotter::setPlotData()
 
     for (int i=0; i<data.size(); ++i)
     {
-      x[i] = data[i].first;
-      y[i] = data[i].second;
+        x[i] = data[i].first;
+        y[i] = data[i].second;
     }
 
     ui->chart->addGraph();

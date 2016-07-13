@@ -5,13 +5,10 @@
 
 LogicalSearch::LogicalSearch(DatabaseHandler* dbh) : SearchType(dbh)
 {
-
 }
-
 
 LogicalSearch::~LogicalSearch()
 {
-
 }
 
 std::vector<FoundRecord> LogicalSearch::processQuery(QStringList arguments)
@@ -23,6 +20,16 @@ std::vector<FoundRecord> LogicalSearch::processQuery(QStringList arguments)
     QString operand = arguments[3];
     QString text2 = arguments[4];
 
+    QString query = prepareQuery(tableName, columnName, text1, operand, text2);
+
+    qDebug() << query;
+    Logger::getInstance().log(query, __FILE__, __LINE__);
+
+    return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
+}
+
+QString LogicalSearch::prepareQuery(QString tableName, QString columnName, QString text1, QString operand, QString text2)
+{
     QString query = QString("SELECT * FROM %1 WHERE ").arg(tableName);
 
     if("any column" == columnName)
@@ -52,8 +59,5 @@ std::vector<FoundRecord> LogicalSearch::processQuery(QStringList arguments)
              .append("%'");
     }
 
-    qDebug() << query;
-    Logger::getInstance().log(query, __FILE__, __LINE__);
-
-    return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
+    return query;
 }

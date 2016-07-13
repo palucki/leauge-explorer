@@ -26,13 +26,10 @@ void AddRecordHelper::updateTableHeaders(const int columns, const QStringList he
     ui->newRecordTable->setHorizontalHeaderLabels(headersList);
     for(int i = 0; i < columns; i++)
         ui->newRecordTable->setItem(0, i,new QTableWidgetItem);
-
 }
 
 void AddRecordHelper::prepareIdColumn(QString tableName)
 {
-    //int nextId = databaseHandler->getNextId(tableName); QString::number(nextId)
-
     if(ui->newRecordTable->item(0,0) == NULL)
         ui->newRecordTable->setItem(0,0, new QTableWidgetItem);
 

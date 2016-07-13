@@ -17,7 +17,6 @@ DigitalClock::DigitalClock(QWidget *parent)
     resize(150, 60);
 }
 
-
 void DigitalClock::showTime()
 {
     QTime time = QTime::currentTime();
