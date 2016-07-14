@@ -16,6 +16,16 @@ void TableExporter::saveTableInCsv(QString fileName, QTableWidget* table)
     {
         qDebug() << "Table " << table->objectName() << " will be exported";
 
+        for(auto i = 0; i < table->rowCount(); i++)
+        {
+            for(auto j = 0; j < table->columnCount(); j++)
+            {
+                tableFile << table->itemAt(i,j)->text().toStdString() << ",";
+                qDebug() << i << j;
+            }
+            tableFile << std::endl;
+        }
+
         tableFile.close();
     }
     else
