@@ -38,7 +38,7 @@ Logger::~Logger()
 {
 }
 
-void Logger::log(QString executedQuery, QString file, int line)
+void Logger::logQuery(QString executedQuery, QString file, int line)
 {
     std::ofstream logFile;
     logFile.open(logFileName, std::ios::out | std::ios::app);

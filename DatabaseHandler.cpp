@@ -19,8 +19,8 @@ void DatabaseHandler::setDatabase()
 
     db = QSqlDatabase::addDatabase("QODBC3", connectionName);
     db.setDatabaseName(connectionString);
-    Logger::getInstance().log("Connection string:", __FILE__, __LINE__);
-    Logger::getInstance().log(connectionString, __FILE__, __LINE__);
+    Logger::getInstance().logQuery("Connection string:", __FILE__, __LINE__);
+    Logger::getInstance().logQuery(connectionString, __FILE__, __LINE__);
 }
 
 DatabaseHandler::~DatabaseHandler()
@@ -70,7 +70,7 @@ QStringList DatabaseHandler::getColumnNamesForTable(QString tableName)
     QSqlQuery qry(db);
 
     QString query = QString("SELECT TOP 0 * FROM %1").arg(tableName);
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
     if(qry.exec(query))
     {
@@ -97,7 +97,7 @@ void DatabaseHandler::showQueryResults(QSqlQuery qry)
 
 void DatabaseHandler::executeGivenQueryAndShowResults(QSqlQuery qry, QString query)
 {
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
     if(qry.exec(query))
     {
         showQueryResults(qry);
@@ -124,7 +124,7 @@ void DatabaseHandler::showFoundRecordsInResultTable(std::vector<FoundRecord> fr)
     queryText.remove(queryText.length()-3, 3); // remove last "OR "
     //qDebug() << queryText;
 
-    Logger::getInstance().log(queryText, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(queryText, __FILE__, __LINE__);
     executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
@@ -148,7 +148,7 @@ std::vector<std::pair<double, double> > DatabaseHandler::getOverallAttendance()
     else
         logDbError();
 
-    Logger::getInstance().log(queryText, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(queryText, __FILE__, __LINE__);
     return overallAttendance;
 }
 
@@ -198,7 +198,7 @@ void DatabaseHandler::showAvailableTablesFromDatabaseIn(QComboBox* box)
 {
     QSqlQuery qry(db);
     QString queryText = "SELECT * FROM information_schema.tables";
-    Logger::getInstance().log(queryText, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(queryText, __FILE__, __LINE__);
     if(qry.exec(queryText))
     {
         while(qry.next())
@@ -231,7 +231,7 @@ void DatabaseHandler::showTableInResults(const QString tableName)
         queryText.append(" ORDER BY points DESC");
     }
 
-    Logger::getInstance().log(queryText, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(queryText, __FILE__, __LINE__);
     executeGivenQueryAndShowResults(qSqlQry, queryText);
 }
 
@@ -272,7 +272,7 @@ void DatabaseHandler::saveChangesToDatabase()
         //qDebug() << *it;
         QString query = *it;
 
-        Logger::getInstance().log(query, __FILE__, __LINE__);
+        Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
         QSqlQuery qry(db);
         if(qry.exec(query)) ;
@@ -291,7 +291,7 @@ int DatabaseHandler::getNextId(const QString fromTableName)
     QString query = "SELECT MAX(id) FROM ";
     query.append(fromTableName);
     //qDebug() << query;
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
 
     QSqlQuery qry(db);
@@ -332,7 +332,7 @@ void DatabaseHandler::insertNewRow(QStringList fields)
     query.append(")");
 
     //qDebug() << "zapytanie: " << query;
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
     QSqlQuery qry(db);
     if(qry.exec(query)) ;
         //qDebug() << "Dodano " << query;
@@ -357,7 +357,7 @@ void DatabaseHandler::removeCurrentRow()
     query.append(" WHERE id=");
     query.append(currentId);
 
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
     QSqlQuery qry(db);
     if(qry.exec(query)) ;
@@ -376,7 +376,7 @@ std::string DatabaseHandler::getHashFromDbForUser(std::string user)
 
 //    //qDebug() << query;
 
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
     QSqlQuery qry(db);
     if(qry.exec(query)) ;
@@ -398,7 +398,7 @@ std::vector<std::string> DatabaseHandler::getAvailableTables()
     std::vector<std::string> availableTables;
     QSqlQuery qry(db);
     QString getHeadersQuery = "SELECT * FROM information_schema.tables";
-    Logger::getInstance().log(getHeadersQuery, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(getHeadersQuery, __FILE__, __LINE__);
     if(qry.exec(getHeadersQuery))
     {
         while(qry.next())

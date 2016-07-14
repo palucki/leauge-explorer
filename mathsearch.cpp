@@ -23,7 +23,7 @@ std::vector<FoundRecord> MathSearch::processQuery(QStringList arguments)
             .arg(tableName).arg(columnName).arg(operand).arg(value);
 
     //qDebug() << query;
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
     return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
 }

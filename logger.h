@@ -3,13 +3,15 @@
 
 #include <QString>
 #include <string>
+#include <iostream>
 
 class Logger
 {
 public:
     static Logger& getInstance();
     ~Logger();
-    void log(QString executedQuery, QString file, int line);
+    void logQuery(QString executedQuery, QString file, int line);
+
 private:
     Logger();
     std::string logFileName;

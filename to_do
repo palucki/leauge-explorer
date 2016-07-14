@@ -5,12 +5,15 @@ uwspolnic w simple search oraz mathematical serach ta funkcje do prostego szukan
 New features:
 - export tabelki do csv lub pliczku jakiegoś ładnego!!!
     [DONE] add placeholder in UI
+    [DONE] add placeholder for function to Exporter
+    add logic in Exporter
+    [DONE] connect all
     handle enabling the button
-    add fnction to Logger
-    connect all
 
-
-
+- podzielic projekt na
+    utilities (databsehandler , exporter, logger, qcustom plot, digital clock, loginhelper)
+    ui ( main window, add record helper, plotter)
+    seekers()
 
 - prepare exe and release it
 

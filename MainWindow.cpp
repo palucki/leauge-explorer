@@ -13,6 +13,8 @@
 #include "logger.h"
 #include "plotter.h"
 
+#include "tableexporter.h"
+
 
 void MainWindow::connectAllSignals()
 {
@@ -49,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
-    Logger::getInstance().log("Started application", __FILE__, __LINE__);
+    Logger::getInstance().logQuery("Started application", __FILE__, __LINE__);
 }
 
 void MainWindow::setDatabaseHandler(DatabaseHandler* dbh)
@@ -83,7 +85,7 @@ void MainWindow::connectToDatabase()
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd);
 
     setConnectionButtonsAfterConnectState();
-    Logger::getInstance().log("Connected to database", __FILE__, __LINE__);
+    Logger::getInstance().logQuery("Connected to database", __FILE__, __LINE__);
     on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
 }
 
@@ -96,7 +98,7 @@ void MainWindow::disconnectFromDatabase()
 
     ui->resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     cleanupEnvironment();\
-    Logger::getInstance().log("Disconnected from database", __FILE__, __LINE__);
+    Logger::getInstance().logQuery("Disconnected from database", __FILE__, __LINE__);
 }
 
 void MainWindow::setConnectionButtonsInitialState()
@@ -459,4 +461,6 @@ void MainWindow::on_chartButton_clicked()
 void MainWindow::on_exportTableButton_clicked()
 {
     qDebug() << "export clicked";
+    TableExporter exporter;
+    exporter.saveTableInCsv("table.csv", ui->resultTable);
 }

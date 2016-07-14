@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     mathsearch.cpp \
     logicalsearch.cpp \
     digitalclock.cpp \
-    searchtype.cpp
+    searchtype.cpp \
+    tableexporter.cpp
 
 HEADERS  += \
     DatabaseHandler.h \
@@ -39,7 +40,8 @@ HEADERS  += \
     plotter.h \
     mathsearch.h \
     logicalsearch.h \
-    digitalclock.h
+    digitalclock.h \
+    tableexporter.h
 FORMS    += mainwindow.ui \
     addrecordhelper.ui \
     plotter.ui

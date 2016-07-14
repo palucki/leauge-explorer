@@ -24,7 +24,7 @@ std::vector<FoundRecord> SimpleSearch::processQuery(QStringList arguments)
     QString query = prepareQuery(columnName, tableName, text);
 
     qDebug() << query;
-    Logger::getInstance().log(query, __FILE__, __LINE__);
+    Logger::getInstance().logQuery(query, __FILE__, __LINE__);
 
     return prepareFoundRecordsVector(databaseHandler->processSimpleSearch(query),tableName);
 }
