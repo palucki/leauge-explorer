@@ -56,12 +56,13 @@ public:
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout_5;
+    QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QLabel *label;
     QSpacerItem *horizontalSpacer_2;
     QComboBox *allTablesasdasd;
-    QPushButton *chartButton;
+    QSpacerItem *verticalSpacer;
     QGridLayout *gridLayout;
     QPushButton *addRecordButton;
     QPushButton *deleteButton;
@@ -94,6 +95,10 @@ public:
     QPushButton *disconnectButton;
     QPushButton *exitButton;
     DigitalClock *currentTime;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *chartButton;
+    QPushButton *exportTableButton;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -101,7 +106,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setEnabled(true);
-        MainWindow->resize(890, 605);
+        MainWindow->resize(890, 620);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         resultTable = new QTableWidget(centralWidget);
@@ -229,6 +234,10 @@ public:
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_5->addItem(verticalSpacer_2);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -256,7 +265,7 @@ public:
 
         allTablesasdasd = new QComboBox(layoutWidget1);
         allTablesasdasd->setObjectName(QStringLiteral("allTablesasdasd"));
-        QSizePolicy sizePolicy3(QSizePolicy::Maximum, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy3(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(allTablesasdasd->sizePolicy().hasHeightForWidth());
@@ -269,23 +278,9 @@ public:
 
         verticalLayout_5->addWidget(allTablesasdasd);
 
-        chartButton = new QPushButton(layoutWidget1);
-        chartButton->setObjectName(QStringLiteral("chartButton"));
-        chartButton->setEnabled(false);
-        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(chartButton->sizePolicy().hasHeightForWidth());
-        chartButton->setSizePolicy(sizePolicy4);
-        chartButton->setMinimumSize(QSize(0, 0));
-        chartButton->setMaximumSize(QSize(16777215, 40));
-        chartButton->setFont(font);
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/MyFiles/images/png/arrow-made-up-of-connectors-and-lines.png"), QSize(), QIcon::Normal, QIcon::Off);
-        chartButton->setIcon(icon1);
-        chartButton->setIconSize(QSize(25, 25));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_5->addWidget(chartButton);
+        verticalLayout_5->addItem(verticalSpacer);
 
 
         horizontalLayout_4->addLayout(verticalLayout_5);
@@ -296,15 +291,15 @@ public:
         addRecordButton = new QPushButton(layoutWidget1);
         addRecordButton->setObjectName(QStringLiteral("addRecordButton"));
         addRecordButton->setEnabled(false);
-        QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(addRecordButton->sizePolicy().hasHeightForWidth());
-        addRecordButton->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(addRecordButton->sizePolicy().hasHeightForWidth());
+        addRecordButton->setSizePolicy(sizePolicy4);
         addRecordButton->setFont(font);
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/MyFiles/images/png/bible-with-cross-symbol-variant.png"), QSize(), QIcon::Normal, QIcon::Off);
-        addRecordButton->setIcon(icon2);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/MyFiles/images/png/bible-with-cross-symbol-variant.png"), QSize(), QIcon::Normal, QIcon::Off);
+        addRecordButton->setIcon(icon1);
         addRecordButton->setIconSize(QSize(25, 25));
 
         gridLayout->addWidget(addRecordButton, 0, 0, 1, 1);
@@ -312,12 +307,12 @@ public:
         deleteButton = new QPushButton(layoutWidget1);
         deleteButton->setObjectName(QStringLiteral("deleteButton"));
         deleteButton->setEnabled(false);
-        sizePolicy5.setHeightForWidth(deleteButton->sizePolicy().hasHeightForWidth());
-        deleteButton->setSizePolicy(sizePolicy5);
+        sizePolicy4.setHeightForWidth(deleteButton->sizePolicy().hasHeightForWidth());
+        deleteButton->setSizePolicy(sizePolicy4);
         deleteButton->setFont(font);
-        QIcon icon3;
-        icon3.addFile(QStringLiteral(":/MyFiles/images/png/data-storage-drive-with-cross-mark.png"), QSize(), QIcon::Normal, QIcon::Off);
-        deleteButton->setIcon(icon3);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/MyFiles/images/png/data-storage-drive-with-cross-mark.png"), QSize(), QIcon::Normal, QIcon::Off);
+        deleteButton->setIcon(icon2);
         deleteButton->setIconSize(QSize(25, 25));
 
         gridLayout->addWidget(deleteButton, 1, 0, 1, 1);
@@ -325,12 +320,12 @@ public:
         saveButton = new QPushButton(layoutWidget1);
         saveButton->setObjectName(QStringLiteral("saveButton"));
         saveButton->setEnabled(false);
-        sizePolicy5.setHeightForWidth(saveButton->sizePolicy().hasHeightForWidth());
-        saveButton->setSizePolicy(sizePolicy5);
+        sizePolicy4.setHeightForWidth(saveButton->sizePolicy().hasHeightForWidth());
+        saveButton->setSizePolicy(sizePolicy4);
         saveButton->setFont(font);
-        QIcon icon4;
-        icon4.addFile(QStringLiteral(":/MyFiles/images/png/data-storage.png"), QSize(), QIcon::Normal, QIcon::Off);
-        saveButton->setIcon(icon4);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/MyFiles/images/png/data-storage.png"), QSize(), QIcon::Normal, QIcon::Off);
+        saveButton->setIcon(icon3);
         saveButton->setIconSize(QSize(25, 25));
 
         gridLayout->addWidget(saveButton, 1, 1, 1, 1);
@@ -338,12 +333,12 @@ public:
         editModeButton = new QPushButton(layoutWidget1);
         editModeButton->setObjectName(QStringLiteral("editModeButton"));
         editModeButton->setEnabled(false);
-        sizePolicy5.setHeightForWidth(editModeButton->sizePolicy().hasHeightForWidth());
-        editModeButton->setSizePolicy(sizePolicy5);
+        sizePolicy4.setHeightForWidth(editModeButton->sizePolicy().hasHeightForWidth());
+        editModeButton->setSizePolicy(sizePolicy4);
         editModeButton->setFont(font);
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/MyFiles/images/png/data-storage-disc.png"), QSize(), QIcon::Normal, QIcon::Off);
-        editModeButton->setIcon(icon5);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/MyFiles/images/png/data-storage-disc.png"), QSize(), QIcon::Normal, QIcon::Off);
+        editModeButton->setIcon(icon4);
         editModeButton->setIconSize(QSize(25, 25));
 
         gridLayout->addWidget(editModeButton, 0, 1, 1, 1);
@@ -357,11 +352,11 @@ public:
         queryEditor = new QPlainTextEdit(layoutWidget1);
         queryEditor->setObjectName(QStringLiteral("queryEditor"));
         queryEditor->setEnabled(false);
-        QSizePolicy sizePolicy6(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(queryEditor->sizePolicy().hasHeightForWidth());
-        queryEditor->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(queryEditor->sizePolicy().hasHeightForWidth());
+        queryEditor->setSizePolicy(sizePolicy5);
         queryEditor->setMinimumSize(QSize(0, 0));
         queryEditor->setMaximumSize(QSize(16777215, 40));
         QFont font3;
@@ -373,13 +368,13 @@ public:
         executeQueryButton = new QPushButton(layoutWidget1);
         executeQueryButton->setObjectName(QStringLiteral("executeQueryButton"));
         executeQueryButton->setEnabled(false);
-        sizePolicy6.setHeightForWidth(executeQueryButton->sizePolicy().hasHeightForWidth());
-        executeQueryButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(executeQueryButton->sizePolicy().hasHeightForWidth());
+        executeQueryButton->setSizePolicy(sizePolicy5);
         executeQueryButton->setMinimumSize(QSize(0, 0));
         executeQueryButton->setFont(font);
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/MyFiles/images/png/database-edition.png"), QSize(), QIcon::Normal, QIcon::Off);
-        executeQueryButton->setIcon(icon6);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/MyFiles/images/png/database-edition.png"), QSize(), QIcon::Normal, QIcon::Off);
+        executeQueryButton->setIcon(icon5);
         executeQueryButton->setIconSize(QSize(25, 25));
 
         verticalLayout_4->addWidget(executeQueryButton);
@@ -422,11 +417,11 @@ public:
         usernameLineEdit = new QLineEdit(layoutWidget3);
         usernameLineEdit->setObjectName(QStringLiteral("usernameLineEdit"));
         usernameLineEdit->setEnabled(false);
-        QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(usernameLineEdit->sizePolicy().hasHeightForWidth());
-        usernameLineEdit->setSizePolicy(sizePolicy7);
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(usernameLineEdit->sizePolicy().hasHeightForWidth());
+        usernameLineEdit->setSizePolicy(sizePolicy6);
         usernameLineEdit->setMinimumSize(QSize(0, 30));
         usernameLineEdit->setMaximumSize(QSize(100, 16777215));
         usernameLineEdit->setFont(font);
@@ -452,8 +447,8 @@ public:
         passwordLineEdit = new QLineEdit(layoutWidget3);
         passwordLineEdit->setObjectName(QStringLiteral("passwordLineEdit"));
         passwordLineEdit->setEnabled(false);
-        sizePolicy7.setHeightForWidth(passwordLineEdit->sizePolicy().hasHeightForWidth());
-        passwordLineEdit->setSizePolicy(sizePolicy7);
+        sizePolicy6.setHeightForWidth(passwordLineEdit->sizePolicy().hasHeightForWidth());
+        passwordLineEdit->setSizePolicy(sizePolicy6);
         passwordLineEdit->setMinimumSize(QSize(0, 30));
         passwordLineEdit->setMaximumSize(QSize(100, 16777215));
         passwordLineEdit->setFont(font);
@@ -470,8 +465,8 @@ public:
         signInButton = new QPushButton(layoutWidget3);
         signInButton->setObjectName(QStringLiteral("signInButton"));
         signInButton->setEnabled(false);
-        sizePolicy6.setHeightForWidth(signInButton->sizePolicy().hasHeightForWidth());
-        signInButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(signInButton->sizePolicy().hasHeightForWidth());
+        signInButton->setSizePolicy(sizePolicy5);
         signInButton->setMinimumSize(QSize(0, 20));
         signInButton->setMaximumSize(QSize(16777215, 60));
         QFont font4;
@@ -479,9 +474,9 @@ public:
         font4.setBold(false);
         font4.setWeight(50);
         signInButton->setFont(font4);
-        QIcon icon7;
-        icon7.addFile(QStringLiteral(":/MyFiles/images/png/interface.png"), QSize(), QIcon::Normal, QIcon::Off);
-        signInButton->setIcon(icon7);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/MyFiles/images/png/interface.png"), QSize(), QIcon::Normal, QIcon::Off);
+        signInButton->setIcon(icon6);
         signInButton->setIconSize(QSize(25, 25));
 
         horizontalLayout_9->addWidget(signInButton);
@@ -504,14 +499,14 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         connectButton = new QPushButton(layoutWidget4);
         connectButton->setObjectName(QStringLiteral("connectButton"));
-        sizePolicy6.setHeightForWidth(connectButton->sizePolicy().hasHeightForWidth());
-        connectButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(connectButton->sizePolicy().hasHeightForWidth());
+        connectButton->setSizePolicy(sizePolicy5);
         connectButton->setMinimumSize(QSize(0, 0));
         connectButton->setMaximumSize(QSize(16777215, 60));
         connectButton->setFont(font4);
-        QIcon icon8;
-        icon8.addFile(QStringLiteral(":/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png"), QSize(), QIcon::Normal, QIcon::Off);
-        connectButton->setIcon(icon8);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/MyFiles/images/png/folder-silhouette-with-arrow-pointing-up.png"), QSize(), QIcon::Normal, QIcon::Off);
+        connectButton->setIcon(icon7);
         connectButton->setIconSize(QSize(25, 25));
         connectButton->setFlat(false);
 
@@ -549,22 +544,22 @@ public:
         disconnectButton = new QPushButton(layoutWidget4);
         disconnectButton->setObjectName(QStringLiteral("disconnectButton"));
         disconnectButton->setEnabled(false);
-        sizePolicy6.setHeightForWidth(disconnectButton->sizePolicy().hasHeightForWidth());
-        disconnectButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(disconnectButton->sizePolicy().hasHeightForWidth());
+        disconnectButton->setSizePolicy(sizePolicy5);
         disconnectButton->setMinimumSize(QSize(0, 0));
         disconnectButton->setMaximumSize(QSize(16777215, 60));
         disconnectButton->setFont(font4);
-        QIcon icon9;
-        icon9.addFile(QStringLiteral(":/MyFiles/images/png/folder-with-close-or-delete-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        disconnectButton->setIcon(icon9);
+        QIcon icon8;
+        icon8.addFile(QStringLiteral(":/MyFiles/images/png/folder-with-close-or-delete-button.png"), QSize(), QIcon::Normal, QIcon::Off);
+        disconnectButton->setIcon(icon8);
         disconnectButton->setIconSize(QSize(25, 25));
 
         verticalLayout->addWidget(disconnectButton);
 
         exitButton = new QPushButton(layoutWidget4);
         exitButton->setObjectName(QStringLiteral("exitButton"));
-        sizePolicy6.setHeightForWidth(exitButton->sizePolicy().hasHeightForWidth());
-        exitButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(exitButton->sizePolicy().hasHeightForWidth());
+        exitButton->setSizePolicy(sizePolicy5);
         exitButton->setMinimumSize(QSize(0, 0));
         exitButton->setMaximumSize(QSize(16777215, 60));
         QFont font5;
@@ -573,9 +568,9 @@ public:
         font5.setWeight(75);
         exitButton->setFont(font5);
         exitButton->setAutoFillBackground(false);
-        QIcon icon10;
-        icon10.addFile(QStringLiteral(":/MyFiles/images/png/direction.png"), QSize(), QIcon::Normal, QIcon::Off);
-        exitButton->setIcon(icon10);
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/MyFiles/images/png/direction.png"), QSize(), QIcon::Normal, QIcon::Off);
+        exitButton->setIcon(icon9);
         exitButton->setIconSize(QSize(25, 25));
 
         verticalLayout->addWidget(exitButton);
@@ -586,11 +581,53 @@ public:
         currentTime = new DigitalClock(centralWidget);
         currentTime->setObjectName(QStringLiteral("currentTime"));
         currentTime->setGeometry(QRect(80, 370, 71, 31));
+        horizontalLayoutWidget = new QWidget(centralWidget);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(580, 560, 291, 35));
+        horizontalLayout_5 = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        chartButton = new QPushButton(horizontalLayoutWidget);
+        chartButton->setObjectName(QStringLiteral("chartButton"));
+        chartButton->setEnabled(false);
+        QSizePolicy sizePolicy7(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(chartButton->sizePolicy().hasHeightForWidth());
+        chartButton->setSizePolicy(sizePolicy7);
+        chartButton->setMinimumSize(QSize(0, 0));
+        chartButton->setMaximumSize(QSize(16777215, 40));
+        chartButton->setFont(font);
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/MyFiles/images/png/arrow-made-up-of-connectors-and-lines.png"), QSize(), QIcon::Normal, QIcon::Off);
+        chartButton->setIcon(icon10);
+        chartButton->setIconSize(QSize(25, 25));
+
+        horizontalLayout_5->addWidget(chartButton);
+
+        exportTableButton = new QPushButton(horizontalLayoutWidget);
+        exportTableButton->setObjectName(QStringLiteral("exportTableButton"));
+        exportTableButton->setEnabled(false);
+        sizePolicy7.setHeightForWidth(exportTableButton->sizePolicy().hasHeightForWidth());
+        exportTableButton->setSizePolicy(sizePolicy7);
+        exportTableButton->setMinimumSize(QSize(0, 0));
+        exportTableButton->setMaximumSize(QSize(16777215, 40));
+        exportTableButton->setFont(font);
+        QIcon icon11;
+        icon11.addFile(QStringLiteral(":/MyFiles/images/png/coins-stack-with-arrows-in-different-directions.png"), QSize(), QIcon::Normal, QIcon::Off);
+        exportTableButton->setIcon(icon11);
+        exportTableButton->setIconSize(QSize(25, 25));
+
+        horizontalLayout_5->addWidget(exportTableButton);
+
         MainWindow->setCentralWidget(centralWidget);
         layoutWidget->raise();
         resultTable->raise();
         groupBox->raise();
         currentTime->raise();
+        horizontalLayoutWidget->raise();
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -620,7 +657,6 @@ public:
         searchButton->setText(QApplication::translate("MainWindow", "Search", 0));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Modify", 0));
         label->setText(QApplication::translate("MainWindow", "Available tables", 0));
-        chartButton->setText(QApplication::translate("MainWindow", "Wykres", 0));
         addRecordButton->setText(QApplication::translate("MainWindow", "Add record", 0));
         deleteButton->setText(QApplication::translate("MainWindow", "Delete record", 0));
         saveButton->setText(QApplication::translate("MainWindow", "Save", 0));
@@ -639,6 +675,8 @@ public:
         connectionIndicator->setText(QApplication::translate("MainWindow", "Connection state", 0));
         disconnectButton->setText(QApplication::translate("MainWindow", "Disconnect from Database", 0));
         exitButton->setText(QApplication::translate("MainWindow", "Exit", 0));
+        chartButton->setText(QApplication::translate("MainWindow", "Plot", 0));
+        exportTableButton->setText(QApplication::translate("MainWindow", "Export", 0));
     } // retranslateUi
 
 };

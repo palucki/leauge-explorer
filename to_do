@@ -1,2 +1,17 @@
 Zwracanie wektora przez wartosc - mocno slabe
 uwspolnic w simple search oraz mathematical serach ta funkcje do prostego szukania
+
+
+New features:
+- export tabelki do csv lub pliczku jakiegoś ładnego!!!
+    [DONE] add placeholder in UI
+    handle enabling the button
+    add fnction to Logger
+    connect all
+
+
+
+
+- prepare exe and release it
+
+

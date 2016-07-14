@@ -44,11 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->exportTableButton->setEnabled(true);
     disableAdminButtons();
     newRecordWindow = new AddRecordHelper(this);
     userIdentity = "";
     connectAllSignals();
-//    on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
     Logger::getInstance().log("Started application", __FILE__, __LINE__);
 }
 
@@ -82,11 +82,9 @@ void MainWindow::connectToDatabase()
     databaseHandler->setResultTable(ui->resultTable);
     databaseHandler->showAvailableTablesFromDatabaseIn(ui->allTablesasdasd);
 
-//    databaseHandler->showAvailableTablesFromDatabaseIn(ui->availableTablesInSearch);
     setConnectionButtonsAfterConnectState();
     Logger::getInstance().log("Connected to database", __FILE__, __LINE__);
     on_searchTypeField_currentTextChanged(ui->searchTypeField->currentText());
-    //setEditingButtonsState(false);
 }
 
 void MainWindow::disconnectFromDatabase()
@@ -131,7 +129,6 @@ void MainWindow::setConnectionButtonsAfterConnectState()
     ui->saveButton->setEnabled(false);
 
     ui->searchButton->setEnabled(true);
-//    ui->clearResults->setEnabled(true);
     ui->searchTypeField->setEnabled(true);
 
     ui->usernameLineEdit->clear();
@@ -166,10 +163,7 @@ void MainWindow::showOnlyFoundRecordsInResultTable(std::vector<FoundRecord> foun
 
 void MainWindow::cleanupEnvironment()
 {
-//    databaseHandler->clearAvailableTablesList(ui->allTablesasdasd);
-//    databaseHandler->clearAvailableTablesList(ui->availableTablesInSearch);
     ui->allTablesasdasd->clear();
-//    ui->availableTablesInSearch->clear();
     ui->columnForSearch->clear();
     for(int i = 0; i < ui->resultTable->columnCount(); i++)
         ui->resultTable->horizontalHeaderItem(i)->setText("");
@@ -187,12 +181,10 @@ void MainWindow::executeQueryFromEditor()
 
 void MainWindow::showTableFrom(QListWidgetItem *item)
 {
-//    setConnectionButtonsAfterConnectState();
     inEditingMode = false;
     ui->saveButton->setEnabled(false);
 
     QString selectedTable = item->text();
-    //qDebug() << "selected table: " << selectedTable;
     databaseHandler->showTableInResults(selectedTable);
 }
 
@@ -208,17 +200,6 @@ void MainWindow::updateConnectedIndicator(bool state)
     }
 }
 
-//void MainWindow::on_allTables_itemDoubleClicked(QListWidgetItem *item)
-//{
-//    showTableFrom(item);
-//}
-
-//void MainWindow::showSelectedFromButton()
-//{
-//    showTableFrom(ui->allTables->currentItem());
-//}
-
-
 void MainWindow::editSelectedTable()
 {
     ui->resultTable->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -227,18 +208,13 @@ void MainWindow::editSelectedTable()
     setEditingButtonsState(true);
 }
 
-
-
 void MainWindow::deletebuttonClicked()
 {
-    //qDebug() << "Remove";
-
     if(ui->resultTable->currentRow() != -1)
     {
         databaseHandler->removeCurrentRow();
         ui->resultTable->removeRow(ui->resultTable->currentRow());
         ui->resultTable->setCurrentCell(ui->resultTable->currentRow(), ui->resultTable->currentColumn());
-
     }
 }
 
@@ -270,7 +246,6 @@ void MainWindow::savebuttonClicked()
     ui->editModeButton->setEnabled(true);
 
     databaseHandler->saveChangesToDatabase();
-//    showTableFrom(ui->allTables->currentItem()); //update table
     QListWidgetItem tempItem(ui->allTablesasdasd->currentText());
     showTableFrom(&tempItem); //update table
     ui->editModeButton->setEnabled(true);
@@ -481,9 +456,7 @@ void MainWindow::on_chartButton_clicked()
     plotter.showOverallAttendance();
 }
 
-//void MainWindow::on_clearResults_clicked()
-//{
-//    QListWidgetItem tempItem;
-//    tempItem.setText(ui->allTablesasdasd->currentText());
-//    showTableFrom(&tempItem);
-//}
+void MainWindow::on_exportTableButton_clicked()
+{
+    qDebug() << "export clicked";
+}
