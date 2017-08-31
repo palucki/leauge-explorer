@@ -1,10 +1,4 @@
-########### Leauge Explorer ###########
+# Leauge Explorer
 
-TO DO:
-	- refactor, refactor, refactor
-	- crash when switching table during edition (witouht "Save" clicked)
-	- add database name in connection options
-	- enhancements:
-		-login screen
-		-privilege users
-
+Qt-based application for connecting and managing the SQL Server database.
+The database stores footbal league tables including latest results, overall performance, personal statistics etc.
